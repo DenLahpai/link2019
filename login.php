@@ -24,5 +24,4 @@ else {
     $_SESSION['msg_error'] = 'Wrong Username or Password!';
     header("location: index.php");
 }
-
 ?>
