@@ -17,16 +17,18 @@ function getUsers() {
     <body>
         <!-- content -->
         <div class="content">
-            <!-- login -->
-            <div class="login">
-                <form class="login" action="login.php" method="post">
-                    <h1>Log in</h1>
-                    <input type="text" name="Username" placeholder="Username" autofocus autocomplete="none" required>
-                    <input type="password" name="Password" placeholder="Password" required>
-                    <button type="submit" name="button_login">Log in</button>
-                </form>
-            </div>
-            <!-- end of login -->
+            <main>
+                <!-- login -->
+                <div class="login">
+                    <form class="login" action="login.php" method="post">
+                        <h1>Log in</h1>
+                        <input type="text" name="Username" placeholder="Username" autofocus autocomplete="none" required>
+                        <input type="password" name="Password" placeholder="Password" required>
+                        <button type="submit" name="button_login">Log in</button>
+                    </form>
+                </div>
+                <!-- end of login -->
+            </main>
         </div>
         <!-- end of content -->
         <?php include "includes/footer.html"; ?>

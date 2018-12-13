@@ -1,0 +1,47 @@
+<nav id="nav">
+    <!-- menu-switch -->
+    <div id="menuSwitch" onclick="openMenu();">
+        <div class="hamburger"></div>
+        <div class="hamburger"></div>
+        <div class="hamburger"></div>
+    </div>
+    <!-- end of menu-switch -->
+    <!-- menu -->
+    <div id="menu">
+        <a href="home.php" class="link menu"><button type="button" class="button menu" name="button">Home</button></a>
+        <a href="bookings.php" class="link menu"><button type="button" class="button menu" name="button">Bookings</button></a>
+        <a href="reports.php" class="link menu"><button type="button" class="button menu">Reports</button></a>
+        <a href="admins.php" class="link menu"><button type="button" class="button menu">Admin</button></a>
+        <a href="logout.php" class="link menu"><button type="button" class="button menu">Logout</button></a>
+        <a href="#" class="link menu"><button type="button" class="button menu" onclick="closeMenu();">Close</button></a>
+    </div>
+    <!-- end of menu -->
+</nav>
+<script type="text/javascript">
+    //get menu
+    var menu = document.getElementById('menu');
+
+    // get menuSwitch
+    var menuSwitch = document.getElementById('menuSwitch');
+
+    // get nav
+    var nav = document.getElementById('nav');
+
+    window.addEventListener('click', outsideClick);
+
+    // function to expan the menu
+    function openMenu() {
+        menu.style.display = 'block';
+    }
+
+    function closeMenu() {
+        menu.style.display = 'none';
+    }
+
+    function outsideClick(e) {
+        if (e.target == menu) {
+            menu.style.display = 'none';
+        }
+    }
+
+</script>

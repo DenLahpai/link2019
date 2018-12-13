@@ -5,12 +5,34 @@
 }
 
 body {
-    background: #E8E8E7;
+    background: #FFF;
 }
 
 .content {
-    background: #E8E8E7;
-    padding: 12px;
+    display: grid;
+    grid-gap: 3px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+    " nav nav nav "
+    " header header header "
+    " sub-menu sub-menu sub-menu "
+    " main main main "
+    " aside aside aside "
+    ;
+}
+
+nav {
+    grid-area: nav;
+}
+
+main {
+    grid-area: main;
+}
+
+header {
+    grid-area: header;
+    text-align: center;
+    color: #01CFFF;
 }
 
 footer {
@@ -27,7 +49,6 @@ button {
     border: 1px solid #FFF;
     background: gold;
     font-weight: bold;
-    /* color: #FFF; */
 }
 
 button:active {
@@ -70,4 +91,67 @@ button:active {
     padding: 12px 12px;
     margin: 12px;
     border-radius: 6px;
+}
+
+#menuSwitch {
+    padding: 6px;
+    background: #009f00;
+    cursor: pointer;
+}
+
+.hamburger {
+    width: 36px;
+    height: 6px;
+    background: #000;
+    margin: 6px 0;
+}
+
+#menu {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(0,0,0,0.4);
+}
+
+.menu button {
+    display: block;
+    width: 90%;
+    text-align: center;
+    margin: 12px auto;
+    text-decoration: none;
+    border-radius: 3px;
+    opacity: 1;
+    cursor: pointer;
+}
+
+#menu {
+    display: none;
+    opacity: 1;
+    padding: 6px;
+    text-align: center;
+}
+
+main div ul li {
+    padding: 6px;
+    text-align: center;
+}
+
+
+
+/* Styles for tablets */
+@media screen and (min-width: 768px) {
+
+}
+
+/*styles for computers*/
+@media screen and (min-width: 992px) {
+    .menu button {
+        width: 90%;
+        display: inline;
+    }
 }
