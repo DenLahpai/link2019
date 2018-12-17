@@ -25,6 +25,23 @@ nav {
     grid-area: nav;
 }
 
+header {
+    grid-area: header;
+    text-align: center;
+    color: #01CFFF;
+}
+
+.sub-menu {
+    padding: 12px;
+    grid-area: sub-menu;
+    background: gold;
+}
+
+.sub-menu a {
+    padding: 6px 12px;
+    border-radius: 3px;
+}
+
 main {
     grid-area: main;
 }
@@ -34,7 +51,6 @@ main div ul li {
     text-align: center;
 }
 
-
 main form input {
     background: none;
     border: none;
@@ -42,11 +58,6 @@ main form input {
 }
 
 
-header {
-    grid-area: header;
-    text-align: center;
-    color: #01CFFF;
-}
 
 footer {
     text-align: center;
@@ -154,12 +165,40 @@ button:active {
     color: red;
 }
 
+.grid-div {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 3px;
+}
+
+.grid-item {
+    background: #D7DAE0;
+    border-radius: 6px;
+}
+
+.grid-item:nth-of-type(2) {
+    background: silver;
+}
+
+.grid-item ul li {
+    list-style: none;
+}
+
+.bold {
+    font-weight: bold;
+}
+
 /* Styles for tablets */
 @media screen and (min-width: 768px) {
     .menu button {
         width: 60%;
         margin: 24px auto;
     }
+    .grid-div {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
 }
 
 /*styles for computers*/
@@ -167,5 +206,9 @@ button:active {
     .menu button {
         width: 30%;
         margin: 30px auto;
+    }
+    .grid-div {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
     }
 }

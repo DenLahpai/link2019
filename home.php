@@ -11,7 +11,8 @@ $rowCount = 0;
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $rowCount = table_Bookings('check', NULL, NULL);
         if ($rowCount == 0) {
-            table_Bookings('insert', NULL, NULL);
+            echo $Reference = generate_Reference();
+            table_Bookings('insert', $Reference, NULL);
         }
     }
     ?>
@@ -66,7 +67,7 @@ $rowCount = 0;
                             </li>
                             <li>
                                 Exchange:
-                                <input type="number" name="Exchang" step="0.01" placeholder="1 USD to MMK" required>
+                                <input type="number" name="Exchange" step="0.01" placeholder="1 USD to MMK" required>
                             </li>
                             <li class="error">
                                 <?php
