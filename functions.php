@@ -167,5 +167,38 @@ function table_Corporates ($job, $var1, $var2) {
     }
 }
 
+// function to get data from the table Invoices
+function table_Invoices ($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'select_by_BookingsId':
+            $query = "SELECT * FROM Invoices WHERE BookingsId = :BookingsId ;";
+            $database->query($query);
+            $database->bind(':BookingsId', $var1);
+            return $r = $database->resultset();
+            break;
+
+        default:
+            // code...
+            break;
+    }
+}
+
+// function to get data from the table Services_booking
+function table_Services_booking ($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'select_flights':
+            // code...
+            break;
+
+        default:
+            // code...
+            break;
+    }
+}
+
 
 ?>

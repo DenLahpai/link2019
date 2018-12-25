@@ -1,3 +1,8 @@
+/* Variables */
+:root {
+    --button-color: gold;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -34,7 +39,7 @@ header {
 .sub-menu {
     padding: 12px;
     grid-area: sub-menu;
-    background: gold;
+    background: var(--button-color);
 }
 
 .sub-menu a {
@@ -57,11 +62,14 @@ main form input {
     border-bottom: 1px solid black;
 }
 
+main h3 {
+    text-align: center;
+}
 
 
 footer {
     text-align: center;
-    background: gold;
+    background: var(--button-color);
 }
 
 footer p {
@@ -71,7 +79,7 @@ footer p {
 button {
     padding: 6px 18px;
     border: 1px solid #FFF;
-    background: gold;
+    background: var(--button-color);
     font-weight: bold;
 }
 
