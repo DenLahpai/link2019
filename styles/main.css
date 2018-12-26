@@ -1,6 +1,8 @@
 /* Variables */
 :root {
     --button-color: gold;
+    --header-color: #01CFFF;
+    --button-add-color: #009f00; 
 }
 
 * {
@@ -33,7 +35,7 @@ nav {
 header {
     grid-area: header;
     text-align: center;
-    color: #01CFFF;
+    color: var(--header-color);
 }
 
 .sub-menu {
@@ -64,8 +66,13 @@ main form input {
 
 main h3 {
     text-align: center;
+    padding: 6px;
 }
 
+main h3 button {
+    background: var(--button-add-color);
+    color: #FFF;
+}
 
 footer {
     text-align: center;
@@ -81,6 +88,7 @@ button {
     border: 1px solid #FFF;
     background: var(--button-color);
     font-weight: bold;
+    border-radius: 3px;
 }
 
 button:active {
@@ -157,7 +165,7 @@ button:active {
     margin: 24px auto;
     padding: 12px;
     text-decoration: none;
-    border-radius: 3px;
+    
     opacity: 1;
     cursor: pointer;
 }
@@ -194,6 +202,10 @@ button:active {
 
 .bold {
     font-weight: bold;
+}
+
+.invisible {
+    display: none;
 }
 
 /* Styles for tablets */

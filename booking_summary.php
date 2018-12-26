@@ -22,6 +22,7 @@ foreach ($rows_Bookings as $row_Bookings) {
             include "includes/booking_menu.html";
             ?>
             <main>
+                <h3>Invoices</h3>
                 <!-- grid-div -->
                 <div class="grid-div">
                     <?php
