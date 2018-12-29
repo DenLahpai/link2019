@@ -2,7 +2,7 @@
 :root {
     --button-color: gold;
     --header-color: #01CFFF;
-    --button-add-color: #009f00; 
+    --button-add-color: #009f00;
 }
 
 * {
@@ -72,6 +72,11 @@ main h3 {
 main h3 button {
     background: var(--button-add-color);
     color: #FFF;
+}
+
+main form ul li {
+    padding: 6px;
+    text-align: center;
 }
 
 footer {
@@ -165,7 +170,7 @@ button:active {
     margin: 24px auto;
     padding: 12px;
     text-decoration: none;
-    
+
     opacity: 1;
     cursor: pointer;
 }

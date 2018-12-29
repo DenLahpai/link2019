@@ -192,16 +192,16 @@ function table_Services_booking ($job, $var1, $var2) {
     switch ($job) {
         case 'select_flights':
             $query = "SELECT
-                Services_booking.Id AS Services_bookingId, 
-                Services_booking.ServicesId, 
+                Services_booking.Id AS Services_bookingId,
+                Services_booking.ServicesId,
                 Services_booking.Date_in,
                 Services_booking.Pax,
-                Services_booking.Flight_no, 
+                Services_booking.Flight_no,
                 Services_booking.Pick_up,
                 Services_booking.Drop_off,
                 Services_booking.Pick_up_time,
                 Services_booking.Drop_off_time,
-                Services_booking.StatusId, 
+                Services_booking.StatusId,
                 Services_booking.Cfm_no,
                 Services.Id AS ServicesId,
                 Suppliers.Name AS SuppliersName,
@@ -209,9 +209,9 @@ function table_Services_booking ($job, $var1, $var2) {
                 FROM Services_booking
                 LEFT OUTER JOIN Services
                 ON Services_booking.ServicesId = Services.Id
-                LEFT OUTER JOIN Suppliers 
+                LEFT OUTER JOIN Suppliers
                 ON Services.SupplierId = Suppliers.Id
-                LEFT OUTER JOIN ServiceStatus 
+                LEFT OUTER JOIN ServiceStatus
                 ON Services_booking.StatusId = ServiceStatus.Id
                 WHERE Services.ServiceTypeId = '2'
                 AND Services_booking.BookingsId = :BookingsId
@@ -222,11 +222,76 @@ function table_Services_booking ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
+        case 'select_one':
+            $query = "SELECT
+                Services_booking.BookingsId AS BookingsId,
+                Services_booking.ServicesId,
+                Services_booking.Date_in,
+                Services_booking.Pax,
+                Services_booking.Flight_no,
+                Services_booking.Pick_up,
+                Services_booking.Drop_off,
+                Services_booking.Pick_up_time,
+                Services_booking.Drop_off_time,
+                Services_booking.StatusId,
+                Services_booking.Cfm_no,
+                Services_booking.StatusId,
+                Services.Id AS ServicesId,
+                Services.ServiceTypeId AS ServiceTypeId,
+                Suppliers.Name AS SuppliersName,
+                ServiceStatus.Status AS Status
+                FROM Services_booking
+                LEFT OUTER JOIN Services
+                ON Services_booking.ServicesId = Services.Id
+                LEFT OUTER JOIN Suppliers
+                ON Services.SupplierId = Suppliers.Id
+                LEFT OUTER JOIN ServiceStatus
+                ON Services_booking.StatusId = ServiceStatus.Id
+                WHERE Services_booking.Id = :Services_bookingId
+            ;";
+            $database->query($query);
+            $database->bind(':Services_bookingId', $var1);
+            return $r = $database->resultset();
+            break;
+
         default:
             // code...
             break;
     }
 }
 
+//function to use the table Cities
+function table_Cities ($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'select_all':
+            $query = "SELECT * FROM Cities ORDER BY Id ;";
+            $database->query($query);
+            return $r = $database->resultset();
+            break;
+
+        default:
+            // code...
+            break;
+    }
+}
+
+// function to use the table ServiceStatus
+function table_ServiceStatus ($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'select_all':
+            $query = "SELECT * FROM ServiceStatus ORDER BY Id ;";
+            $database->query($query);
+            return $r = $database->resultset();
+            break;
+
+        default:
+            // code...
+            break;
+    }
+}
 
 ?>
