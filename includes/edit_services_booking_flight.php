@@ -1,3 +1,10 @@
+<?php
+//getting data from the form
+if ($_SERVER['REQUEST_METHOD'] ==  'POST') {
+    table_Services_booking('update_one', $Services_bookingId, $BookingsId);
+}
+?>
+
 <form action="#" method="post">
     <ul>
         <li class="bold">
@@ -6,7 +13,7 @@
         </li>
         <li>
             Date:
-            <input type="date" name="Date_in" value="<? echo $row_Services_booking->Date_in; ?>">
+            <input type="date" name="Date_in" id="Date_in" value="<? echo $row_Services_booking->Date_in; ?>">
         </li>
         <li>
             Flight No:
@@ -48,9 +55,9 @@
         </li>
         <li>
             ETD:
-            <input type="time" name="Pick_up_time" value="<? echo $row_Services_booking->Pick_up_time; ?>">
+            <input type="time" name="Pick_up_time" id="Pick_up_time" value="<? echo $row_Services_booking->Pick_up_time; ?>">
             ETA:
-            <input type="time" name="Drop_off_time" value="<? echo $row_Services_booking->Drop_off_time; ?>">
+            <input type="time" name="Drop_off_time" id="Drop_off_time" value="<? echo $row_Services_booking->Drop_off_time; ?>">
         </li>
         <li>
             Status:
@@ -74,7 +81,7 @@
             <input type="text" name="Cfm_no" value="<? echo $row_Services_booking->Cfm_no; ?>">
         </li>
         <li>
-            <button type="button" name="buttonSubmit" onclick="checkThreeFields('Date_in', 'ETD', 'ETA')">Update</button>
+            <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="checkThreeFields('Date_in', 'Pick_up_time', 'Drop_off_time')">Update</button>
         </li>
     </ul>
 </form>

@@ -253,6 +253,42 @@ function table_Services_booking ($job, $var1, $var2) {
             $database->bind(':Services_bookingId', $var1);
             return $r = $database->resultset();
             break;
+        case 'update_one':
+            //getting data from the form
+            $Date_in = $_REQUEST['Date_in'];
+            $Flight_no = trim($_REQUEST['Flight_no']);
+            $Pick_up = trim($_REQUEST['Pick_up']);
+            $Pick_up_time = $_REQUEST['Pick_up_time'];
+            $Drop_off = trim($_REQUEST['Drop_off']);
+            $Drop_off_time = $_REQUEST['Drop_off_time'];
+            $StatusId = $_REQUEST['StatusId'];
+            $Cfm_no = trim($_REQUEST['Cfm_no']);
+
+            $query = "UPDATE Services_booking SET
+                Date_in = :Date_in,
+                Flight_no = :Flight_no,
+                Pick_up = :Pick_up,
+                Pick_up_time = :Pick_up_time,
+                Drop_off = :Drop_off,
+                Drop_off_time = :Drop_off_time,
+                StatusId = :StatusId,
+                Cfm_no = :Cfm_no
+                WHERE Id = :Services_bookingId
+            ;";
+            $database->query($query);
+            $database->bind(':Date_in', $Date_in);
+            $database->bind(':Flight_no', $Flight_no);
+            $database->bind(':Pick_up', $Pick_up);
+            $database->bind(':Pick_up_time', $Pick_up_time);
+            $database->bind(':Drop_off', $Drop_off);
+            $database->bind(':Drop_off_time', $Drop_off_time);
+            $database->bind(':StatusId', $StatusId);
+            $database->bind(':Cfm_no', $Cfm_no);
+            $database->bind(':Services_bookingId', $var1);
+            if ($database->execute()) {
+                header("location: booking_services.php?BookingsId=$var2");
+            }
+            break;
 
         default:
             // code...
