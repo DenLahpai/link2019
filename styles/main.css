@@ -140,7 +140,7 @@ button:active {
 
 #menuSwitch {
     padding: 6px;
-    background: #009f00;
+    background: var(--button-add-color);
     cursor: pointer;
 }
 
