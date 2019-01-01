@@ -23,3 +23,26 @@ function checkThreeFields(field1, field2, field3) {
         document.getElementById('buttonSubmit').type = 'submit';
     }
 }
+
+// script to select currency
+function selectCurrency() {
+    var currency = document.getElementById('currency').value;
+    if (currency === 'USD') {
+        document.getElementById('costUSD').style.display = 'block';
+        document.getElementById('costMMK').style.display = 'none';
+        document.getElementById('sellPerUSD').style.display = 'block';
+        document.getElementById('sellPerMMK').style.display = 'none';
+    }
+    else if (currency === 'MMK') {
+        document.getElementById('costMMK').style.display = 'block';
+        document.getElementById('costUSD').style.display = 'none';
+        document.getElementById('sellPerUSD').style.display = 'none';
+        document.getElementById('sellPerMMK').style.display = 'block';
+    }
+    else {
+        document.getElementById('costUSD').style.display = 'none';
+        document.getElementById('costMMK').style.display = 'none';
+        document.getElementById('sellPerUSD').style.display = 'none';
+        document.getElementById('sellPerMMK').style.display = 'none';
+    }
+}

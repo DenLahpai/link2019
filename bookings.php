@@ -13,7 +13,7 @@ require_once "functions.php";
         <div class="content">
             <?php
             include "includes/nav.html";
-            $header = "New Booking";
+            $header = "Bookings";
             include "includes/header.html";
             ?>
             <main>

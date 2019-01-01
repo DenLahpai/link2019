@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] ==  'POST') {
 }
 ?>
 
-<form action="#" method="post">
+<form action="#" method="post" id="myForm">
     <ul>
         <li class="bold">
             Airline:
@@ -79,6 +79,31 @@ if ($_SERVER['REQUEST_METHOD'] ==  'POST') {
         <li>
             Confirmation No:
             <input type="text" name="Cfm_no" value="<? echo $row_Services_booking->Cfm_no; ?>">
+        </li>
+        <li>
+            Select Currency:
+            <select id="currency" name="currency" onchange="selectCurrency();">
+                <option value="0">Select One</option>
+                <option value="USD">USD</option>
+                <option value="MMK">MMK</option>
+            </select>
+        </li>
+        <li id="costUSD" class="invisible">
+            Cost in USD / Pers:
+            <input type="number" step="0.01" name="Cost1_USD" id="Cost1_USD" value="0">
+        </li>
+        <li id="costMMK" class="invisible">
+            Cost in MMK / Pers:
+            <input type="number" name="Cost1_MMK" value="0">
+        </li>
+
+        <li id="sellPerUSD" class="invisible">
+            Sell in USD / Pers:
+            <input type="number" step="0.01" name="sellPerUSD" id="sellPerUSD" value="0">
+        </li>
+        <li id="sellPerMMK" class="invisible">
+            Sell in MMK / Pers:
+            <input type="number" name="sellPerMMK" value="0">
         </li>
         <li>
             <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="checkThreeFields('Date_in', 'Pick_up_time', 'Drop_off_time')">Update</button>

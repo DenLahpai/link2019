@@ -26,7 +26,6 @@ foreach ($rows_Services_booking as $row_Services_booking) {
             include "includes/booking_menu.html";
             ?>
             <main>
-                <h3>Edit Service</h3>
                 <?php
                 switch ($ServiceTypeId) {
                     case '1':
