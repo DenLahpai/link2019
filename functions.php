@@ -253,6 +253,7 @@ function table_Services_booking ($job, $var1, $var2) {
             $database->bind(':Services_bookingId', $var1);
             return $r = $database->resultset();
             break;
+			
         case 'update_one':
             //getting data from the form
             $Date_in = $_REQUEST['Date_in'];
@@ -261,8 +262,35 @@ function table_Services_booking ($job, $var1, $var2) {
             $Pick_up_time = $_REQUEST['Pick_up_time'];
             $Drop_off = trim($_REQUEST['Drop_off']);
             $Drop_off_time = $_REQUEST['Drop_off_time'];
+            $Pax = $_REQUEST['Pax'];
             $StatusId = $_REQUEST['StatusId'];
             $Cfm_no = trim($_REQUEST['Cfm_no']);
+            $Cost1_USD = $_REQUEST['Cost1_USD'];
+            $Cost1_MMK = $_REQUEST['Cost1_MMK'];
+
+            $sellPerUSD = $_REQUEST['sellPerUSD'];
+            $sellPerMMK = $_REQUEST['sellPerMMK'];
+
+            //getting Markup
+            $profitUSD = $sellPerUSD - $Cost1_USD;
+            $profitMMK = $sellPerMMK - $Cost2_MKK;
+
+            if ($profitUSD == 0 && $profitMMK == 0) {
+                $Markup = 0;
+            } 
+            elseif ($profitMMK == 0 && $profitUSD != 0) {
+                $Markup = ($profitUSD / $Cost1_USD) * 100;
+            }
+            elseif ($profitUSD === 0 && $profitMMK != 0) {
+                $Markup = ($profitMMK / $Cost1_MMK) * 100;
+            }
+			
+			//getting the total costs 
+			$Total_cost_USD = $Cost1_USD * $Pax;
+			$Total_cost_MMK = $Cost1_MMK * $Pax;
+			
+			$Sell_USD = $sellPerUSD * $Pax;
+			$Sell_MMK = $sellPerMMK * $Pax;
 
             $query = "UPDATE Services_booking SET
                 Date_in = :Date_in,
@@ -271,8 +299,16 @@ function table_Services_booking ($job, $var1, $var2) {
                 Pick_up_time = :Pick_up_time,
                 Drop_off = :Drop_off,
                 Drop_off_time = :Drop_off_time,
+                Pax = :Pax,
                 StatusId = :StatusId,
-                Cfm_no = :Cfm_no
+                Cfm_no = :Cfm_no,
+                Cost1_USD = :Cost1_USD,
+                Cost1_MMK = :Cost1_MMK,
+               	Total_cost_USD = :Total_cost_USD,
+				Total_cost_MMK = :Total_cost_MMK,
+                Markup = :Markup,
+				Sell_USD = :Sell_USD,
+                Sell_MMK = :Sell_MMK                
                 WHERE Id = :Services_bookingId
             ;";
             $database->query($query);
@@ -282,8 +318,16 @@ function table_Services_booking ($job, $var1, $var2) {
             $database->bind(':Pick_up_time', $Pick_up_time);
             $database->bind(':Drop_off', $Drop_off);
             $database->bind(':Drop_off_time', $Drop_off_time);
+            $database->bind(':Pax', $Pax);
             $database->bind(':StatusId', $StatusId);
             $database->bind(':Cfm_no', $Cfm_no);
+            $database->bind(':Cost1_USD', $Cost1_USD);
+            $database->bind(':Cost1_MMK', $Cost1_MMK);
+            $database->bind(':Total_cost_USD', $Total_cost_USD);
+            $database->bind(':Total_cost_MMK', $Total_cost_MMK);
+            $database->bind(':Markup', $Markup);
+            $database->bind(':Sell_USD', $Sell_USD);
+            $database->bind(':Sell_MMK', $Sell_MMK);
             $database->bind(':Services_bookingId', $var1);
             if ($database->execute()) {
                 header("location: booking_services.php?BookingsId=$var2");

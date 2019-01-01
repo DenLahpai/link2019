@@ -60,6 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] ==  'POST') {
             <input type="time" name="Drop_off_time" id="Drop_off_time" value="<? echo $row_Services_booking->Drop_off_time; ?>">
         </li>
         <li>
+            Pax:
+            <input type="number" name="Pax" value="<? echo $row_Services_booking->Pax; ?>">
+        </li>
+        <li>
             Status:
             <select name="StatusId">
                 <?php
