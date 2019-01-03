@@ -9,6 +9,8 @@ foreach ($rows_Services_booking as $row_Services_booking) {
     $ServiceTypeId =$row_Services_booking->ServiceTypeId;
 }
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

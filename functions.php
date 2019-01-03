@@ -118,31 +118,66 @@ function table_Bookings ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
-            case 'select_one':
-                $query =  "SELECT
-                    Bookings.Id,
-                    Bookings.Reference,
-                    Bookings.Name,
-                    Corporates.Name AS CorporatesName,
-                    Bookings.ArvDate,
-                    Bookings.Pax,
-                    Bookings.Status,
-                    Bookings.Remark,
-                    Bookings.Exchange,
-                    Users.Username,
-                    Users.Fullname,
-                    Bookings.created
-                    FROM Bookings
-                    LEFT JOIN Corporates
-                    ON Bookings.CorporatesId = Corporates.Id
-                    LEFT JOIN Users
-                    ON Bookings.UserId = Users.Id
-                    WHERE Bookings.Id = :BookingsId
-                ;";
-                $database->query($query);
-                $database->bind(':BookingsId', $var1);
-                return $r = $database->resultset();
-                break;
+        case 'select_one':
+            $query =  "SELECT
+                Bookings.Id,
+                Bookings.Reference,
+                Bookings.Name,
+                Corporates.Name AS CorporatesName,
+                Bookings.ArvDate,
+                Bookings.Pax,
+                Bookings.Status,
+                Bookings.Remark,
+                Bookings.Exchange,
+                Users.Username,
+                Users.Fullname,
+                Bookings.created
+                FROM Bookings
+                LEFT JOIN Corporates
+                ON Bookings.CorporatesId = Corporates.Id
+                LEFT JOIN Users
+                ON Bookings.UserId = Users.Id
+                WHERE Bookings.Id = :BookingsId
+            ;";
+            $database->query($query);
+            $database->bind(':BookingsId', $var1);
+            return $r = $database->resultset();
+            break;
+            
+        case 'update':
+            // getting data from the form
+            $Name = trim($_REQUEST['Name']);
+            $CorporatesId = $_REQUEST['CorporatesId'];
+            $ArvDate = $_REQUEST['ArvDate'];
+            $Pax = $_REQUEST['Pax'];
+            $Status = $_REQUEST['Status'];
+            $Remark = trim($_REQUEST['Remark']);
+            $Exchange = trim($_REQUEST['Exchange']);
+            
+            $query = "UPDATE Bookings SET 
+                Name = :Name,
+                CorporatesId = :CorporatesId,
+                ArvDate = :ArvDate,
+                Pax = :Pax,
+                Status = :Status,
+                Remark = :Remark,
+                Exchange = :Exchange
+                WHERE Id = :var1
+            
+            ;";
+            $database->query($query);
+            $database->bind(':Name', $Name);
+            $database->bind(':CorporatesId', $CorporatesId);
+            $database->bind(':ArvDate', $ArvDate);
+            $database->bind(':Pax', $Pax);
+            $database->bind(':Status', $Status);
+            $database->bind(':Remark', $Remark);
+            $database->bind(':Exchange', $Exchange);
+            $database->bind(':var1', $var1);
+            if ($database->execute()) {
+                header("location: bookings.php");
+            }
+            break;
 
         default:
             // code...
@@ -236,6 +271,11 @@ function table_Services_booking ($job, $var1, $var2) {
                 Services_booking.StatusId,
                 Services_booking.Cfm_no,
                 Services_booking.StatusId,
+                Services_booking.Cost1_USD,
+                Services_booking.Cost1_MMK,
+                Services_booking.Markup,
+                Services_booking.Sell_USD,
+                Services_booking.Sell_MMK,
                 Services.Id AS ServicesId,
                 Services.ServiceTypeId AS ServiceTypeId,
                 Suppliers.Name AS SuppliersName,
