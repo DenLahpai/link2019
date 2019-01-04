@@ -9,9 +9,23 @@ foreach ($rows_Bookings as $row_Bookings) {
 
 //Inserting data to the tables
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //getting the currency;
+    $currency = $_REQUEST['currency'];
+
     // generating the InvoiceNo
-    $InvoiceNo = table_Invoices('generate_InvoiceNo', NULL, NULL);
-    table_Invoices('insert', $InvoiceNo, $BookingsId);
+    // $InvoiceNo = table_Invoices('generate_InvoiceNo', NULL, NULL);
+    // table_InvoiceHeader('insert', $InvoiceNo, NULL);
+    // table_InvoiceDetails('insert', $InvoiceNo, $currency);
+    $rows_sum = table_InvoiceDetails('get_sum', '2019-0001', $currency);
+    foreach ($rows_sum as $row_sum) {
+        if ($currency === 'USD') {
+            $sum = $row_sum->USD;
+        }
+        else {
+            $sum = $row_sum->MMK;
+        }
+    }
+    echo $sum;
 }
 
 ?>
@@ -93,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </tr>
                                     <?php
                                     $i = 1;
-                                    while ($i < 20) {
+                                    while ($i <= 20) {
                                         include "includes/invoice_details.php";
                                         $i++;
                                     }

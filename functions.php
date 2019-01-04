@@ -291,6 +291,7 @@ function table_InvoiceDetails ($job, $var1, $var2) {
 
     switch ($job) {
         case 'insert':
+                       
             // inserting data of 20 rows 
             $i = 1;
             while ($i <= 20) {
@@ -307,18 +308,25 @@ function table_InvoiceDetails ($job, $var1, $var2) {
                     :InvoiceNo,
                     :Date,
                     :Description,
-                    :var2
+                    :amount
                     )
                 ;";
                 $database->query($query);
-                $database->bind(':InvoiceNo', $InvoiceNo);
+                $database->bind(':InvoiceNo', $var1);
                 $database->bind(':Date', $Date);
                 $database->bind(':Description', $Description);
-                $database->bind(':var2', $var2);
+                $database->bind(':amount', $amount);
                 $database->execute();
                 $i++;
             }
             break;
+
+        case 'get_sum': 
+            $query = "SELECT SUM($var2) AS $var2 FROM InvoiceDetails WHERE InvoiceNo = :InvoiceNo ;";
+            $database->query($query);
+            $database->bind(':InvoiceNo', $var1);
+            return $r = $database->resultset();
+            break;    
         
         default:
             # code...
