@@ -1,6 +1,5 @@
 <?php
 require "functions.php";
-$rowCount = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -11,9 +10,13 @@ $rowCount = 0;
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $rowCount = table_Bookings('check', NULL, NULL);
         if ($rowCount == 0) {
-            echo $Reference = generate_Reference();
+            $Reference = generate_Reference();
             table_Bookings('insert', $Reference, NULL);
         }
+        else {
+            $error = 'Duplicate Entry!';
+        }
+
     }
     ?>
     <body>
@@ -71,8 +74,8 @@ $rowCount = 0;
                             </li>
                             <li class="error">
                                 <?php
-                                if ($rowCount > 0) {
-                                    echo "Duplicate Entry!";
+                                if (!empty($error)) {
+                                    echo $error;
                                 }
                                 ?>
                             </li>
@@ -90,3 +93,4 @@ $rowCount = 0;
     </body>
     <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>
+\
