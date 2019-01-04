@@ -9,7 +9,9 @@ foreach ($rows_Bookings as $row_Bookings) {
 
 //Inserting data to the tables
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // TODO codes to generate invoice No, insert into tables
+    // generating the InvoiceNo
+    $InvoiceNo = table_Invoices('generate_InvoiceNo', NULL, NULL);
+    table_Invoices('insert', $InvoiceNo, $BookingsId);
 }
 
 ?>

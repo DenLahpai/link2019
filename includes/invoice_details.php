@@ -1,6 +1,6 @@
 <tr>
     <td>
-        <input type="date" name="<? echo "date$i"; ?>" id="<? echo "date$i"; ?>" value="">
+        <input type="Date" name="<? echo "Date$i"; ?>" id="<? echo "Date$i"; ?>" value="">
     </td>
     <td colspan="2">
         <input type="text" name="<? echo "Description$i"; ?>"  id="<? echo "Description$i"?>" placeholder="Description" style="width: 90%">

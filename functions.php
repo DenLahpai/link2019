@@ -214,11 +214,117 @@ function table_Invoices ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
+        case 'generate_InvoiceNo':
+            $query = "SELECT * FROM Invoices ;";
+            $database->query($query);
+            $r = $database->rowCount() + 1;
+            if ($r <= 9) {
+                $InvoiceNo = '2019'.'-000'.$r;
+            }
+            elseif ($r <= 99) {
+                $InvoiceNo = '2019'.'-00'.$r;
+            }
+            elseif ($r <= 999) {
+                $InvoiceNo = '2019'.'-0'.$r;
+            }
+            else {
+                $InvoiceNo = '2019'.'-'.$r;
+            }
+            return $InvoiceNo;
+            break;
+        
+        case 'insert':
+            //getting data from the form
+            break;
+
+
         default:
             // code...
             break;
     }
 }
+
+//function to use the table InvoiceHeader 
+function table_InvoiceHeader($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'insert':
+            // getting data from the form 
+            $Addressee = trim($_REQUEST['Addressee']);
+            $Address = trim($_REQUEST['Address']);
+            $City = trim($_REQUEST['City']);
+            $Attn = trim($_REQUEST['Attn']);
+
+            $query = "INSERT INTO InvoiceHeader (
+                InvoiceNo, 
+                Addressee,
+                Address,
+                City,
+                Attn
+                ) VALUES (
+                :InvoiceNo,
+                :Addressee,
+                :Address,
+                :City,
+                :Attn
+                )
+            ;";
+            $database->query($query);
+            $database->bind(':InvoiceNo', $var1);
+            $database->bind(':Addressee', $Addressee);
+            $database->bind(':Address', $Address);
+            $database->bind(':City', $City);
+            $database->bind(':Attn', $Attn);
+            $database->execute();
+            break;
+        
+        default:
+            # code...
+            break;
+    }
+}
+
+// function to use the data from the table InvoiceDetails 
+function table_InvoiceDetails ($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'insert':
+            // inserting data of 20 rows 
+            $i = 1;
+            while ($i <= 20) {
+                $Date = $_REQUEST["Date$i"];
+                $Description = trim($_REQUEST["Description$i"]);
+                $amount = $_REQUEST["amount$i"];
+
+                $query = "INSERT INTO InvoiceDetails (
+                    InvoiceNo,
+                    Date,
+                    Description, 
+                    $var2
+                    ) VALUES(
+                    :InvoiceNo,
+                    :Date,
+                    :Description,
+                    :var2
+                    )
+                ;";
+                $database->query($query);
+                $database->bind(':InvoiceNo', $InvoiceNo);
+                $database->bind(':Date', $Date);
+                $database->bind(':Description', $Description);
+                $database->bind(':var2', $var2);
+                $database->execute();
+                $i++;
+            }
+            break;
+        
+        default:
+            # code...
+            break;
+    }
+} 
 
 // function to get data from the table Services_booking
 function table_Services_booking ($job, $var1, $var2) {
