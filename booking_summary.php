@@ -54,6 +54,5 @@ foreach ($rows_Bookings as $row_Bookings) {
             </main>
         </div>
         <!-- end of content -->
-        <?php include "includes/footer.html"; ?>
     </body>
 </html>

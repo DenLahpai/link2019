@@ -13,19 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $currency = $_REQUEST['currency'];
 
     // generating the InvoiceNo
-    // $InvoiceNo = table_Invoices('generate_InvoiceNo', NULL, NULL);
-    // table_InvoiceHeader('insert', $InvoiceNo, NULL);
-    // table_InvoiceDetails('insert', $InvoiceNo, $currency);
-    $rows_sum = table_InvoiceDetails('get_sum', '2019-0001', $currency);
-    foreach ($rows_sum as $row_sum) {
-        if ($currency === 'USD') {
-            $sum = $row_sum->USD;
-        }
-        else {
-            $sum = $row_sum->MMK;
-        }
-    }
-    echo $sum;
+    $InvoiceNo = table_Invoices('generate_InvoiceNo', NULL, NULL);
+    table_InvoiceHeader('insert', $InvoiceNo, NULL);
+    table_InvoiceDetails('insert', $InvoiceNo, $currency);
+    table_Invoices('insert', $InvoiceNo, $BookingsId);
 }
 
 ?>

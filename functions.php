@@ -214,6 +214,13 @@ function table_Invoices ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
+        case 'select_one': 
+            $query = "SELECT * FROM Invoices WHERE InvoiceNo = :InvoiceNo ;";
+            $database->query($query);
+            $database->bind(':InvoiceNo', $var1);
+            return $r = $database->resultset();    
+            break;    
+
         case 'generate_InvoiceNo':
             $query = "SELECT * FROM Invoices ;";
             $database->query($query);
@@ -234,7 +241,43 @@ function table_Invoices ($job, $var1, $var2) {
             break;
         
         case 'insert':
-            //getting data from the form
+            //getting data from the form 
+            $InvoiceDate = $_REQUEST['InvoiceDate'];
+            $currency = $_REQUEST['currency'];
+            
+            //getting the sum
+            $rows_sum = table_InvoiceDetails('get_sum', $var1, $currency);
+            foreach ($rows_sum as $row_sum) {
+                if ($currency === 'USD') {
+                    $sum = $row_sum->USD;
+                }
+                else {
+                    $sum = $row_sum->MMK;
+                }
+            }
+            $query = "INSERT INTO Invoices(
+                InvoiceNo,
+                BookingsId,
+                InvoiceDate,
+                $currency,
+                Status    
+                ) VALUES(
+                :InvoiceNo,
+                :BookingsId,
+                :InvoiceDate,
+                :sum,
+                :Status    
+                )      
+            ;";
+            $database->query($query);
+            $database->bind(':InvoiceNo', $var1);
+            $database->bind(':BookingsId', $var2);
+            $database->bind(':InvoiceDate', $InvoiceDate);
+            $database->bind(':sum', $sum);
+            $database->bind(':Status', 'Invoiced');
+            if ($database->execute()) {
+                header("location: generate_invoice.php?InvoiceNo=$var1");
+            }        
             break;
 
 
@@ -278,6 +321,12 @@ function table_InvoiceHeader($job, $var1, $var2) {
             $database->bind(':Attn', $Attn);
             $database->execute();
             break;
+        case 'select_one': 
+            $query = "SELECT * FROM InvoiceHeader WHERE InvoiceNo = :InvoiceNo ;";
+            $database->query($query);
+            $database->bind(':InvoiceNo', $var1);
+            return $r = $database->resultset();        
+            break;
         
         default:
             # code...
@@ -319,6 +368,12 @@ function table_InvoiceDetails ($job, $var1, $var2) {
                 $database->execute();
                 $i++;
             }
+            break;
+        case 'select_one':
+            $query = "SELECT * FROM InvoiceDetails WHERE InvoiceNo = :InvoiceNo ;";
+            $database->query($query);
+            $database->bind(':InvoiceNo', $var1);
+            return $r = $database->resultset();
             break;
 
         case 'get_sum': 
