@@ -276,11 +276,10 @@ function table_Invoices ($job, $var1, $var2) {
             $database->bind(':sum', $sum);
             $database->bind(':Status', 'Invoiced');
             if ($database->execute()) {
-                header("location: generate_invoice.php?InvoiceNo=$var1");
+                header("location: edit_booking_invoice.php?InvoiceNo=$var1");
             }        
             break;
-
-
+            
         default:
             // code...
             break;
