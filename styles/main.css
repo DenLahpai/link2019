@@ -57,6 +57,7 @@ main {
 main div ul li {
     padding: 6px;
     text-align: center;
+    list-style: none;
 }
 
 main form input {
@@ -218,11 +219,12 @@ button:active {
 }
 
 .grid-item {
-    background: #D7DAE0;
+    background: silver;
+    border: 1px solid var(--button-add-color);
     border-radius: 6px;
 }
 
-.grid-item:nth-of-type(2) {
+.grid-item:nth-of-type() {
     background: silver;
 }
 
