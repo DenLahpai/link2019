@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             </li>
                                             <li>
                                                 Booking Name:
-                                                <input type="text" name="Name" value="<? echo $row_Bookings->Name; ?>">
+                                                <input type="text" name="Name" value="<? echo $row_Bookings->Name; ?>" readonly>
                                             </li>
                                         </ul>
                                     </td>

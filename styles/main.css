@@ -309,10 +309,18 @@ button:active {
     list-style: none;
 }
 
+.InvoiceBody p select {
+    background: none;
+    border: 0px;
+    padding: 6px;
+    font-weight: bold;
+}
+
 .InvoiceBody ul li input {
     border: none;
     border-bottom: 1px solid var(--button-add-color);
 }
+
 
 /* Styles for tablets */
 @media screen and (min-width: 768px) {

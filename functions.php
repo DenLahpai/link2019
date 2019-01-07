@@ -7,18 +7,18 @@ if (empty($_SESSION['UsersId'])) {
     $_SESSION['msg_error'] = 'Session Expired!';
 }
 
-//function to use data from the table Users 
+//function to use data from the table Users
 function table_Users($job, $var1, $var2) {
     $database = new Database();
-    
+
     switch ($job) {
-        case 'select_one': 
+        case 'select_one':
             $query = "SELECT * FROM Users WHERE Id = :Id ;";
             $database->query($query);
             $database->bind(':Id', $var1);
             return $r = $database->resultset();
             break;
-        default: 
+        default:
             //code...
             break;
     }
@@ -160,7 +160,7 @@ function table_Bookings ($job, $var1, $var2) {
             $database->bind(':BookingsId', $var1);
             return $r = $database->resultset();
             break;
-            
+
         case 'update':
             // getting data from the form
             $Name = trim($_REQUEST['Name']);
@@ -170,8 +170,8 @@ function table_Bookings ($job, $var1, $var2) {
             $Status = $_REQUEST['Status'];
             $Remark = trim($_REQUEST['Remark']);
             $Exchange = trim($_REQUEST['Exchange']);
-            
-            $query = "UPDATE Bookings SET 
+
+            $query = "UPDATE Bookings SET
                 Name = :Name,
                 CorporatesId = :CorporatesId,
                 ArvDate = :ArvDate,
@@ -180,7 +180,7 @@ function table_Bookings ($job, $var1, $var2) {
                 Remark = :Remark,
                 Exchange = :Exchange
                 WHERE Id = :var1
-            
+
             ;";
             $database->query($query);
             $database->bind(':Name', $Name);
@@ -231,12 +231,12 @@ function table_Invoices ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
-        case 'select_one': 
+        case 'select_one':
             $query = "SELECT * FROM Invoices WHERE InvoiceNo = :InvoiceNo ;";
             $database->query($query);
             $database->bind(':InvoiceNo', $var1);
-            return $r = $database->resultset();    
-            break;    
+            return $r = $database->resultset();
+            break;
 
         case 'generate_InvoiceNo':
             $query = "SELECT * FROM Invoices ;";
@@ -256,12 +256,12 @@ function table_Invoices ($job, $var1, $var2) {
             }
             return $InvoiceNo;
             break;
-        
+
         case 'insert':
-            //getting data from the form 
+            //getting data from the form
             $InvoiceDate = $_REQUEST['InvoiceDate'];
             $currency = $_REQUEST['currency'];
-            
+
             //getting the sum
             $rows_sum = table_InvoiceDetails('get_sum', $var1, $currency);
             foreach ($rows_sum as $row_sum) {
@@ -277,14 +277,14 @@ function table_Invoices ($job, $var1, $var2) {
                 BookingsId,
                 InvoiceDate,
                 $currency,
-                Status    
+                Status
                 ) VALUES(
                 :InvoiceNo,
                 :BookingsId,
                 :InvoiceDate,
                 :sum,
-                :Status    
-                )      
+                :Status
+                )
             ;";
             $database->query($query);
             $database->bind(':InvoiceNo', $var1);
@@ -294,29 +294,57 @@ function table_Invoices ($job, $var1, $var2) {
             $database->bind(':Status', 'Invoiced');
             if ($database->execute()) {
                 header("location: edit_booking_invoice.php?InvoiceNo=$var1");
-            }        
+            }
             break;
-            
+
+            case 'update':
+                //getting data from the form
+                $InvoiceDate = $_REQUEST['InvoiceDate'];
+                $currency = $_REQUEST['currency'];
+
+                //getting the sum
+                $rows_sum = table_InvoiceDetails('get_sum', $var1, $currency);
+                foreach ($rows_sum as $row_sum) {
+                    if ($currency === 'USD') {
+                        $sum = $row_sum->USD;
+                    }
+                    else {
+                        $sum = $row_sum->MMK;
+                    }
+                }
+
+                $query = "UPDATE Invoices SET
+                    InvoiceDate = :InvoiceDate,
+                    $currency = :sum
+                    WHERE InvoiceNo = :InvoiceNo;
+                ;";
+                $database->query($query);
+                $database->bind(':InvoiceDate', $InvoiceDate);
+                $database->bind(':sum', $sum);
+                $database->bind(':InvoiceNo', $var1);
+                $database->execute();
+                break;
+
         default:
             // code...
             break;
     }
 }
 
-//function to use the table InvoiceHeader 
+//function to use the table InvoiceHeader
 function table_InvoiceHeader($job, $var1, $var2) {
     $database = new Database();
 
     switch ($job) {
         case 'insert':
-            // getting data from the form 
+            // getting data from the form
             $Addressee = trim($_REQUEST['Addressee']);
             $Address = trim($_REQUEST['Address']);
             $City = trim($_REQUEST['City']);
             $Attn = trim($_REQUEST['Attn']);
 
             $query = "INSERT INTO InvoiceHeader (
-                InvoiceNo, 
+                InvoiceNo,
                 Addressee,
                 Address,
                 City,
@@ -337,27 +365,49 @@ function table_InvoiceHeader($job, $var1, $var2) {
             $database->bind(':Attn', $Attn);
             $database->execute();
             break;
-        case 'select_one': 
+        case 'select_one':
             $query = "SELECT * FROM InvoiceHeader WHERE InvoiceNo = :InvoiceNo ;";
             $database->query($query);
             $database->bind(':InvoiceNo', $var1);
-            return $r = $database->resultset();        
+            return $r = $database->resultset();
             break;
-        
+
+        case 'update':
+            //getting data from the form
+            $Addressee = trim($_REQUEST['Addressee']);
+            $Address = trim($_REQUEST['Address']);
+            $City = trim($_REQUEST['City']);
+            $Attn = trim($_REQUEST['Attn']);
+            $query = "UPDATE InvoiceHeader SET
+                Addressee = :Addressee,
+                Address = :Address,
+                City = :City,
+                Attn = :Attn
+                WHERE InvoiceNo = :InvoiceNo
+            ;";
+            $database->query($query);
+            $database->bind(':Addressee', $Addressee);
+            $database->bind(':Address', $Address);
+            $database->bind(':City', $City);
+            $database->bind(':Attn', $Attn);
+            $database->bind(':InvoiceNo', $var1);
+            $database->execute();
+            break;
+
         default:
             # code...
             break;
     }
 }
 
-// function to use the data from the table InvoiceDetails 
+// function to use the data from the table InvoiceDetails
 function table_InvoiceDetails ($job, $var1, $var2) {
     $database = new Database();
 
     switch ($job) {
         case 'insert':
-                       
-            // inserting data of 20 rows 
+
+            // inserting data of 20 rows
             $i = 1;
             while ($i <= 20) {
                 $Date = $_REQUEST["Date$i"];
@@ -367,7 +417,7 @@ function table_InvoiceDetails ($job, $var1, $var2) {
                 $query = "INSERT INTO InvoiceDetails (
                     InvoiceNo,
                     Date,
-                    Description, 
+                    Description,
                     $var2
                     ) VALUES(
                     :InvoiceNo,
@@ -392,18 +442,43 @@ function table_InvoiceDetails ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
-        case 'get_sum': 
+        case 'get_sum':
             $query = "SELECT SUM($var2) AS $var2 FROM InvoiceDetails WHERE InvoiceNo = :InvoiceNo ;";
             $database->query($query);
             $database->bind(':InvoiceNo', $var1);
             return $r = $database->resultset();
-            break;    
-        
+            break;
+
+        case 'update':
+            //getting data from the form
+            $i = 1;
+            $currency = $_REQUEST['currency'];
+            while ($i <= 20) {
+                $Id = $_REQUEST["Id$i"];
+                $Date = $_REQUEST["Date$i"];
+                $Description = trim($_REQUEST["Description$i"]);
+                $amount = $_REQUEST["amount$i"];
+                $query = "UPDATE InvoiceDetails SET
+                    Date = :Date,
+                    Description = :Description,
+                    $currency = :amount
+                    WHERE Id = :Id
+                ;";
+                $database->query($query);
+                $database->bind(':Date', $Date);
+                $database->bind(':Description', $Description);
+                $database->bind(':amount', $amount);
+                $database->bind(':Id', $Id);
+                $database->execute();
+                $i++;
+            }
+            break;
+
         default:
             # code...
             break;
     }
-} 
+}
 
 // function to get data from the table Services_booking
 function table_Services_booking ($job, $var1, $var2) {
@@ -478,7 +553,7 @@ function table_Services_booking ($job, $var1, $var2) {
             $database->bind(':Services_bookingId', $var1);
             return $r = $database->resultset();
             break;
-			
+
         case 'update_one':
             //getting data from the form
             $Date_in = $_REQUEST['Date_in'];
@@ -502,18 +577,18 @@ function table_Services_booking ($job, $var1, $var2) {
 
             if ($profitUSD == 0 && $profitMMK == 0) {
                 $Markup = 0;
-            } 
+            }
             elseif ($profitMMK == 0 && $profitUSD != 0) {
                 $Markup = ($profitUSD / $Cost1_USD) * 100;
             }
             elseif ($profitUSD === 0 && $profitMMK != 0) {
                 $Markup = ($profitMMK / $Cost1_MMK) * 100;
             }
-			
-			//getting the total costs 
+
+			//getting the total costs
 			$Total_cost_USD = $Cost1_USD * $Pax;
 			$Total_cost_MMK = $Cost1_MMK * $Pax;
-			
+
 			$Sell_USD = $sellPerUSD * $Pax;
 			$Sell_MMK = $sellPerMMK * $Pax;
 
@@ -533,7 +608,7 @@ function table_Services_booking ($job, $var1, $var2) {
 				Total_cost_MMK = :Total_cost_MMK,
                 Markup = :Markup,
 				Sell_USD = :Sell_USD,
-                Sell_MMK = :Sell_MMK                
+                Sell_MMK = :Sell_MMK
                 WHERE Id = :Services_bookingId
             ;";
             $database->query($query);

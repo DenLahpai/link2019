@@ -7,7 +7,9 @@ $InvoiceNo = trim($_REQUEST['InvoiceNo']);
 //Updating the table Invoices, InvoiceHeader and InvoiceDetails
 //when the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //TODO update the tables
+    table_InvoiceHeader('update', $InvoiceNo, NULL);
+    table_InvoiceDetails('update', $InvoiceNo, NULL);
+    table_Invoices('update', $InvoiceNo, NULL);
 }
 
 
@@ -104,7 +106,7 @@ else {
                                             </li>
                                             <li>
                                                 Booking Name:
-                                                <input type="text" name="Name" value="<? echo $row_Bookings->Name; ?>">
+                                                <input type="text" name="Name" value="<? echo $row_Bookings->Name; ?>" readonly>
                                             </li>
                                         </ul>
                                     </td>
@@ -136,6 +138,7 @@ else {
                                 ?>
                                 <tr>
                                     <th colspan="4">
+                                        <input type="text" class="invisible" name="currency" value="<? echo $currency;?>">
                                         <button type="button" id="buttonSubmit" name="buttonSubmit" onclick="checkThreeFields('Addressee', 'InvoiceDate', 'Addressee')">Update</button>
                                         <a href="<? echo "print_invoice.php?InvoiceNo=$InvoiceNo"; ?>" target="_blank"><button type="button" class="link button" name="button">Print</button></a>
                                     </th>
@@ -149,4 +152,5 @@ else {
         </div>
         <!-- end of content -->
     </body>
+    <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>
