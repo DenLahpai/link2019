@@ -137,7 +137,7 @@ else {
                                 <tr>
                                     <th colspan="4">
                                         <button type="button" id="buttonSubmit" name="buttonSubmit" onclick="checkThreeFields('Addressee', 'InvoiceDate', 'Addressee')">Update</button>
-                                        <a href="<? echo "print_invoice.php?InvoiceNo=$InvoiceNo"; ?>"><button type="button" class="link button" name="button">Print</button></a>
+                                        <a href="<? echo "print_invoice.php?InvoiceNo=$InvoiceNo"; ?>" target="_blank"><button type="button" class="link button" name="button">Print</button></a>
                                     </th>
                                 </tr>
                             </tbody>

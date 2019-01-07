@@ -238,6 +238,82 @@ button:active {
     display: none;
 }
 
+.pageHeader {
+    border-bottom: 1px solid gold;
+}
+
+.pageHeader table {
+    margin: 6px auto;
+}
+
+.pageHeader table thead tr td {
+    padding: 12px;
+}
+.pageHeader table thead tr td img {
+    width: 300px;
+}
+
+.pageHeader table thead tr td ul li {
+    list-style: none;
+}
+
+
+.InvoiceHead table {
+    margin: 6px auto;
+    border: 1px solid silver;
+}
+
+.InvoiceHead table thead tr td ul li {
+    padding: 6px 12px;
+    list-style: none;
+}
+
+.Invoice h1 {
+    padding: 6px;
+    text-align: center;
+    color: var(--button-add-color);
+}
+
+.InvoiceBody table {
+    margin: 18px auto;
+    border-collapse: collapse;
+}
+
+.InvoiceBody table thead tr th {
+    padding: 6px 12px;
+    border: 1px solid silver;
+}
+
+.InvoiceBody table tbody tr td {
+    padding: 6px 12px;
+    border: 1px solid silver;
+    text-align: center;
+}
+
+.InvoiceBody table tbody tr th {
+    padding: 6px 12px;
+    border: 1px solid silver;
+}
+
+.InvoiceBody p {
+    padding: 12px;
+    line-height: 1.8;
+}
+
+.InvoiceBody ul {
+    text-align: center;
+}
+
+.InvoiceBody ul li {
+    padding: 6px 12px;
+    list-style: none;
+}
+
+.InvoiceBody ul li input {
+    border: none;
+    border-bottom: 1px solid var(--button-add-color);
+}
+
 /* Styles for tablets */
 @media screen and (min-width: 768px) {
     .menu button {
