@@ -4,6 +4,13 @@ require_once "functions.php";
 //getting data from the table Corporates
 $rows_Corporates = table_Corporates('select', NULL, NULL);
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $InvoiceDate1 = $_REQUEST['InvoiceDate1'];
+    $InvoiceDate2 = $_REQUEST['InvoiceDate2'];
+    $CorporatesId = $_REQUEST['CorporatesId'];
+    $InvoicesStatus = $_REQUEST['InvoicesStatus'];
+    $search = trim($_REQUEST['search']);
+}
 
 ?>
 <!DOCTYPE html>
@@ -30,10 +37,10 @@ $rows_Corporates = table_Corporates('select', NULL, NULL);
                             </li>
                             <li>
                                 Invoice From:
-                                <input type="date" name="InvoiceDate1" value="">
+                                <input type="date" name="InvoiceDate1" value="<? echo $InvoiceDate1; ?>">
                                 &nbsp;
                                 Until:
-                                <input type="date" name="InvoiceDate2" value="">
+                                <input type="date" name="InvoiceDate2" value="<? echo $InvoiceDate2; ?>">
                             </li>
                             <li>
                                 Corporates:
@@ -53,13 +60,28 @@ $rows_Corporates = table_Corporates('select', NULL, NULL);
                                 &nbsp;
                                 Status:
                                 <select name="InvoicesStatus">
-                                    <option value="">Select One</option>
-                                    <option value="Invoiced">Invoiced</option>
-                                    <option value="Paid">Paid</option>
+                                    <?php
+                                    switch ($InvoicesStatus) {
+                                        case 'Invoiced':
+                                            echo "<option value=\"Invoiced\" selected>Invoiced</option>";
+                                            echo "<option value=\"Paid\">Paid</option>";
+                                            break;
+                                        case 'Paid':
+                                            echo "<option value=\"Invoiced\">Invoiced</option>";
+                                            echo "<option value=\"Paid\" selected>Paid</option>";
+                                            break;
+
+                                        default:
+                                        echo "<option value=\"\">Select One</option>";
+                                        echo "<option value=\"Invoiced\">Invoiced</option>";
+                                        echo "<option value=\"Paid\">Paid</option>";
+                                            break;
+                                    }
+                                    ?>
                                 </select>
                             </li>
                             <li>
-                                <input type="text" name="search" placeholder="Search">
+                                <input type="text" name="search" placeholder="Search" value="<? if (!empty($search)) { echo $search; } ?>">
                             </li>
                             <li>
                                 <button type="submit" class="button submit" name="buttonSubmit">Search</button>

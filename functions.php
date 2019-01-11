@@ -324,6 +324,7 @@ function table_Invoices ($job, $var1, $var2) {
                 $database->bind(':InvoiceNo', $var1);
                 $database->execute();
                 break;
+
             case 'update_receipt':
                 //getting data from the form
                 $Method = $_REQUEST['Method'];
