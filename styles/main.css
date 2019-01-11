@@ -327,6 +327,20 @@ button:active {
     background: silver;
 }
 
+.report.table table {
+    border-collapse: collapse;
+    margin: 6px auto;
+}
+
+.report.table table tr th {
+    border: 1px solid gold;
+    padding: 6px 12px;
+}
+
+.report.table table tr td {
+    border: 1px solid gold;
+    padding: 6px 12px;
+}
 
 /* Styles for tablets */
 @media screen and (min-width: 768px) {

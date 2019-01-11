@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </table>
             </div>
             <!-- end of pageHeader -->
-            <!-- InvoiceBody -->
+            <!-- Invoice -->
             <div class="Invoice">
                 <h1>
                     Invoice
@@ -210,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             }
                             ?>
                             <tr>
-                                <th colspan="2">Total in <? $currency; ?></th>
+                                <th colspan="2">Total in <? echo $currency; ?></th>
                                 <th>
                                     <?php
                                     if ($currency == 'USD') {
