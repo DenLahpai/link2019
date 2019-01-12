@@ -5,8 +5,8 @@ require_once "functions.php";
 $rows_Corporates = table_Corporates('select', NULL, NULL);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $InvoiceDate1 = $_REQUEST['InvoiceDate1'];
-    $InvoiceDate2 = $_REQUEST['InvoiceDate2'];
+    $Date1 = $_REQUEST['Date1'];
+    $Date2 = $_REQUEST['Date2'];
     $CorporatesId = $_REQUEST['CorporatesId'];
     $InvoicesStatus = $_REQUEST['InvoicesStatus'];
     $search = trim($_REQUEST['search']);
@@ -16,19 +16,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <?php
-    $page_title = 'Report: Invoices';
+    $page_title = "Report: Invoice Details";
     include "includes/head.html";
     ?>
     <body>
         <!-- content -->
         <div class="content">
             <?php
-            $header = 'Report Invoices';
+            $header = 'Report Invoice Details';
             include "includes/header.html";
             include "includes/nav.html";
             ?>
             <main>
-                <!-- search -->
+                <!-- search  -->
                 <div class="search">
                     <form action="#" method="post">
                         <ul>
@@ -36,11 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 Enter Search Criteria
                             </li>
                             <li>
-                                Invoice From:
-                                <input type="date" name="InvoiceDate1" id="InvoiceDate1" onchange="autoFillSecondDate('InvoiceDate1','InvoiceDate2');" value="<? echo $InvoiceDate1; ?>">
+                                Invoice Details From:
+                                <input type="date" name="Date1" id="Date1" onchange="autoFillSecondDate('Date1','Date2');" value="<? echo $Date1; ?>">
                                 &nbsp;
                                 Until:
-                                <input type="date" name="InvoiceDate2" id="InvoiceDate2" value="<? echo $InvoiceDate2; ?>">
+                                <input type="date" name="Date2" id="Date2" value="<? echo $Date2; ?>">
                             </li>
                             <li>
                                 Corporates:
@@ -84,48 +84,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="text" name="search" placeholder="Search" value="<? if (!empty($search)) { echo $search; } ?>">
                             </li>
                             <li>
-                                <button type="button" class="button submit" id="buttonSubmit" name="buttonSubmit" onclick="compareDates('InvoiceDate1', 'InvoiceDate2');">Search</button>
+                                <button type="button" class="button submit" id="buttonSubmit" name="buttonSubmit" onclick="compareDates('Date1', 'Date2');">Search</button>
                             </li>
                         </ul>
                     </form>
                 </div>
                 <!-- end of search -->
-                <!-- report table -->
+                <!-- report table  -->
                 <div class="report table">
                     <table>
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Reference</th>
-                                <th>Name</th>
-                                <th>Company</th>
-                                <th>Invoice Date</th>
+                                <th>Date</th>
+                                <th>Description</th>
                                 <th>USD</th>
                                 <th>MMK</th>
-                                <th>Status</th>
-                                <th>Method</th>
                                 <th>Invoice No</th>
-                                <th>Receipt</th>
+                                <th>Invoice Status</th>
+                                <th>Reference</th>
+                                <th>Name</th>
+                                <th>Payment Method</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                                $rows_report_Invoices =  report_Invoices();
-                                foreach ($rows_report_Invoices as $row_report_Invoices) {
-                                    echo "<tr>";
-                                    echo "<td><a href=\"edit_booking_invoice.php?InvoiceNo=$row_report_Invoices->InvoiceNo\" target=\"_blank\">Edit</a></td>";
-                                    echo "<td>".$row_report_Invoices->Reference."</td>";
-                                    echo "<td>".$row_report_Invoices->BookingsName."</td>";
-                                    echo "<td>".$row_report_Invoices->CorporatesName."</td>";
-                                    echo "<td>".date('d-M-y', strtotime($row_report_Invoices->InvoiceDate))."</td>";
-                                    echo "<td>".$row_report_Invoices->USD."</td>";
-                                    echo "<td>".$row_report_Invoices->MMK."</td>";
-                                    echo "<td>".$row_report_Invoices->Status."</td>";
-                                    echo "<td>".$row_report_Invoices->Method."</td>";
-                                    echo "<td>".$row_report_Invoices->InvoiceNo."</td>";
-                                    echo "<td><a href=\"receipt_booking_invoice.php?InvoiceNo=$row_report_Invoices->InvoiceNo\" target=\"_blank\">Receipt</a></td>";
-                                    echo "</tr>";
+                                $rows_report_InvoiceDetails = report_Invoice_Details();
+                                foreach ($rows_report_InvoiceDetails as $row_report_InvoiceDetails) {
+                                    $thisYear = 2019;
+                                    $year = date('Y', strtotime($row_report_InvoiceDetails->Date));
+                                    if ($year >= 2019) {
+                                        echo "<tr>";
+                                        echo "<td><a href=\"edit_booking_invoice.php?InvoiceNo=$row_report_InvoiceDetails->InvoiceNo\">View</a></td>";
+                                        echo "<td>".date('d-M-y', strtotime($row_report_InvoiceDetails->Date))."</td>";
+                                        echo "<td>".$row_report_InvoiceDetails->Description."</td>";
+                                        echo "<td>".$row_report_InvoiceDetails->USD."</td>";
+                                        echo "<td>".$row_report_InvoiceDetails->MMK."</td>";
+                                        echo "<td>".$row_report_InvoiceDetails->InvoiceNo."</td>";
+                                        echo "<td>".$row_report_InvoiceDetails->Status."</td>";
+                                        echo "<td>".$row_report_InvoiceDetails->Reference."</td>";
+                                        echo "<td>".$row_report_InvoiceDetails->Name."</td>";
+                                        echo "<td>".$row_report_InvoiceDetails->Method."</td>";
+                                        echo "</tr>";
+                                    }
                                 }
                             }
                             ?>

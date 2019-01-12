@@ -76,23 +76,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </li>
                             <li>
                                 Arrival Date From:
-                                <input type="date" name="ArvDate1" value="<? echo $ArvDate1; ?>">
+                                <input type="date" name="ArvDate1" id="ArvDate1" onchange="autoFillSecondDate('ArvDate1', 'ArvDate2');" value="<? echo $ArvDate1; ?>">
                                 &nbsp;
                                 Until
-                                <input type="date" name="ArvDate2" value="<? echo $ArvDate2; ?>">
+                                <input type="date" name="ArvDate2" id="ArvDate2" value="<? echo $ArvDate2; ?>">
                             </li>
                             <li>
                                 Create Date From:
-                                <input type="date" name="created1" value="<? echo $created1; ?>">
+                                <input type="date" name="created1" id="created1" onchange="autoFillSecondDate('created1', 'created2')" value="<? echo $created1; ?>">
                                 &nbsp;
                                 Until:
-                                <input type="date" name="created2" value="<? echo $created2; ?>">
+                                <input type="date" name="created2" id="created2" value="<? echo $created2; ?>">
                             </li>
                             <li>
                                 <input type="text" name="search" placeholder="Search" value="<? if (!empty($search)) { echo $search; } ?>">
                             </li>
                             <li>
-                                <button type="submit" class="button submit" name="buttonSubmit">Search</button>
+                                <button type="button" class="button submit" id="buttonSubmit" name="buttonSubmit" onclick="compareDates('ArvDate1', 'ArvDate2');">Search</button>
                             </li>
                         </ul>
                     </form>
@@ -142,4 +142,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- end of content -->
         <?php include "includes/footer.html"; ?>
     </body>
+    <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>

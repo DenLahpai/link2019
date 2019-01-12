@@ -26,6 +26,9 @@ require_once "functions.php";
                             <a href="report_Invoices.php">Invoices</a>
                         </li>
                         <li>
+                            <a href="report_InvoiceDetails.php">Invoice Details</a>
+                        </li>
+                        <li>
                             <a href="report_Services.php">Services</a>
                         </li>
                         <li>

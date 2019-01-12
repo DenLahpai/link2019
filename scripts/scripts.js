@@ -46,3 +46,24 @@ function selectCurrency() {
         document.getElementById('sellPerMMK').style.display = 'none';
     }
 }
+
+// function to fill date2
+function autoFillSecondDate(date1, date2) {
+    var date1 = document.getElementById(date1).value;
+    document.getElementById(date2).value = date1;
+}
+
+//function to check 2 dates
+function compareDates(date1, date2) {
+    var date1 = document.getElementById(date1);
+    var date2 = document.getElementById(date2);
+
+    if (date1.value > date2.value) {
+        var error = 'Please ensure that your dates are in order!';
+        date2.style.background = 'red';
+        alert(error);
+    }
+    else {
+        document.getElementById('buttonSubmit').type = 'submit';
+    }
+}

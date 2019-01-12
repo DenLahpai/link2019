@@ -2373,4 +2373,188 @@ function report_Bookings() {
     return $r = $database->resultset();
 }
 
+//function to get report of Invoice Details
+function report_Invoice_Details () {
+    $database = new Database();
+
+    $Date1 = $_REQUEST['Date1'];
+    $Date2 = $_REQUEST['Date2'];
+    $CorporatesId = $_REQUEST['CorporatesId'];
+    $InvoicesStatus = $_REQUEST['InvoicesStatus'];
+    $search = trim($_REQUEST['search']);
+    $mySearch = '%'.$search.'%';
+
+    if ($Date2 == NULL) {
+        $Date2 = $Date1;
+    }
+
+    if ($Date1 == NULL && $CorporatesId == NULL && $InvoicesStatus == NULL && $search == NULL) {
+        $n = 0000;
+        $query = "SELECT
+            Invoices.InvoiceNo,
+            Invoices.InvoiceDate,
+            Invoices.Status,
+            Invoices.MethodId,
+            Bookings.Name,
+            Bookings.Reference,
+            InvoiceHeader.Addressee,
+            InvoiceHeader.Attn,
+            InvoiceDetails.Date,
+            InvoiceDetails.Description,
+            InvoiceDetails.USD,
+            InvoiceDetails.MMK,
+            PaymentMethods.Method
+            FROM InvoiceDetails
+            LEFT OUTER JOIN Invoices
+            ON Invoices.InvoiceNo = InvoiceDetails.InvoiceNo
+            LEFT OUTER JOIN InvoiceHeader
+            ON InvoiceHeader.InvoiceNo = InvoiceDetails.InvoiceNo
+            LEFT OUTER JOIN PaymentMethods
+            ON Invoices.MethodId = PaymentMethods.Id
+            LEFT OUTER JOIN Bookings
+            ON Invoices.BookingsId = Bookings.Id
+        ;";
+        $database->query($query);
+    }
+    elseif ($Date1 == NULL && $CorporatesId == NULL && $InvoicesStatus == NULL && $search != NULL) {
+        $n = 0001;
+        $query = "SELECT
+            Invoices.InvoiceNo,
+            Invoices.InvoiceDate,
+            Invoices.Status,
+            Invoices.MethodId,
+            Bookings.Name,
+            Bookings.Reference,
+            InvoiceHeader.Addressee,
+            InvoiceHeader.Attn,
+            InvoiceDetails.Date,
+            InvoiceDetails.Description,
+            InvoiceDetails.USD,
+            InvoiceDetails.MMK,
+            PaymentMethods.Method
+            FROM InvoiceDetails
+            LEFT OUTER JOIN Invoices
+            ON Invoices.InvoiceNo = InvoiceDetails.InvoiceNo
+            LEFT OUTER JOIN InvoiceHeader
+            ON InvoiceHeader.InvoiceNo = InvoiceDetails.InvoiceNo
+            LEFT OUTER JOIN PaymentMethods
+            ON Invoices.MethodId = PaymentMethods.Id
+            LEFT OUTER JOIN Bookings
+            ON Invoices.BookingsId = Bookings.Id
+            WHERE CONCAT(
+            Invoices.InvoiceNo,
+            Bookings.Name,
+            Bookings.Reference,
+            InvoiceHeader.Addressee,
+            InvoiceHeader.Attn,
+            InvoiceDetails.Description,
+            InvoiceDetails.USD,
+            InvoiceDetails.MMK
+        ) LIKE :mySearch
+        ;";
+        $database->query($query);
+        $database->bind(':mySearch', $mySearch);
+    }
+
+    elseif ($Date1 == NULL && $CorporatesId == NULL && $InvoicesStatus != NULL && $search == NULL) {
+        $n = 0010;
+        $query = "SELECT
+            Invoices.InvoiceNo,
+            Invoices.InvoiceDate,
+            Invoices.Status,
+            Invoices.MethodId,
+            Bookings.Name,
+            Bookings.Reference,
+            InvoiceHeader.Addressee,
+            InvoiceHeader.Attn,
+            InvoiceDetails.Date,
+            InvoiceDetails.Description,
+            InvoiceDetails.USD,
+            InvoiceDetails.MMK,
+            PaymentMethods.Method
+            FROM InvoiceDetails
+            LEFT OUTER JOIN Invoices
+            ON Invoices.InvoiceNo = InvoiceDetails.InvoiceNo
+            LEFT OUTER JOIN InvoiceHeader
+            ON InvoiceHeader.InvoiceNo = InvoiceDetails.InvoiceNo
+            LEFT OUTER JOIN PaymentMethods
+            ON Invoices.MethodId = PaymentMethods.Id
+            LEFT OUTER JOIN Bookings
+            ON Invoices.BookingsId = Bookings.Id
+            WHERE Invoices.Status = :InvoicesStatus
+        ;";
+        $database->query($query);
+        $database->bind(':InvoicesStatus', $InvoicesStatus);
+    }
+
+    elseif ($Date1 == NULL && $CorporatesId != NULL && $InvoicesStatus == NULL && $search == NULL) {
+        $n = 0100;
+        $query = "SELECT
+            Invoices.InvoiceNo,
+            Invoices.InvoiceDate,
+            Invoices.Status,
+            Invoices.MethodId,
+            Bookings.Name,
+            Bookings.Reference,
+            InvoiceHeader.Addressee,
+            InvoiceHeader.Attn,
+            InvoiceDetails.Date,
+            InvoiceDetails.Description,
+            InvoiceDetails.USD,
+            InvoiceDetails.MMK,
+            PaymentMethods.Method
+            FROM InvoiceDetails
+            LEFT OUTER JOIN Invoices
+            ON Invoices.InvoiceNo = InvoiceDetails.InvoiceNo
+            LEFT OUTER JOIN InvoiceHeader
+            ON InvoiceHeader.InvoiceNo = InvoiceDetails.InvoiceNo
+            LEFT OUTER JOIN PaymentMethods
+            ON Invoices.MethodId = PaymentMethods.Id
+            LEFT OUTER JOIN Bookings
+            ON Invoices.BookingsId = Bookings.Id
+            WHERE CorporatesId = :CorporatesId
+        ;";
+        $database->query($query);
+        $database->bind(':CorporatesId', $CorporatesId);
+    }
+
+    elseif ($Date1 != NULL && $CorporatesId == NULL && $InvoicesStatus == NULL && $search == NULL) {
+        $n = 1000;
+        $query = "SELECT
+            Invoices.InvoiceNo,
+            Invoices.InvoiceDate,
+            Invoices.Status,
+            Invoices.MethodId,
+            Bookings.Name,
+            Bookings.Reference,
+            InvoiceHeader.Addressee,
+            InvoiceHeader.Attn,
+            InvoiceDetails.Date,
+            InvoiceDetails.Description,
+            InvoiceDetails.USD,
+            InvoiceDetails.MMK,
+            PaymentMethods.Method
+            FROM InvoiceDetails
+            LEFT OUTER JOIN Invoices
+            ON Invoices.InvoiceNo = InvoiceDetails.InvoiceNo
+            LEFT OUTER JOIN InvoiceHeader
+            ON InvoiceHeader.InvoiceNo = InvoiceDetails.InvoiceNo
+            LEFT OUTER JOIN PaymentMethods
+            ON Invoices.MethodId = PaymentMethods.Id
+            LEFT OUTER JOIN Bookings
+            ON Invoices.BookingsId = Bookings.Id
+            WHERE InvoiceDetails.Date >= :Date1
+            AND InvoiceDetails.Date <= :Date2
+        ;";
+        $database->query($query);
+        $database->bind(':Date1', $Date1);
+        $database->bind(':Date2', $Date2);
+    }
+
+    // TODO $n = 0011;
+
+    return $r = $database->resultset();
+}
+
+
 ?>

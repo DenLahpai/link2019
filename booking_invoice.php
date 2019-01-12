@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <option value="USD">USD</option>
                                             <option value="MMK">MMK</option>
                                         </select>
-                                        <button type="button" id="buttonSubmit" name="buttonSubmit" onclick="checkThreeFields('Addressee', 'InvoiceDate', 'currency')">Submit</button>
+                                        <button type="button" id="buttonSubmit" name="buttonSubmit" onclick="checkThreeFields('Addressee', 'InvoiceDate', 'currency');">Submit</button>
                                     </th>
                                 </tr>
                             </tbody>
