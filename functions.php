@@ -18,6 +18,7 @@ function table_Users($job, $var1, $var2) {
             $database->bind(':Id', $var1);
             return $r = $database->resultset();
             break;
+
         default:
             //code...
             break;
@@ -198,6 +199,23 @@ function table_Bookings ($job, $var1, $var2) {
 
         default:
             // code...
+            break;
+    }
+}
+
+
+//function to use the table Suppliers
+function table_Suppliers ($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'select':
+            $query = "SELECT * FROM Suppliers ORDER BY Name ;";
+            $database->query($query);
+            return $r = $database->resultset();
+            break;
+         default:
+            # code...
             break;
     }
 }
@@ -693,6 +711,23 @@ function table_ServiceStatus ($job, $var1, $var2) {
     }
 }
 
+//function to use the table ServiceType
+function table_ServiceType ($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'select':
+            $query = "SELECT * FROM ServiceType ;";
+            $database->query($query);
+            return $r = $database->resultset();
+            break;
+
+        default:
+            // code...
+            break;
+    }
+}
+
 
 //This cool function that converts number to words doesn't belong to me
 function convert_number_to_words($number) {
@@ -805,6 +840,11 @@ function convert_number_to_words($number) {
     }
     return $string;
 }
+
+
+############################# REPORTS #################################
+
+
 
 // functions to get reports from the table Invoices
 function report_Invoices() {
@@ -3003,6 +3043,25 @@ function report_Invoice_Details () {
     }
 
     return $r = $database->resultset();
+}
+
+// report for services_booking
+function report_Services_booking () {
+    $database = new Database();
+    $ServiceDate1 = $_REQUEST['ServiceDate1'];
+    $ServiceDate2 = $_REQUEST['ServiceDate2'];
+    $ServiceType = $_REQUEST['ServiceType'];
+    $StatusId = $_REQUEST['StatusId'];
+    $CorporatesId = $_REQUEST['CorporatesId'];
+    $SuppliersId = $_REQUEST['SuppliersId'];
+    $search = trim($_REQUEST['search']);
+    $mySearch = '%'.$search.'%';
+
+    if ($ServiceDate1 == NULL && $ServiceType == NULL && $Status == NULL && $CorporatesId == NULL && $SuppliersId == NULL) {
+        $n = 00000;
+        $query = "SELECT ;";
+        //TODO Resume report_Services.php HERE.
+    }
 }
 
 

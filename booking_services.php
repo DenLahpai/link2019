@@ -24,8 +24,8 @@ foreach ($rows_Bookings as $row_Bookings) {
             <main>
                 <h3>
                     Flights
-                    <button class="button modal" id="New Flight">Add New</button>
-                </h3>                
+                    <a href="<? echo "new_services_booking_fl.php?BookingsId=$BookingsId"; ?>"><button class="button modal" id="New Flight">Add New</button></a>
+                </h3>
                 <!-- grid-div -->
                 <div class="grid-div">
                     <?php
@@ -50,6 +50,6 @@ foreach ($rows_Bookings as $row_Bookings) {
             </main>
         </div>
         <!-- end of content -->
-        <?php include "includes/footer.html"; ?>        
-    </body>    
+        <?php include "includes/footer.html"; ?>
+    </body>
 </html>
