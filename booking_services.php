@@ -24,7 +24,6 @@ foreach ($rows_Bookings as $row_Bookings) {
             <main>
                 <h3>
                     Flights
-                    <a href="<? echo "new_services_booking_fl.php?BookingsId=$BookingsId"; ?>"><button class="button modal" id="New Flight">Add New</button></a>
                 </h3>
                 <!-- grid-div -->
                 <div class="grid-div">

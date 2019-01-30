@@ -90,7 +90,6 @@ main form ul li {
     border: 1px solid silver;
 }
 
-
 .table.invoice table thead tr td ul li {
     padding: 6px;
     text-align: left;
@@ -340,6 +339,18 @@ button:active {
 .report.table table tr td {
     border: 1px solid gold;
     padding: 6px 12px;
+}
+
+.list.service ul li {
+    margin-top: 3px;
+}
+
+.list.service ul li:nth-last-of-type(even) {
+    background: silver;
+}
+
+.list.service ul li:nth-last-of-type(odd) {
+    background: grey;
 }
 
 /* Styles for tablets */

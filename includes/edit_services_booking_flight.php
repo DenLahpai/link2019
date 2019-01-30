@@ -17,6 +17,10 @@ if ($_SERVER['REQUEST_METHOD'] ==  'POST') {
                 <input type="date" name="Date_in" id="Date_in" value="<? echo $row_Services_booking->Date_in; ?>">
             </li>
             <li>
+                Pax:
+                <input type="number" name="Pax" value="<? echo $row_Services_booking->Pax; ?>">
+            </li>
+            <li>
                 Flight No:
                 <input type="text" name="Flight_no" value="<? echo $row_Services_booking->Flight_no; ?>">
             </li>
@@ -57,12 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] ==  'POST') {
             <li>
                 ETD:
                 <input type="time" name="Pick_up_time" id="Pick_up_time" value="<? echo $row_Services_booking->Pick_up_time; ?>">
+                &nbsp;
                 ETA:
                 <input type="time" name="Drop_off_time" id="Drop_off_time" value="<? echo $row_Services_booking->Drop_off_time; ?>">
-            </li>
-            <li>
-                Pax:
-                <input type="number" name="Pax" value="<? echo $row_Services_booking->Pax; ?>">
             </li>
             <li>
                 Status:

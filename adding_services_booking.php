@@ -1,18 +1,27 @@
 <?php
 require_once "functions.php";
 
-//getting one data from the table Services_booking
-$Services_bookingId = trim($_REQUEST['Services_bookingId']);
-$rows_Services_booking = table_Services_booking('select_one', $Services_bookingId, NULL);
-foreach ($rows_Services_booking as $row_Services_booking) {
-    $BookingsId = $row_Services_booking->BookingsId;
-    $ServiceTypeId =$row_Services_booking->ServiceTypeId;
+//getting data from the table Bookings
+$BookingsId = trim($_REQUEST['BookingsId']);
+$rows_Bookings = table_Bookings('select_one', $BookingsId, NULL);
+foreach ($rows_Bookings as $row_Bookings) {
+    // codes...
 }
+
+//getting ServicesId
+$ServicesId = trim($_REQUEST['ServicesId']);
+$rows_Services = table_Services('select_one', $ServicesId, NULL);
+foreach ($rows_Services as $row_Services) {
+    // code...
+}
+
+//getting the Date_in
+$Date_in = trim($_REQUEST['Date_in']);
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <?php
-    $page_title = 'Edit Service';
+    $page_title = $row_Bookings->Reference.": Adding Service";
     include "includes/head.html";
     ?>
     <body>
@@ -26,12 +35,12 @@ foreach ($rows_Services_booking as $row_Services_booking) {
             ?>
             <main>
                 <?php
-                switch ($ServiceTypeId) {
+                switch ($row_Services->ServiceTypeId) {
                     case '1':
                         // code...
                         break;
                     case '2':
-                        include "includes/edit_services_booking_flight.php";
+                        include "includes/adding_services_booking_flight.php";
                         break;
 
                     default:
@@ -43,6 +52,4 @@ foreach ($rows_Services_booking as $row_Services_booking) {
         </div>
         <!-- end of content -->
     </body>
-    <?php include "includes/footer.html"; ?>
-    <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>

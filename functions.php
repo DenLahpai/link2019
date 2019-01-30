@@ -214,8 +214,95 @@ function table_Suppliers ($job, $var1, $var2) {
             $database->query($query);
             return $r = $database->resultset();
             break;
-         default:
+        case 'select_Suppliers':
+            // selecting Suppliers for a specific Service Type
+            $query = "SELECT
+                Suppliers.Id AS SupplierId,
+                Suppliers.Name,
+                Services.Service,
+                Services.MaxPax,
+                Services.Cost1_USD,
+                Services.Cost1_MMK,
+                Services.StartDate,
+                Services.EndDate
+                FROM Suppliers
+                LEFT OUTER JOIN Services
+                ON Suppliers.Id = Services.SupplierId
+                WHERE Services.ServiceTypeId = :ServiceTypeId
+            ;";
+            $database->query($query);
+            $database->bind(':ServiceTypeId', $var1);
+            return $r = $database->resultset();
+            break;
+
+        case 'select_distinct_Suppliers':
+            $query = "SELECT DISTINCT
+                Suppliers.Id AS SupplierId,
+                Suppliers.Name
+                FROM Suppliers
+                LEFT OUTER JOIN Services
+                ON Suppliers.Id = Services.SupplierId
+                WHERE Services.ServiceTypeId = :ServiceTypeId
+            ;";
+            $database->query($query);
+            $database->bind(':ServiceTypeId', $var1);
+            return $r = $database->resultset();
+            break;
+
+        default:
             # code...
+            break;
+    }
+}
+
+// functions to use the table Servcies
+function table_Services ($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'select_all':
+            // code...
+            break;
+
+        case 'select_one':
+            $query = "SELECT
+                Services.ServiceTypeId,
+                Services.SupplierId,
+                Services.Service,
+                Services.Additional,
+                Services.StartDate,
+                Services.EndDate,
+                Services.MaxPax,
+                Services.Cost1_USD,
+                Services.Cost1_MMK,
+                Services.Cost2_USD,
+                Services.Cost2_MMK,
+                Services.Cost3_USD,
+                Services.Cost3_MMK,
+                Suppliers.Name
+                FROM Services
+                LEFT OUTER JOIN Suppliers
+                ON Services.SupplierId = Suppliers.Id
+                WHERE Services.Id = :ServicesId
+            ;";
+            $database->query($query);
+            $database->bind(':ServicesId', $var1);
+            return $r = $database->resultset();
+            break;
+
+        case 'select_to_add':
+            $query = "SELECT * FROM Services WHERE
+                ServiceTypeId = :ServiceTypeId
+                AND SupplierId = :SupplierId
+            ;";
+            $database->query($query);
+            $database->bind(':ServiceTypeId', $var1);
+            $database->bind(':SupplierId', $var2);
+            return $r = $database->resultset();
+            break;
+
+        default:
+            // code...
             break;
     }
 }
