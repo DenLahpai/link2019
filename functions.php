@@ -131,6 +131,7 @@ function table_Bookings ($job, $var1, $var2) {
                 ON Bookings.CorporatesId = Corporates.Id
                 LEFT JOIN Users
                 ON Bookings.UserId = Users.Id
+                ORDER BY Bookings.Id DESC
             ;";
             $database->query($query);
             return $r = $database->resultset();
@@ -203,6 +204,166 @@ function table_Bookings ($job, $var1, $var2) {
     }
 }
 
+//function to use the table Countries
+function table_Countries ($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'select_all':
+            $query = "SELECT * FROM Countries ;";
+            $database->query($query);
+            return $r = $database->resultset();
+            break;
+
+        case 'select_one':
+            $query = "SELECT * FROM Countries WHERE Id = :CountriesId ;";
+            $database->query($query);
+            $database->bind(':CountriesId', $var1);
+            return $r = $database->resultset();
+            break;
+
+        case 'check':
+            //getting data from the form
+            $Code = $_REQUEST['Code'];
+            $Country = trim($_REQUEST['Country']);
+
+            $query = "SELECT * FROM Countries
+                WHERE Code = :Code
+                OR Country = :Country
+            ;";
+            $database->query($query);
+            $database->bind(':Code', $Code);
+            $database->bind(':Country', $Country);
+            return $r = $database->rowCount();
+
+            break;
+
+
+        case 'insert':
+            //getting data from the form
+            $Code = $_REQUEST['Code'];
+            $Country = trim($_REQUEST['Country']);
+            $Region = trim($_REQUEST['Region']);
+
+            $query = "INSERT INTO Countries (
+                Code,
+                Country,
+                Region
+                ) VALUES (
+                :Code,
+                :Country,
+                :Region
+                )
+            ;";
+            $database->query($query);
+            $database->bind(':Code', $Code);
+            $database->bind(':Country', $Country);
+            $database->bind(':Region', $Region);
+            $database->execute();
+            break;
+
+        case 'update':
+            //getting data from the form
+            $Code = $_REQUEST['Code'];
+            $Country = trim($_REQUEST['Country']);
+            $Region = trim($_REQUEST['Region']);
+
+            $query = "UPDATE Countries SET
+                Code = :Code,
+                Country = :Country,
+                Region = :Region
+                WHERE Id = :CountriesId
+            ;";
+            $database->query($query);
+            $database->bind(':Code', $Code);
+            $database->bind(':Country', $Country);
+            $database->bind(':Region', $Region);
+            $database->bind(':CountriesId', $var1);
+            if ($database->excute()) {
+                header("location: countries.php");
+            }
+            break;
+
+        default:
+            // code...
+            break;
+    }
+}
+
+//function to use the table Cities
+function table_Cities ($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'select_all':
+            $query = "SELECT
+                Cities.Id,
+                Cities.AirportCode,
+                Cities.City,
+                Countries.Country
+                FROM Cities
+                LEFT OUTER JOIN Countries
+                ON Cities.CountryCode = Countries.Code
+            ;";
+            $database->query($query);
+            return $r = $database->resultset();
+            break;
+
+        case 'select_one':
+            $query = "SELECT
+                Cities.Id,
+                Cities.AirportCode,
+                Cities.City,
+                Cities.CountryCode,
+                Countries.Country
+                FROM Cities
+                LEFT OUTER JOIN Countries
+                ON Cities.CountryCode = Countries.Code
+                WHERE Cities.Id = :CitiesId
+            ;";
+            $database->query($query);
+            $database->bind(':CitiesId', $var1);
+            return $r = $database->resultset();
+            break;
+
+        case 'check':
+                // getting data from the form
+                $AirportCode = trim($_REQUEST['AirportCode']);
+
+                $query = "SELECT * FROM Cities WHERE AirportCode = :AirportCode ;";
+                $database->query($query);
+                $database->bind(':AirportCode', $AirportCode);
+                return $r = $database->rowCount();
+                break;
+
+        case 'insert':
+            // getting data from the form
+            $AirportCode = trim($_REQUEST['AirportCode']);
+            $City = trim($_REQUEST['City']);
+            $CountryCode = $_REQUEST['CountryCode'];
+
+            $query = "INSERT INTO Cities (
+                AirportCode,
+                City,
+                CountryCode
+                ) VALUES (
+                :AirportCode,
+                :City,
+                :CountryCode
+                )
+            ;";
+            $database->query($query);
+            $database->bind(':AirportCode', $AirportCode);
+            $database->bind(':City', $City);
+            $database->bind(':CountryCode', $CountryCode);
+            $database->execute();
+            break;
+
+        default:
+            // code...
+            break;
+    }
+}
 
 //function to use the table Suppliers
 function table_Suppliers ($job, $var1, $var2) {
@@ -609,6 +770,112 @@ function table_Services_booking ($job, $var1, $var2) {
     $database = new Database();
 
     switch ($job) {
+        case 'insert_flight':
+            //getting data from the form
+            $Date_in = $_REQUEST['Date_in'];
+            $Pax = $_REQUEST['Pax'];
+            $Quantity = 1;
+            $Flight_no = $_REQUEST['Flight_no'];
+            $Pick_up = $_REQUEST['Pick_up'];
+            $Drop_off = $_REQUEST['Drop_off'];
+            $Pick_up_time = $_REQUEST['Pick_up_time'];
+            $Drop_off_time = $_REQUEST['Drop_off_time'];
+            $StatusId = $_REQUEST['StatusId'];
+            $Cfm_no = trim($_REQUEST['Cfm_no']);
+            $Cost1_USD = $_REQUEST['Cost1_USD'];
+            $Cost1_MMK = $_REQUEST['Cost1_MMK'];
+            $sellPerUSD = $_REQUEST['sellPerUSD'];
+            $sellPerMMK = $_REQUEST['sellPerMMK'];
+
+            echo "Sumitee";
+
+            //getting the Markup
+            if ($Cost1_MMK == 0) {
+                $profit = $sellPerUSD - $Cost1_USD;
+                $Markup = ($profit / $Cost1_USD) * 100;
+            }
+            elseif ($Cost1_USD == 0) {
+                $profit = $sellPerMMK = $Cost1_MMK;
+                $Markup = ($profit / $Cost1_MMK) * 100;
+            }
+            else {
+                $profit = 0;
+                $Markup = 0;
+            }
+
+            $Total_cost_USD = $Cost1_USD * $Quantity * $Pax;
+            $Total_cost_MMK = $Cost1_MMK * $Quantity * $Pax;
+
+            $Sell_USD = $sellPerUSD * $Quantity * $Pax;
+            $Sell_MMK = $sellPerMMK * $Quantity * $Pax;
+
+            $query = "INSERT INTO Services_booking (
+                BookingsId,
+                ServicesId,
+                Date_in,
+                Pax,
+                Quantity,
+                Flight_no,
+                Pick_up,
+                Drop_off,
+                Pick_up_time,
+                Drop_off_time,
+                StatusId,
+                Cfm_no,
+                Cost1_USD,
+                Cost1_MMK,
+                Total_cost_USD,
+                Total_cost_MMK,
+                Markup,
+                Sell_USD,
+                Sell_MMK
+                ) VALUES(
+                :BookingsId,
+                :ServicesId,
+                :Date_in,
+                :Pax,
+                :Quantity,
+                :Flight_no,
+                :Pick_up,
+                :Drop_off,
+                :Pick_up_time,
+                :Drop_off_time,
+                :StatusId,
+                :Cfm_no,
+                :Cost1_USD,
+                :Cost1_MMK,
+                :Total_cost_USD,
+                :Total_cost_MMK,
+                :Markup,
+                :Sell_USD,
+                :Sell_MMK
+                )
+            ;";
+            $database->query($query);
+            $database->bind(':BookingsId', $var1);
+            $database->bind(':ServicesId', $var2);
+            $database->bind(':Date_in', $Date_in);
+            $database->bind(':Pax', $Pax);
+            $database->bind(':Quantity', $Quantity);
+            $database->bind(':Flight_no', $Flight_no);
+            $database->bind(':Pick_up', $Pick_up);
+            $database->bind(':Drop_off', $Drop_off);
+            $database->bind(':Pick_up_time', $Pick_up_time);
+            $database->bind(':Drop_off_time', $Drop_off_time);
+            $database->bind(':StatusId', $StatusId);
+            $database->bind(':Cfm_no', $Cfm_no);
+            $database->bind(':Cost1_USD', $Cost1_USD);
+            $database->bind(':Cost1_MMK', $Cost1_MMK);
+            $database->bind(':Total_cost_USD', $Total_cost_USD);
+            $database->bind(':Total_cost_MMK', $Total_cost_MMK);
+            $database->bind(':Markup', $Markup);
+            $database->bind(':Sell_USD', $Sell_USD);
+            $database->bind(':Sell_MMK', $Sell_MMK);
+            if ($database->execute()) {
+                header("location: booking_services.php?BookingsId=$var1");
+            }
+            break;
+
         case 'select_flights':
             $query = "SELECT
                 Services_booking.Id AS Services_bookingId,
@@ -756,23 +1023,6 @@ function table_Services_booking ($job, $var1, $var2) {
             if ($database->execute()) {
                 header("location: booking_services.php?BookingsId=$var2");
             }
-            break;
-
-        default:
-            // code...
-            break;
-    }
-}
-
-//function to use the table Cities
-function table_Cities ($job, $var1, $var2) {
-    $database = new Database();
-
-    switch ($job) {
-        case 'select_all':
-            $query = "SELECT * FROM Cities ORDER BY Id ;";
-            $database->query($query);
-            return $r = $database->resultset();
             break;
 
         default:
