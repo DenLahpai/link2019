@@ -11,10 +11,15 @@ foreach ($rows_Bookings as $row_Bookings) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    table_Bookings('update', $BookingsId, NULL);
-    // echo 'SUBMITTED!';
-}
+    $rowCount = table_Bookings('check_before_update', $BookingsId, NULL);
 
+    if ($rowCount == 0) {
+        table_Bookings ('update', $BookingsId, NULL);
+    }
+    else {
+        $error = "Duplicate Entry!";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -100,6 +105,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <li>
                                 Exchange:
                                 <input type="number" name="Exchange" step="0.01" value="<? echo $row_Bookings->Exchange; ?>">
+                            </li>
+                            <li class="error">
+                                <?php 
+                                if (!empty($error)) {
+                                    echo $error;
+                                }
+                                ?>
                             </li>
                             <li>
                                 <button type="button" class="button submit" id="buttonSubmit" name="buttonSubmit" onclick="checkThreeFields('Name', 'ArvDate', 'Pax');">Update</button>

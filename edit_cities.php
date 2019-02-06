@@ -11,9 +11,15 @@ foreach ($rows_Cities as $row_Cities) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    table_Cities ('update', $CitiesId, NULL);
-}
+    $rowCount = table_Cities ('check_before_update', $CitiesId, NULL);
 
+    if ($rowCount == 0) {
+        table_Cities ('update', $CitiesId, NULL);
+    }
+    else {
+        $error = "Duplicate Entry!";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -57,6 +63,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     }
                                     ?>
                                 </select>
+                            </li>
+                            <li class="error">
+                                <?php
+                                if (!empty($error)) {
+                                    echo $error;
+                                }
+                                ?>
                             </li>
                             <li>
                                 <button type="button" class="button submit" id="buttonSubmit" name="buttonSubmit" onclick="checkThreeFields('AirportCode', 'City', 'CountryCode');">Update</button>

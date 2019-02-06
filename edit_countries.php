@@ -10,7 +10,14 @@ foreach ($rows_Countries as $row_Countries) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    table_Countries ('update', $CountriesId, NULL);
+    $rowCount = table_Countries ('check_before_update', $CountriesId, NULL);
+
+    if ($rowCount == 0) {
+        table_Countries ('update', $CountriesId, NULL);
+    }
+    else {
+        $error = "Duplicate Entry!";
+    }
 }
 
 ?>
@@ -44,6 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <li>
                                 Region:
                                 <input type="text" name="Region" id="Region" value="<? echo $row_Countries->Region; ?>">
+                            </li>
+                            <li class="error">
+                                <?php
+                                if (!empty($error)) {
+                                    echo $error;
+                                }
+                                ?>
                             </li>
                             <li>
                                 <button type="button" class="button submit" id="buttonSubmit" name="buttonSubmit" onclick="checkThreeFields('Code', 'Country', 'Region');">Update</button>

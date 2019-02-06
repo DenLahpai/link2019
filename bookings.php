@@ -1,6 +1,5 @@
 <?php
 require_once "functions.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -26,7 +25,7 @@ require_once "functions.php";
                         echo "<div class='grid-item'>";
                         echo "<ul>";
                         echo "<li class=\"bold\"><a href=\"booking_summary.php?BookingsId=$row_Bookings->Id\">".$row_Bookings->Reference."</a></li>";
-                        echo "<li class=\"bold\">".$row_Bookings->Name."</li>";
+                        echo "<li class=\"bold\">".$row_Bookings->Name." X ".$row_Bookings->Pax."</li>";
                         echo "<li>".$row_Bookings->CorporatesName."</li>";
                         echo "<li class=\"bold\">".date("d-M-Y", strtotime($row_Bookings->ArvDate))."</li>";
                         echo "<li>".$row_Bookings->Status."</li>";

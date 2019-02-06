@@ -66,6 +66,27 @@ function table_Bookings ($job, $var1, $var2) {
             return $r = $database->rowCount();
             break;
 
+        case 'check_before_update':
+            //getting data to check for duplicated entry
+            $Name = trim($_REQUEST['Name']);
+            $ArvDate = $_REQUEST['ArvDate'];
+            $Pax = $_REQUEST['Pax'];
+
+            $query = "SELECT * FROM Bookings
+                WHERE Name = :Name
+                AND ArvDate = :ArvDate
+                AND Pax = :Pax
+                AND Id != :BookingsId
+            ;";
+            $database->query($query);
+            $database->bind(':Name', $Name);
+            $database->bind(':ArvDate', $ArvDate);
+            $database->bind(':Pax', $Pax);
+            $database->bind(':BookingsId', $var1);
+            return $r = $database->rowCount();
+
+            break;
+
         case 'insert':
             $Name = trim($_REQUEST['Name']);
             $CorporatesId = $_REQUEST['CorporatesId'];
@@ -235,7 +256,6 @@ function table_Countries ($job, $var1, $var2) {
             $database->bind(':Code', $Code);
             $database->bind(':Country', $Country);
             return $r = $database->rowCount();
-
             break;
 
 
@@ -262,6 +282,24 @@ function table_Countries ($job, $var1, $var2) {
             $database->execute();
             break;
 
+        case 'check_before_update':
+            //getting data from the form
+            $Code = $_REQUEST['Code'];
+            $Country = trim($_REQUEST['Country']);
+
+            $query = "SELECT * FROM Countries
+                WHERE (Code = :Code
+                OR Country = :Country)
+                AND Id != :CountriesId
+            ;";
+            $database->query($query);
+            $database->bind(':Code', $Code);
+            $database->bind(':Country', $Country);
+            $database->bind(':CountriesId', $var1);
+            return $r = $database->rowCount();
+            break;
+
+
         case 'update':
             //getting data from the form
             $Code = $_REQUEST['Code'];
@@ -279,7 +317,7 @@ function table_Countries ($job, $var1, $var2) {
             $database->bind(':Country', $Country);
             $database->bind(':Region', $Region);
             $database->bind(':CountriesId', $var1);
-            if ($database->excute()) {
+            if ($database->execute()) {
                 header("location: countries.php");
             }
             break;
@@ -357,6 +395,19 @@ function table_Cities ($job, $var1, $var2) {
             $database->bind(':City', $City);
             $database->bind(':CountryCode', $CountryCode);
             $database->execute();
+            break;
+
+        case 'check_before_update':
+            $AirportCode = trim($_REQUEST['AirportCode']);
+
+            $query = "SELECT * FROM Cities
+                WHERE AirportCode = :AirportCode
+                AND Id != :CitiesId
+            ;";
+            $database->query($query);
+            $database->bind(':AirportCode', $AirportCode);
+            $database->bind(':CitiesId', $var1);
+            return $r = $database->rowCount();
             break;
 
         case 'update':
