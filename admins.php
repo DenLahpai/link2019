@@ -25,6 +25,9 @@ require_once "functions.php";
                         <li>
                             <a href="cities.php">Cities</a>
                         </li>
+                        <li>
+                            <a href="suppliers.php">Suppliers</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- end of links -->

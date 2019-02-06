@@ -359,6 +359,28 @@ function table_Cities ($job, $var1, $var2) {
             $database->execute();
             break;
 
+        case 'update':
+            //getting data from the form
+            $AirportCode = trim($_REQUEST['AirportCode']);
+            $City = trim($_REQUEST['City']);
+            $CountryCode = $_REQUEST['CountryCode'];
+
+            $query = "UPDATE Cities SET
+                AirportCode = :AirportCode,
+                City = :City,
+                CountryCode = :CountryCode
+                WHERE Id = :CitiesId
+            ;";
+            $database->query($query);
+            $database->bind(':AirportCode', $AirportCode);
+            $database->bind(':City', $City);
+            $database->bind(':CountryCode', $CountryCode);
+            $database->bind(':CitiesId', $var1);
+            if ($database->execute()) {
+                header("location: cities.php");
+            }
+            break;
+
         default:
             // code...
             break;
@@ -370,11 +392,96 @@ function table_Suppliers ($job, $var1, $var2) {
     $database = new Database();
 
     switch ($job) {
+        case 'check':
+            //getting data from the form
+            $Name = trim($_REQUEST['Name']);
+            $City = trim($_REQUEST['City']);
+
+            $query = "SELECT * FROM Suppliers
+                WHERE Name = :Name
+                AND City = :City
+            ;";
+            $database->query($query);
+            $database->bind(':Name', $Name);
+            $database->bind(':City', $City);
+            return $r = $database->rowCount();
+            break;
+
+        case 'check_before_update':
+            // getting data from the form
+            $Name = trim($_REQUEST['Name']);
+            $City = trim($_REQUEST['City']);
+
+            $query = "SELECT * FROM Suppliers
+                WHERE Name = :Name
+                AND City = :City
+                AND Id != :SuppliersId
+            ;";
+            $database->query($query);
+            $database->bind(':Name', $Name);
+            $database->bind(':City', $City);
+            $database->bind(':SuppliersId', $var1);
+            return $r = $database->rowCount();
+
+            break;
+
+
+        case 'insert':
+            // getting data from the form
+            $Name = trim($_REQUEST['Name']);
+            $Address = trim($_REQUEST['Address']);
+            $City = trim($_REQUEST['City']);
+            $Email = trim($_REQUEST['Email']);
+            $Phone = trim($_REQUEST['Phone']);
+            $Fax = trim($_REQUEST['Fax']);
+            $Website = trim($_REQUEST['Website']);
+
+            $query = "INSERT INTO Suppliers (
+                Name,
+                Address,
+                City,
+                Email,
+                Phone,
+                Fax,
+                Website
+                ) VALUES (
+                :Name,
+                :Address,
+                :City,
+                :Email,
+                :Phone,
+                :Fax,
+                :Website
+                )
+            ;";
+            $database->query($query);
+            $database->bind(':Name', $Name);
+            $database->bind(':Address', $Address);
+            $database->bind(':City', $City);
+            $database->bind(':Email', $Email);
+            $database->bind(':Phone', $Phone);
+            $database->bind(':Fax', $Fax);
+            $database->bind(':Website', $Website);
+            if ($database->execute()) {
+                header("location: suppliers.php");
+            }
+            break;
+
         case 'select':
             $query = "SELECT * FROM Suppliers ORDER BY Name ;";
             $database->query($query);
             return $r = $database->resultset();
             break;
+
+        case 'select_one':
+            $query = "SELECT * FROM Suppliers
+                WHERE Id = :SuppliersId
+            ;";
+            $database->query($query);
+            $database->bind(':SuppliersId', $var1);
+            return $r = $database->resultset();
+            break;
+
         case 'select_Suppliers':
             // selecting Suppliers for a specific Service Type
             $query = "SELECT

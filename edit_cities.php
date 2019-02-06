@@ -10,6 +10,10 @@ foreach ($rows_Cities as $row_Cities) {
     // code...
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    table_Cities ('update', $CitiesId, NULL);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -55,7 +59,7 @@ foreach ($rows_Cities as $row_Cities) {
                                 </select>
                             </li>
                             <li>
-                                <button type="button" class="button submit" id="buttonSubmit" name="buttonSubmit" onclick="checkThreeFields('AirportCode', 'Cities', 'CountryCode');">Update</button>
+                                <button type="button" class="button submit" id="buttonSubmit" name="buttonSubmit" onclick="checkThreeFields('AirportCode', 'City', 'CountryCode');">Update</button>
                             </li>
                         </ul>
                     </form>
