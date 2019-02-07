@@ -631,10 +631,72 @@ function table_Corporates ($job, $var1, $var2) {
     $database = new Database();
 
     switch ($job) {
-        case 'select':
-            $query = "SELECT * FROM Corporates ORDER BY Name ;";
+        case 'select_all':
+            $query = "SELECT
+                Corporates.Id,
+                Corporates.Name,
+                Corporates.Chain,
+                Corporates.Type,
+                Corporates.CountryCode,
+                Countries.Country,
+                Corporates.Email,
+                Corporates.Website
+                FROM Corporates
+                LEFT OUTER JOIN Countries
+                ON Corporates.CountryCode = Countries.Code
+                ORDER BY Corporates.Name
+            ;";
             $database->query($query);
             return $r = $database->resultset();
+            break;
+
+        case 'check':
+            //getting data form the form
+            $Name = trim($_REQUEST['Name']);
+
+            $query = "SELECT * FROM Corporates
+                WHERE Name = :Name
+            ;";
+            $database->query($query);
+            $database->bind(':Name', $Name);
+            return $r = $database->rowCount();
+            break;
+
+        case 'insert':
+            //getting data from the form
+            $Name = trim($_REQUEST['Name']);
+            $Chain = trim($_REQUEST['Chain']);
+            $Type = trim($_REQUEST['Type']);
+            $CountryCode = $_REQUEST['CountryCode'];
+            $Email = trim($_REQUEST['Email']);
+            $Website = trim($_REQUEST['Website']);
+
+            $query = "INSERT INTO Corporates (
+                Name,
+                Chain,
+                Type,
+                CountryCode,
+                Email,
+                Website
+                ) VALUES (
+                :Name,
+                :Chain,
+                :Type,
+                :CountryCode,
+                :Email,
+                :Website
+                )
+            ;";
+            $database->query($query);
+            $database->bind(':Name', $Name);
+            $database->bind(':Chain', $Chain);
+            $database->bind(':Type', $Type);
+            $database->bind(':CountryCode', $CountryCode);
+            $database->bind(':Email', $Email);
+            $database->bind(':Website', $Website);
+            if ($database->execute()) {
+                header ("location: corporates.php");
+            }
             break;
 
         default:
@@ -1214,6 +1276,43 @@ function table_ServiceType ($job, $var1, $var2) {
         case 'select':
             $query = "SELECT * FROM ServiceType ;";
             $database->query($query);
+            return $r = $database->resultset();
+            break;
+
+        default:
+            // code...
+            break;
+    }
+}
+
+// function to use the table Booking_Clients
+function table_Bookings_Clients ($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'select_for_booking':
+            $query = "SELECT
+                Bookings_Clients.ClientsId,
+                Clients.Title,
+                Clients.FirstName,
+                Clients.LastName,
+                Clients.PassportNo,
+                Clients.PassportExpiry,
+                Clients.NRCNo,
+                Clients.DOB,
+                Clients.Country,
+                Clients.FrequentFlyer,
+                Clients.Company,
+                Clients.Phone,
+                Clients.Email,
+                Clients.Website
+                FROM Bookings_Clients
+                LEFT OUTER JOIN Clients
+                ON Bookings_Clients.ClientsId = Clients.Id
+                WHERE Bookings_Clients.BookingsId = :BookingsId
+            ;";
+            $database->query($query);
+            $database->bind(':BookingsId', $var1);
             return $r = $database->resultset();
             break;
 

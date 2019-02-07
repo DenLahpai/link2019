@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             </li>
                                             <li>
                                                 Attn:
-                                                <input type="text" name="Attn" placeholder="Addn">
+                                                <input type="text" name="Attn" placeholder="Attn">
                                             </li>
                                         </ul>
                                     </td>

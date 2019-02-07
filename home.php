@@ -41,7 +41,7 @@ require "functions.php";
                                 <select name="CorporatesId" id="CorporatesId">
                                     <option value="0">Select</option>
                                     <?php
-                                    $rows_Corporates = table_Corporates ('select', NULL, NULL);
+                                    $rows_Corporates = table_Corporates ('select_all', NULL, NULL);
                                     foreach ($rows_Corporates as $row_Corporates) {
                                         echo "<option value=\"$row_Corporates->Id\">".$row_Corporates->Name."</option>";
                                     }
@@ -93,4 +93,3 @@ require "functions.php";
     </body>
     <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>
-

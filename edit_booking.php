@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 Corporates:
                                 <select id="CorporatesId" name="CorporatesId">
                                     <?php
-                                    $rows_Corporates = table_Corporates ('select', NULL, NULL);
+                                    $rows_Corporates = table_Corporates ('select_all', NULL, NULL);
                                     foreach ($rows_Corporates as $row_Corporates) {
                                         if ($row_Corporates->Id === $row_Bookings->CorporatesId) {
                                             echo "<option value=\"$row_Corporates->Id\" selected>".$row_Corporates->Name."</option>";
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="number" name="Exchange" step="0.01" value="<? echo $row_Bookings->Exchange; ?>">
                             </li>
                             <li class="error">
-                                <?php 
+                                <?php
                                 if (!empty($error)) {
                                     echo $error;
                                 }
