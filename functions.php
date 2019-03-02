@@ -1285,6 +1285,24 @@ function table_ServiceType ($job, $var1, $var2) {
     }
 }
 
+//functions to use the table Clients
+function table_Clients ($job, $var1, $var2) {
+    $database = new Database();
+
+    switch ($job) {
+        case 'select_all':
+            $query = "SELECT * FROM Clients ;";
+            $database->query($query);
+            return $r = $database->resultset();
+            break;
+
+        default:
+            // code...
+            break;
+    }
+}
+
+
 // function to use the table Booking_Clients
 function table_Bookings_Clients ($job, $var1, $var2) {
     $database = new Database();

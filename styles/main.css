@@ -188,6 +188,13 @@ button:active {
     background: rgba(0,0,0,0.4);
 }
 
+#menu button {
+    display: block;
+    margin: 12px auto;
+    width: 400px;
+    padding: 12px;
+}
+
 .menu button {
     display: block;
     width: 90%;
@@ -195,7 +202,6 @@ button:active {
     margin: 24px auto;
     padding: 12px;
     text-decoration: none;
-
     opacity: 1;
     cursor: pointer;
 }

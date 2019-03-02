@@ -31,6 +31,9 @@ require_once "functions.php";
                         <li>
                             <a href="corporates.php">Corporates</a>
                         </li>
+                        <li>
+                            <a href="clients.php">Clients</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- end of links -->
