@@ -31,6 +31,7 @@ body {
 
 nav {
     grid-area: nav;
+    background: var(--button-add-color);
 }
 
 header {
@@ -165,8 +166,15 @@ button:active {
 
 #menuSwitch {
     padding: 6px;
-    background: var(--button-add-color);
     cursor: pointer;
+    display: inline-block;
+    background: silver;
+    opacity: 0.6;
+    border-radius: 6px;
+}
+
+#menuSwitch:hover {
+    opacity: 1;
 }
 
 .hamburger {
@@ -190,20 +198,9 @@ button:active {
 
 #menu button {
     display: block;
-    margin: 12px auto;
-    width: 400px;
+    margin: 15px auto;
+    width: 300px;
     padding: 12px;
-}
-
-.menu button {
-    display: block;
-    width: 90%;
-    text-align: center;
-    margin: 24px auto;
-    padding: 12px;
-    text-decoration: none;
-    opacity: 1;
-    cursor: pointer;
 }
 
 #menu {
@@ -357,6 +354,34 @@ button:active {
 
 .list.service ul li:nth-last-of-type(odd) {
     background: grey;
+}
+
+.modalClients {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: silver;
+    opacity: 0.9;
+}
+
+#modalClose {
+    font-size: 2.4em;
+    width: 60%;
+    text-align: right;
+    cursor: pointer;
+}
+
+.modalClient {
+    display: none;
+    background: white;
+    opacity: 1;
+    border: 1px solid gold;
+    border-top: none;
 }
 
 /* Styles for tablets */
