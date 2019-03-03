@@ -198,9 +198,10 @@ button:active {
 
 #menu button {
     display: block;
-    margin: 15px auto;
-    width: 300px;
-    padding: 12px;
+    margin: 36px auto;
+    width: 360px;
+    padding: 24px 12px;
+    font-size: 1em;
 }
 
 #menu {
@@ -371,8 +372,8 @@ button:active {
 
 #modalClose {
     font-size: 2.4em;
-    width: 60%;
-    text-align: right;
+    width: 100%;
+    text-align: left;
     cursor: pointer;
 }
 
@@ -382,6 +383,20 @@ button:active {
     opacity: 1;
     border: 1px solid gold;
     border-top: none;
+}
+
+.modalClient ul li {
+    text-align: left;
+    padding: 12px;
+}
+
+.report-list ul li {
+    text-align: left;
+    padding: 12px;
+}
+
+.report-list ul li:nth-of-type(odd) {
+    background: silver;
 }
 
 /* Styles for tablets */

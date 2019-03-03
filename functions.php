@@ -84,7 +84,6 @@ function table_Bookings ($job, $var1, $var2) {
             $database->bind(':Pax', $Pax);
             $database->bind(':BookingsId', $var1);
             return $r = $database->rowCount();
-
             break;
 
         case 'insert':
@@ -1294,6 +1293,166 @@ function table_Clients ($job, $var1, $var2) {
             $query = "SELECT * FROM Clients ;";
             $database->query($query);
             return $r = $database->resultset();
+            break;
+        case 'check_before_insert':
+            //getting data from the form
+            $Title = $_REQUEST['Title'];
+            $FirstName = trim($_REQUEST['FirstName']);
+            $Company = trim($_REQUEST['Company']);
+            $query = "SELECT Id FROM Clients
+                WHERE Title = :Title
+                AND FirstName = :FirstName
+                AND Company = :Company
+            ;";
+            $database->query($query);
+            $database->bind(':Title', $Title);
+            $database->bind(':FirstName', $FirstName);
+            $database->bind(':Company', $Company);
+            return $r = $database->rowCount();
+            break;
+
+        case 'insert':
+            // getting data from the form
+            $Title = $_REQUEST['Title'];
+            $FirstName = trim($_REQUEST['FirstName']);
+            $LastName = trim($_REQUEST['LastName']);
+            $PassportNo = trim($_REQUEST['PassportNo']);
+            $PassportExpiry = $_REQUEST['PassportExpiry'];
+            $NRCNo = trim($_REQUEST['NRCNo']);
+            $DOB = $_REQUEST['DOB'];
+            $Country = trim($_REQUEST['Country']);
+            $FrequentFlyer = trim($_REQUEST['FrequentFlyer']);
+            $Company = trim($_REQUEST['Company']);
+            $Phone = trim($_REQUEST['Phone']);
+            $Email = trim($_REQUEST['Email']);
+            $Website = trim($_REQUEST['Website']);
+
+            $query = "INSERT INTO Clients (
+                Title,
+                FirstName,
+                LastName,
+                PassportNo,
+                PassportExpiry,
+                NRCNo,
+                DOB,
+                Country,
+                FrequentFlyer,
+                Company,
+                Phone,
+                Email,
+                Website
+                ) VALUES (
+                :Title,
+                :FirstName,
+                :LastName,
+                :PassportNo,
+                :PassportExpiry,
+                :NRCNo,
+                :DOB,
+                :Country,
+                :FrequentFlyer,
+                :Company,
+                :Phone,
+                :Email,
+                :Website
+                )
+            ;";
+            $database->query($query);
+            $database->bind(':Title', $Title);
+            $database->bind(':FirstName', $FirstName);
+            $database->bind(':LastName', $LastName);
+            $database->bind(':PassportNo', $PassportNo);
+            $database->bind(':PassportExpiry', $PassportExpiry);
+            $database->bind(':NRCNo', $NRCNo);
+            $database->bind(':DOB', $DOB);
+            $database->bind(':Country', $Country);
+            $database->bind(':FrequentFlyer', $FrequentFlyer);
+            $database->bind(':Company', $Company);
+            $database->bind(':Phone', $Phone);
+            $database->bind(':Email', $Email);
+            $database->bind(':Website', $Website);
+            if ($database->execute()) {
+                header("location: clients.php");
+            }
+            break;
+
+        case 'select_one':
+            $query = "SELECT * FROM Clients WHERE Id = :ClientsId ;";
+            $database->query($query);
+            $database->bind(':ClientsId', $var1);
+            return $r = $database->resultset();
+            break;
+
+        case 'check_before_update':
+            // getting data from the form
+            $FirstName = trim($_REQUEST['FirstName']);
+            $LastName = trim($_REQUEST['LastName']);
+            $NRCNo = trim($_REQUEST['NRCNo']);
+
+            $query = "SELECT * FROM Clients
+                WHERE FirstName = :FirstName
+                AND LastName = :LastName
+                AND NRCNo = :NRCNo
+                AND Id != :Id
+            ;";
+            $database->query($query);
+            $database->bind(':FirstName', $FirstName);
+            $database->bind(':LastName', $LastName);
+            $database->bind(':NRCNo', $NRCNo);
+            $database->bind(':Id', $var1);
+            return $r = $database->rowCount();
+            break;
+
+        case 'update_one':
+            // getting data from the form
+            $Title = $_REQUEST['Title'];
+            $FirstName = trim($_REQUEST['FirstName']);
+            $LastName = trim($_REQUEST['LastName']);
+            $PassportNo = trim($_REQUEST['PassportNo']);
+            $PassportExpiry = $_REQUEST['PassportExpiry'];
+            $NRCNo = trim($_REQUEST['NRCNo']);
+            $DOB = $_REQUEST['DOB'];
+            $Country = trim($_REQUEST['Country']);
+            $FrequentFlyer = trim($_REQUEST['FrequentFlyer']);
+            $Company = trim($_REQUEST['Company']);
+            $Phone = trim($_REQUEST['Phone']);
+            $Email = trim($_REQUEST['Email']);
+            $Website = trim($_REQUEST['Website']);
+
+            $query = "UPDATE Clients SET
+                Title = :Title,
+                FirstName = :FirstName,
+                LastName = :LastName,
+                PassportNo = :PassportNo,
+                PassportExpiry = :PassportExpiry,
+                NRCNo = :NRCNo,
+                DOB = :DOB,
+                Country = :Country,
+                FrequentFlyer = :FrequentFlyer,
+                Company = :Company,
+                Phone = :Phone,
+                Email = :Email,
+                Website = :Website
+                WHERE Id = :Id
+            ;";
+            $database->query($query);
+            $database->bind(':Title', $Title);
+            $database->bind(':FirstName', $FirstName);
+            $database->bind(':LastName', $LastName);
+            $database->bind(':PassportNo', $PassportNo);
+            $database->bind(':PassportExpiry', $PassportExpiry);
+            $database->bind(':NRCNo', $NRCNo);
+            $database->bind(':DOB', $DOB);
+            $database->bind(':Country', $Country);
+            $database->bind(':FrequentFlyer', $FrequentFlyer);
+            $database->bind(':Company', $Company);
+            $database->bind(':Phone', $Phone);
+            $database->bind(':Email', $Email);
+            $database->bind(':Website', $Website);
+            $database->bind(':Id', $var1);
+            if ($database->execute()) {
+                header("location: edit_clients.php?ClientsId=$var1");
+            }
             break;
 
         default:

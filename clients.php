@@ -3,6 +3,15 @@ require_once "functions.php";
 
 //getting data from the table Clients
 $rows_Clients = table_Clients ('select_all', NULL, NULL);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $rowCount = table_Clients ('check_before_insert', NULL, NULL);
+    if ($rowCount == 0) {
+        table_Clients ('insert', NULL, NULL);
+    }
+    else {
+        $error = "Duplicate entry!";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -25,7 +34,7 @@ $rows_Clients = table_Clients ('select_all', NULL, NULL);
                         <ul>
                             <li>
                                 Title:
-                                <select name="Title">
+                                <select name="Title" id="Title">
                                     <option value="Mr.">Mr.</option>
                                     <option value="Ms.">Ms.</option>
                                     <option value="Mrs.">Mrs.</option>
@@ -79,6 +88,13 @@ $rows_Clients = table_Clients ('select_all', NULL, NULL);
                                 Website:
                                 <input type="text" name="Website" id="Website" placeholder="www.website.com">
                             </li>
+                            <li class="error">
+                                <?php
+                                if (!empty($error)) {
+                                    echo $error;
+                                }
+                                ?>
+                            </li>
                             <li>
                                 <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="checkThreeFields('FirstName', 'Title', 'Country')">Submit</button>
                             </li>
@@ -87,36 +103,24 @@ $rows_Clients = table_Clients ('select_all', NULL, NULL);
                 </div>
                 <!-- end of clients form -->
                 <!-- report table -->
-                <div class="report table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Title</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Company</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            foreach ($rows_Clients as $row_Clients) {
-                                echo "<tr>";
-                                echo "<td><button onclick=\"openClientModal('modalClient$row_Clients->Id');\">View</button></td>";
-                                echo "<td>".$row_Clients->Title."</td>";
-                                echo "<td>".$row_Clients->FirstName."</td>";
-                                echo "<td>".$row_Clients->LastName."</td>";
-                                echo "<td>".$row_Clients->Company."</td>";
-                                echo "</tr>";
-                            }
-                            ?>
-                        </tbody>
-                    </table>
+                <div class="report-list">
+                    <ul>
+                        <?php
+                        foreach ($rows_Clients as $row_Clients) {
+                            echo "<li>";
+                            echo "<button onclick=\"openClientModal('modalClient$row_Clients->Id');\">View</button>";
+                            echo "&nbsp;".$row_Clients->Title;
+                            echo "&nbsp;".$row_Clients->FirstName;
+                            echo "&nbsp;".$row_Clients->LastName;
+                            echo "&nbsp;| ".$row_Clients->Company;
+                            echo "</li>";
+                        }
+                        ?>
                 </div>
-                <!-- end of report table -->
+                <!-- end of report-list -->
                 <!-- modalClients -->
                 <div id="modalClients" class="modalClients">
-                    <h3 id="modalClose" onclick="modalClose();">&times;</h3>
+                    <h3 id="modalClose" onclick="modalClose();" title="Close">&times;</h3>
                     <?php
                     foreach ($rows_Clients as $row_Clients) {
                         echo "<!-- modalClient -->";
@@ -162,4 +166,5 @@ $rows_Clients = table_Clients ('select_all', NULL, NULL);
             modal.style.display = 'none';
         }
     </script>
+    <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>
