@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <?php
                                     $rows_Corporates = table_Corporates ('select_all', NULL, NULL);
                                     foreach ($rows_Corporates as $row_Corporates) {
-                                        if ($row_Corporates->Id === $row_Bookings->CorporatesId) {
+                                        if ($row_Corporates->Id == $row_Bookings->CorporatesId) {
                                             echo "<option value=\"$row_Corporates->Id\" selected>".$row_Corporates->Name."</option>";
                                         }
                                         else {

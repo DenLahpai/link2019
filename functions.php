@@ -162,6 +162,7 @@ function table_Bookings ($job, $var1, $var2) {
                 Bookings.Id,
                 Bookings.Reference,
                 Bookings.Name,
+                Bookings.CorporatesId,
                 Corporates.Name AS CorporatesName,
                 Bookings.ArvDate,
                 Bookings.Pax,
