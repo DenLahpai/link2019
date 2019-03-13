@@ -199,7 +199,7 @@ button:active {
 #menu button {
     display: block;
     margin: 36px auto;
-    width: 360px;
+    width: 90%;
     padding: 24px 12px;
     font-size: 1em;
 }
