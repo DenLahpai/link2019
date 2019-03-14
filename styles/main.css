@@ -300,10 +300,12 @@ button:active {
     border: 1px solid silver;
 }
 
-.InvoiceBody p {
+.InvoiceBody {
     padding: 12px;
     line-height: 1.8;
 }
+
+
 
 .InvoiceBody ul {
     text-align: center;
@@ -365,7 +367,7 @@ button:active {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overfl#menu buttonow: auto;
     background: silver;
     opacity: 0.9;
 }
@@ -405,6 +407,9 @@ button:active {
         width: 60%;
         margin: 24px auto;
     }
+    #menu button {
+        width: 30%;
+    }
     .grid-div {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -417,6 +422,10 @@ button:active {
     .menu button {
         width: 30%;
         margin: 30px auto;
+        background: red;
+    }
+    #menu button {
+        width: 30%;
     }
     .grid-div {
         display: grid;

@@ -44,7 +44,7 @@ foreach ($rows_Bookings as $row_Bookings) {
                         }
                         echo "</li>";
                         echo "<li><a href=\"edit_booking_invoice.php?InvoiceNo=$row_Invoices->InvoiceNo\">Edit</a>";
-                        echo "<li><a href=\"receipt_booking_invoice.php?InvoiceNo=$row_Invoices->InvoiceNo\">Receipt</a>";
+                        echo "<li><a href=\"receipt_booking_invoice.php?InvoiceNo=$row_Invoices->InvoiceNo\" target=\"_blank\">Receipt</a>";
                         echo "</div>";
                         echo "<!-- end of grid-item -->";
                     }

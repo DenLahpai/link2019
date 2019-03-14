@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         Sales Person : <? echo $row_Users->Fullname; ?>
                         <br>
                         <form action="#" method="post">
-                         Payment Method :
+                        Payment Method :
                             <select name="Method" id="Method" onchange="this.form.submit();">
                                 <option value="0">Select One</option>
                                 <option value="1">Cash</option>

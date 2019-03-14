@@ -814,16 +814,16 @@ function table_Invoices ($job, $var1, $var2) {
             case 'update_receipt':
                 //getting data from the form
                 $Method = $_REQUEST['Method'];
-                $InvoiceDate = date('Y-m-d');
+                $PaidOn = date('Y-m-d');
                 $query = "UPDATE Invoices SET
                     MethodId = :Method,
-                    InvoiceDate = :InvoiceDate,
+                    PaidOn = :PaidOn,
                     Status = 'Paid'
                     WHERE InvoiceNo = :InvoiceNo
                 ;";
                 $database->query($query);
                 $database->bind(':Method', $Method);
-                $database->bind(':InvoiceDate', $InvoiceDate);
+                $database->bind(':PaidOn', $PaidOn);
                 $database->bind(':InvoiceNo', $var1);
                 if ($database->execute()) {
                     header("location: receipt_booking_invoice.php?InvoiceNo=$var1");
