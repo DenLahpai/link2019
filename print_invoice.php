@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $headers .= "Content-type: text/html\r\n";
 
         // TODO Test once on the server
-        // mail($Email, $subject, $message, $headers);
+        mail($Email, $subject, $message, $headers);
     }
 }
 
