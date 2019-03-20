@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <? echo $row_InvoiceHeader->City; ?>
                                         </li>
                                         <li>
-                                            Attn:
+                                            Attn: 
                                             <? echo $row_InvoiceHeader->Attn; ?>
                                         </li>
                                     </ul>
