@@ -23,7 +23,7 @@ foreach ($rows_Bookings as $row_Bookings) {
             ?>
             <main>
                 <h3>
-                    Flights
+                    Flights <a href="<?php echo "confirmations_flights.php?BookingsId=$BookingsId"; ?>" target="_blank">Confirmation</a>
                 </h3>
                 <!-- grid-div -->
                 <div class="grid-div">

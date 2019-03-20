@@ -243,6 +243,26 @@ button:active {
     display: none;
 }
 
+.print h3 {
+    text-align: center;
+    margin: 12px 3px;
+}
+
+.confirmation table {
+    margin: 6px auto;
+    border-collapse: collapse;
+}
+
+.confirmation table thead tr th {
+    border: 1px solid silver;
+    padding: 6px 12px;
+}
+
+.confirmation table tbody tr td {
+    border: 1px solid silver;
+    padding: 6px 12px;
+}
+
 .pageHeader {
     border-bottom: 1px solid gold;
 }

@@ -1007,8 +1007,6 @@ function table_Services_booking ($job, $var1, $var2) {
             $sellPerUSD = $_REQUEST['sellPerUSD'];
             $sellPerMMK = $_REQUEST['sellPerMMK'];
 
-            echo "Sumitee";
-
             //getting the Markup
             if ($Cost1_MMK == 0) {
                 $profit = $sellPerUSD - $Cost1_USD;
@@ -1111,6 +1109,7 @@ function table_Services_booking ($job, $var1, $var2) {
                 Services_booking.Cfm_no,
                 Services.Id AS ServicesId,
                 Suppliers.Name AS SuppliersName,
+                ServiceStatus.Code AS StatusCode,
                 ServiceStatus.Status AS Status
                 FROM Services_booking
                 LEFT OUTER JOIN Services
@@ -1122,7 +1121,6 @@ function table_Services_booking ($job, $var1, $var2) {
                 WHERE Services.ServiceTypeId = '2'
                 AND Services_booking.BookingsId = :BookingsId
             ;";
-
             $database->query($query);
             $database->bind(':BookingsId', $var1);
             return $r = $database->resultset();
