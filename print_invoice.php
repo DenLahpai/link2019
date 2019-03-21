@@ -86,7 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $headers = "FROM: Link In Myanmar <info@linkinmyanmar.com>\r\n";
         $headers .= "Content-type: text/html\r\n";
 
-        // TODO Test once on the server
         mail($Email, $subject, $message, $headers);
     }
 }
@@ -149,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <? echo $row_InvoiceHeader->City; ?>
                                         </li>
                                         <li>
-                                            Attn: 
+                                            Attn:
                                             <? echo $row_InvoiceHeader->Attn; ?>
                                         </li>
                                     </ul>

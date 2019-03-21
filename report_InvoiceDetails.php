@@ -2,7 +2,7 @@
 require_once "functions.php";
 
 //getting data from the table Corporates
-$rows_Corporates = table_Corporates('select', NULL, NULL);
+$rows_Corporates = table_Corporates('select_all', NULL, NULL);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $Date1 = $_REQUEST['Date1'];
