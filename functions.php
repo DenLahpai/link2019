@@ -1492,6 +1492,8 @@ function table_Bookings_Clients ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
+        //TODO insert new & select in booking_clients.php    
+
         default:
             // code...
             break;
