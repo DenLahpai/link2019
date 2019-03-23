@@ -3,6 +3,7 @@ require_once "functions.php";
 
 //getting data from the table Clients
 $rows_Clients = table_Clients ('select_all', NULL, NULL);
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rowCount = table_Clients ('check_before_insert', NULL, NULL);
     if ($rowCount == 0) {
