@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     table_Invoices('update', $InvoiceNo, NULL);
 }
 
-
 //getting data from the table Invoices
 $rows_Invoices = table_Invoices('select_one', $InvoiceNo, NULL);
 foreach ($rows_Invoices as $row_Invoices) {
@@ -61,6 +60,7 @@ else {
             include "includes/nav.html";
             $header = $page_title;
             include "includes/header.html";
+            include "includes/booking_menu.html";
             ?>
             <main>
                 <!-- table invoice -->

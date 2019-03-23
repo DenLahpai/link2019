@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             include "includes/nav.html";
             $header = "Invoice : $row_Bookings->Reference";
             include "includes/header.html";
+            include "includes/booking_menu.html";
             ?>
             <main>
                 <!-- table invoice -->

@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $InvoicesStatus = $_REQUEST['InvoicesStatus'];
     $search = trim($_REQUEST['search']);
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
