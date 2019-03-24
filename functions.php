@@ -1126,6 +1126,10 @@ function table_Services_booking ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
+        case 'insert_hotel':
+            // code...
+            break;
+
         case 'select_hotels':
             $query = "SELECT
                 Services_booking.Id AS Services_bookingId,
