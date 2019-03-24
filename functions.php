@@ -1126,6 +1126,31 @@ function table_Services_booking ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
+        case 'select_hotels':
+            $query = "SELECT
+                Services_booking.Id AS Services_bookingId,
+                Services_booking.ServicesId,
+                Services_booking.Date_in,
+                Service_booking.Date_out,
+                Service_booking.Quantity,
+                Services_booking.StatusId,
+                Services_booking.Cfm_no,
+                Services.Id AS ServicesId,
+                Suppliers.Name AS SuppliersName,
+                ServiceStatus.Code AS StatusCode,
+                ServiceStatus.Status AS Status
+                FROM Services_booking
+                LEFT OUTER JOIN Services
+                ON Services_booking.ServicesId = Services.Id
+                LEFT OUTER JOIN Suppliers
+                ON Services.SupplierId = Suppliers.Id
+                LEFT OUTER JOIN ServiceStatus
+                ON Services_booking.StatusId = ServiceStatus.Id
+                WHERE Services.ServiceTypeId = '1'
+                AND Services_booking.BookingsId = :BookingsId
+            ;";
+            break;
+
         case 'select_one':
             $query = "SELECT
                 Services_booking.BookingsId AS BookingsId,

@@ -37,7 +37,7 @@ $Date_in = trim($_REQUEST['Date_in']);
                 <?php
                 switch ($row_Services->ServiceTypeId) {
                     case '1':
-                        // code...
+                        include "includes/adding_services_booking_hotel.php";
                         break;
                     case '2':
                         include "includes/adding_services_booking_flight.php";
