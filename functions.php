@@ -1127,7 +1127,13 @@ function table_Services_booking ($job, $var1, $var2) {
             break;
 
         case 'insert_hotel':
-            // code...
+            // getting data from the form
+            $Date_in = new DateTime($_REQUEST['Date_in']);
+            $Date_out = new DateTime($_REQUEST['Date_out']);
+            $nights = date_diff($Date_in, $Date_out);
+            $quantity = $nights->format("%R%a days");
+            $Quantity = preg_replace("/[^0-9]/", "", $quantity);
+            $Sgl = $_REQUEST['Sgl'];
             break;
 
         case 'select_hotels':

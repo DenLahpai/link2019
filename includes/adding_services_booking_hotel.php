@@ -1,5 +1,7 @@
 <?php
-
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    table_Services_booking ('insert_hotel', $BookingsId, $ServicesId);
+}
 ?>
 <!-- service form -->
 <div class="service form">
@@ -39,6 +41,43 @@
             <li>
                 Triple:
                 <input type="number" name="Tpl" id="Tpl">
+            </li>
+            <li class="bold">
+                Cost
+            </li>
+            <li>
+                Single Room
+            </li>
+            <li>
+                USD:
+                <input type="number" step="0.01" name="Cost1_USD" id="Cost1_USD" value="<? echo $row_Services->Cost1_USD; ?>" readonly>
+                MMK:
+                <input type="number" name="Cost1_MMK" id="Cost1_MMK" value="<? echo $row_Services->Cost1_MMK; ?>" readonly>
+            </li>
+            <li>
+                Double / Twin Room
+            </li>
+            <li>
+                USD:
+                <input type="number" step="0.01" name="Cost2_USD" id="Cost2_USD" value="<? echo $row_Services->Cost2_USD; ?>">
+                MMK:
+                <input type="number" step="0.01" name="Cost2_MMK" id="Cost2_MMK" value="<? echo $row_Services->Cost2_MMK; ?>">
+            </li>
+            <li>
+                Triple Room
+            </li>
+            <li>
+                USD:
+                <input type="number" step="0.01" name="Cost3_USD" id="Cost3_USD" value="<? echo $row_Services->Cost3_USD; ?>">
+                MMK:
+                <input type="number" step="0.01" name="Cost3_MMK" id="Cost3_MMK" value="<? echo $row_Services->Cost3_MMK; ?>">
+            </li>
+            <li>
+                Markup %:
+                <input type="number" name="Markup" id="Markup" step="0.01" onchage="calculateHotelSell();">
+            </li>
+            <li>
+                Sell
             </li>
             <li class="error"></li>
             <li>
