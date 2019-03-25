@@ -1134,6 +1134,13 @@ function table_Services_booking ($job, $var1, $var2) {
             $quantity = $nights->format("%R%a days");
             $Quantity = preg_replace("/[^0-9]/", "", $quantity);
             $Sgl = $_REQUEST['Sgl'];
+            $Dbl = $_REQUEST['Dbl'];
+            $Twn = $_REQUEST['Twn'];
+            $Tpl = $_REQUEST['Tpl'];
+            $Cost1_USD = $_REQUEST['Cost1_USD'];
+            $Cost1_MMK = $_REQUEST['Cost1_MMK'];
+            $Cost2_USD = $_REQUEST['Cost2_USD'];
+            $Cost2_MMK = $_REQUEST['Cost2_MMK'];
             break;
 
         case 'select_hotels':
