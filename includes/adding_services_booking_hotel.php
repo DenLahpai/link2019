@@ -74,10 +74,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </li>
             <li>
                 Markup %:
-                <input type="number" name="Markup" id="Markup" step="0.01" onchage="calculateHotelSell();">
+                <input type="number" name="Markup" id="Markup" step="0.01" onchange="calculateHotelSell();">
+            </li>
+            <li class="bold">
+                Sell
             </li>
             <li>
-                Sell
+                Single Room
+            </li>
+            <li>
+                USD:
+                <input type="number" step="0.01" name="Sell1_USD" id="Sell1_USD" value="">
+                MMK:
+                <input type="number" name="Sell1_MMK" id="Sell1_MMK" value="">
+            </li>
+            <li>
+                Double / Twin Room
+            </li>
+            <li>
+                USD:
+                <input type="number" name="Sell2_USD" id="Sell2_USD" step="0.01" value="">
+                MMK:
+                <input type="number" name="Sell2_MMK" id="Sell2_MMK" value="">
+            </li>
+            <li>
+                Triple Room
+            </li>
+            <li>
+                USD:
+                <input type="number" step="0.01" name="Sell3_USD" id="Sell3_USD" value="">
+                MMK:
+                <input type="number" name="Sell3_MMK" id="Sell3_MMK" value="">
             </li>
             <li class="error"></li>
             <li>
@@ -100,6 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         var num2 = Twn.value - 0;
         var num3 = Tpl.value - 0;
         var rooms = num0 + num1 + num2 + num3;
+        var Markup = document.getElementById('Markup');
 
         if (Date_out.value == "") {
             Date_out.style.background = 'red';
@@ -116,8 +144,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             Tpl.style.background = 'brown';
             document.getElementsByClassName('error')[0].innerHTML = 'Please input a proper number of room(s)!';
         }
+        else if (Markup.value == 0 || Markup.value === null || Markup.value === "") {
+            Markup.style.background = 'brown';
+            document.getElementsByClassName('error')[0].innerHTML = 'Please input a proper markup!';
+        }
         else {
             document.getElementById('buttonSubmit').type = 'submit';
         }
+    }
+
+    //function to calculate sell for hotel
+    function calculateHotelSell() {
+        var Markup = document.getElementById('Markup');
+        var MarkupPC = document.getElementById('Markup').value -0;
+        var Cost1_USD = document.getElementById('Cost1_USD').value -0;
+        var Cost1_MMK = document.getElementById('Cost1_MMK').value -0;
+        var Cost2_USD = document.getElementById('Cost2_USD').value -0;
+        var Cost2_MMK = document.getElementById('Cost2_MMK').value -0;
+        var Cost3_USD = document.getElementById('Cost3_USD').value -0;
+        var Cost3_MMK = document.getElementById('Cost3_MMK').value -0;
+
+        Sell1_USD = (Cost1_USD * MarkupPC / 100) + Cost1_USD;
+        Sell1_MMK = (Cost1_MMK * MarkupPC / 100) + Cost1_MMK;
+        Sell2_USD = (Cost2_USD * MarkupPC / 100) + Cost2_USD;
+        Sell2_MMK = (Cost2_MMK * MarkupPC / 100) + Cost2_MMK;
+        Sell3_USD = (Cost3_USD * MarkupPC / 100) + Cost3_USD;
+        Sell3_MMK = (Cost3_MMK * MarkupPC / 100) + Cost3_MMK;
+
+        document.getElementById('Sell1_USD').value = Sell1_USD;
+        document.getElementById('Sell1_MMK').value = Sell1_MMK;
+        document.getElementById('Sell2_USD').value = Sell2_USD;
+        document.getElementById('Sell2_MMK').value = Sell2_MMK;
+        document.getElementById('Sell3_USD').value = Sell3_USD;
+        document.getElementById('Sell3_MMK').value = Sell3_MMK;
     }
 </script>
