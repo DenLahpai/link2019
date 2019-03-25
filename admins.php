@@ -29,6 +29,9 @@ require_once "functions.php";
                             <a href="suppliers.php">Suppliers</a>
                         </li>
                         <li>
+                            <a href="services.php">Services</a>
+                        </li>
+                        <li>
                             <a href="corporates.php">Corporates</a>
                         </li>
                         <li>

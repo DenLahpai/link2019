@@ -1141,6 +1141,11 @@ function table_Services_booking ($job, $var1, $var2) {
             $Cost1_MMK = $_REQUEST['Cost1_MMK'];
             $Cost2_USD = $_REQUEST['Cost2_USD'];
             $Cost2_MMK = $_REQUEST['Cost2_MMK'];
+            $Cost3_USD = $_REQUEST['Cost3_USD'];
+            $Cost3_MMK = $_REQUEST['Cost3_MMK'];
+            $Markup = $_REQUEST['Markup'];
+            // TODO
+
             break;
 
         case 'select_hotels':
