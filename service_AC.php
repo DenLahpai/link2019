@@ -33,7 +33,7 @@ require_once "functions.php";
                                 </select>
                             </li>
                             <li>
-                                Service:
+                                Room Type:
                                 <input type="text" name="Service" id="Service">
                             </li>
                             <li>
@@ -43,6 +43,30 @@ require_once "functions.php";
                             <li>
                                 Valid Until:
                                 <input type="date" name="EndDate" id="EndDate">
+                            </li>
+                            <li class="bold">
+                                Cost for Double / Twin Room
+                            </li>
+                            <li>
+                                USD: <input type="number" name="Cost1_USD" id="Cost1_USD" step="0.01a">
+                                MMK: <input type="number" name="Cost1_MMK" id="Cost1_MMK">
+                            </li>
+                            <li class="bold">
+                                Cost for Single Room
+                            </li>
+                            <li>
+                                USD: <input type="number" name="Cost2_USD" id="Cost2_USD" step="0.01">
+                                MMK: <input type="number" name="Cost2_MMK" id="Cost2_MMK">
+                            </li>
+                            <li class="bold">
+                                Cost for Triple Room
+                            </li>
+                            <li>
+                                USD: <input type="number" name="Cost3_USD" id="Cost3_USD" step="0.01">
+                                MMK: <input type="number" name="Cost3_MMK" id="Cost3_MMK">
+                            </li>
+                            <li>
+                                <button type="button" name="buttonSubmit" id="buttonSubmit">Submit</button>
                             </li>
                         </ul>
                     </form>
