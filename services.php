@@ -16,7 +16,15 @@ require_once "functions.php";
             include "includes/nav.html";
             ?>
             <main>
-                
+                <!-- Services form -->
+                <div class="Services form">
+                    <form action="#" method="post">
+                        <ul>
+                            <li></li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end of Services form -->
             </main>
         </div>
         <!-- end of content -->
