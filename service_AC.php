@@ -148,7 +148,6 @@ require_once "functions.php";
                     m++;
                 }
             }
-
         }
     </script>
 </html>
