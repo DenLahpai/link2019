@@ -574,58 +574,6 @@ function table_Suppliers ($job, $var1, $var2) {
     }
 }
 
-// functions to use the table Servcies
-function table_Services ($job, $var1, $var2) {
-    $database = new Database();
-
-    switch ($job) {
-        case 'select_all':
-            // code...
-            break;
-
-        case 'select_one':
-            $query = "SELECT
-                Services.ServiceTypeId,
-                Services.SupplierId,
-                Services.Service,
-                Services.Additional,
-                Services.StartDate,
-                Services.EndDate,
-                Services.MaxPax,
-                Services.Cost1_USD,
-                Services.Cost1_MMK,
-                Services.Cost2_USD,
-                Services.Cost2_MMK,
-                Services.Cost3_USD,
-                Services.Cost3_MMK,
-                Suppliers.Name
-                FROM Services
-                LEFT OUTER JOIN Suppliers
-                ON Services.SupplierId = Suppliers.Id
-                WHERE Services.Id = :ServicesId
-            ;";
-            $database->query($query);
-            $database->bind(':ServicesId', $var1);
-            return $r = $database->resultset();
-            break;
-
-        case 'select_to_add':
-            $query = "SELECT * FROM Services WHERE
-                ServiceTypeId = :ServiceTypeId
-                AND SupplierId = :SupplierId
-            ;";
-            $database->query($query);
-            $database->bind(':ServiceTypeId', $var1);
-            $database->bind(':SupplierId', $var2);
-            return $r = $database->resultset();
-            break;
-
-        default:
-            // code...
-            break;
-    }
-}
-
 // function the get data from the table Corporates
 function table_Corporates ($job, $var1, $var2) {
     $database = new Database();
@@ -1307,6 +1255,10 @@ function table_ServiceStatus ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
+        case 'select_all':
+            // code...
+            break;
+
         default:
             // code...
             break;
@@ -1322,6 +1274,160 @@ function table_ServiceType ($job, $var1, $var2) {
             $query = "SELECT * FROM ServiceType ;";
             $database->query($query);
             return $r = $database->resultset();
+            break;
+
+        default:
+            // code...
+            break;
+    }
+}
+
+//function to use the table Services
+function table_Services ($job, $var1, $var2) {
+    $database = new Database();
+    switch ($job) {
+        case 'select_one':
+            $query = "SELECT
+                Services.ServiceTypeId,
+                Services.SupplierId,
+                Services.Service,
+                Services.Additional,
+                Services.StartDate,
+                Services.EndDate,
+                Services.MaxPax,
+                Services.Cost1_USD,
+                Services.Cost1_MMK,
+                Services.Cost2_USD,
+                Services.Cost2_MMK,
+                Services.Cost3_USD,
+                Services.Cost3_MMK,
+                Suppliers.Name
+                FROM Services
+                LEFT OUTER JOIN Suppliers
+                ON Services.SupplierId = Suppliers.Id
+                WHERE Services.Id = :ServicesId
+            ;";
+            $database->query($query);
+            $database->bind(':ServicesId', $var1);
+            return $r = $database->resultset();
+            break;
+
+        case 'select_to_add':
+            $query = "SELECT * FROM Services WHERE
+                ServiceTypeId = :ServiceTypeId
+                AND SupplierId = :SupplierId
+            ;";
+            $database->query($query);
+            $database->bind(':ServiceTypeId', $var1);
+            $database->bind(':SupplierId', $var2);
+            return $r = $database->resultset();
+            break;
+
+        case 'check_before_insert_AC':
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $Cost1_USD = $_REQUEST['Cost1_USD'];
+            $query = "SELECT Id FROM Services
+                WHERE SupplierId = :SupplierId
+                AND Service = :Service
+                AND StartDate = :StartDate
+                AND EndDate = :EndDate
+                AND Cost1_USD = :Cost1_USD
+            ;";
+            $database->query($query);
+            $database->bind(':SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            $database->bind(':Service', $Service);
+            $database->bind(':StartDate', $StartDate);
+            $database->bind(':EndDate', $EndDate);
+            $database->bind(':Cost1_USD', $Cost1_USD);
+            return $r = $database->rowCount();
+            break;
+
+        case 'insert_AC':
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $currency = $_REQUEST['currency'];
+            switch ($currency) {
+                case 'USD':
+                    $Cost1_USD = $_REQUEST['Cost1_USD'];
+                    $Cost2_USD = $_REQUEST['Cost2_USD'];
+                    $Cost3_USD = $_REQUEST['Cost3_USD'];
+                    $query = "INSERT INTO Services (
+                        ServiceTypeId,
+                        SupplierId,
+                        Service,
+                        StartDate,
+                        EndDate,
+                        Cost1_USD,
+                        Cost2_USD,
+                        Cost3_USD
+                        ) VALUES (
+                        :ServiceTypeId,
+                        :SupplierId,
+                        :Service,
+                        :StartDate,
+                        :EndDate,
+                        :Cost1_USD,
+                        :Cost2_USD,
+                        :Cost3_USD
+                        )
+                    ;";
+                    $database->query($query);
+                    $database->bind(':ServiceTypeId', 1);
+                    $database->bind(':SupplierId', $SupplierId);
+                    $database->bind(':Service', $Service);
+                    $database->bind(':StartDate', $StartDate);
+                    $database->bind(':EndDate', $EndDate);
+                    $database->bind(':Cost1_USD', $Cost1_USD);
+                    $database->bind(':Cost2_USD', $Cost2_USD);
+                    $database->bind(':Cost3_USD', $Cost3_USD);
+                    break;
+                case 'MMK':
+                    $Cost1_MMK = $_REQUEST['Cost1_MMK'];
+                    $Cost2_MMK = $_REQUEST['Cost2_MMK'];
+                    $Cost3_MMK = $_REQUEST['Cost3_MMK'];
+                    $query = "INSERT INTO Services (
+                        ServiceTypeId,
+                        SupplierId,
+                        Service,
+                        StartDate,
+                        EndDate,
+                        Cost1_USD,
+                        Cost2_USD,
+                        Cost3_USD
+                        ) VALUES (
+                        :ServiceTypeId,
+                        :SupplierId,
+                        :Service,
+                        :StartDate,
+                        :EndDate,
+                        :Cost1_MMK,
+                        :Cost2_MMK,
+                        :Cost3_MMK
+                        )
+                    ;";
+                    $database->query($query);
+                    $database->bind(':ServiceTypeId', 1);
+                    $database->bind(':SupplierId', $SupplierId);
+                    $database->bind(':Service', $Service);
+                    $database->bind(':StartDate', $StartDate);
+                    $database->bind(':EndDate', $EndDate);
+                    $database->bind(':Cost1_MMK', $Cost1_MMK);
+                    $database->bind(':Cost2_MMK', $Cost2_MMK);
+                    $database->bind(':Cost3_MMK', $Cost3_MMK);
+                    break;
+                default:
+                    // code...
+                    break;
+            }
+            if ($database->execute()) {
+                header("location:services.php");
+            }
             break;
 
         default:

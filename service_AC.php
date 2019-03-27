@@ -2,7 +2,13 @@
 require_once "functions.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //TODO function to insert
+    $rowCount = table_Services ('check_before_insert_AC', NULL, NULL);
+    if ($rowCount == 0) {
+        table_Services ('insert_AC', NULL, NULL);
+    }
+    else {
+        $error = "Duplicate Entry!";
+    }
 }
 ?>
 <!DOCTYPE html>
