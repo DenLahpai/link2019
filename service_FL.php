@@ -1,5 +1,17 @@
 <?php
 require_once "functions.php";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $rowCount = table_Services ('check_before_insert_FL', NULL, NULL);
+
+    if ($rowCount == 0) {
+        table_Services ('insert_FL', NULL, NULL);
+    }
+    else {
+        $error = 'Duplicate entry!';
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -63,6 +75,46 @@ require_once "functions.php";
     </body>
     <script type="text/javascript" src="scripts/scritps.js"></script>
     <script type="text/javascript">
+        //function to insert Service flight
+        function insertServiceFlight () {
+            var SupplierId = document.getElementById('SupplierId');
+            var StartDate = document.getElementById('StartDate');
+            var EndDate = document.getElementById('EndDate');
+            var error = 0;
 
+            if (SupplierId.value === null || SupplierId.value === "") {
+                SupplierId.style.background = 'red';
+                error = 1;
+            }
+
+            if (StartDate.value == "" || StartDate.value == null) {
+                StartDate.style.background = 'red';
+                error = 1;
+            }
+
+            if (EndDate.value == "" || EndDate.value == null) {
+                EndDate.style.background = 'red';
+                error = 1;
+            }
+
+            if (StartDate.value > EndDate.value) {
+                error = 2;
+                StartDate.style.background = 'brown';
+                EndDate.style.background = 'brown';
+            }
+
+            if (error == 1) {
+                document.getElementsByClassName('error')[0].innerHTML = 'Please fill out all the filed(s) in red!';
+            }
+            else if (error == 2) {
+                document.getElementsByClassName('error')[0].innerHTML = 'The date in the field Valid From cannot be later than the date in the field Valid Until!';
+            }
+            else if (error == 0) {
+                document.getElementById('buttonSubmit').type = 'submit';
+            }
+            else {
+                document.getElementsByClassName('error')[0].innerHTML = 'Please contact the developer!';
+            }
+        }
     </script>
 </html>

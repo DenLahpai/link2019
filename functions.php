@@ -1430,6 +1430,49 @@ function table_Services ($job, $var1, $var2) {
             }
             break;
 
+            case 'check_before_insert_FL':
+                $SupplierId = $_REQUEST['SupplierId'];
+                $Service = trim($_REQUEST['Service']);
+                $query = "SELECT * FROM Services
+                    WHERE SupplierId = :SupplierId
+                    AND Service = :Service
+                ;";
+                $database->query($query);
+                $database->bind(':SupplierId', $SupplierId);
+                $database->bind(':Service', $Service);
+                return $r = $database->rowCount();
+                break;
+
+            case 'insert_FL':
+                $SupplierId = $_REQUEST['SupplierId'];
+                $Service = trim($_REQUEST['Service']);
+                $StartDate = $_REQUEST['StartDate'];
+                $EndDate = $_REQUEST['EndDate'];
+                $query = "INSERT INTO Services (
+                    ServiceTypeId,
+                    SupplierId,
+                    Service,
+                    StartDate,
+                    EndDate
+                    ) VALUES (
+                    :ServiceTypeId,
+                    :SupplierId,
+                    :Service,
+                    :StartDate,
+                    :EndDate
+                    )
+                ;";
+                $database->query($query);
+                $database->bind(':ServiceTypeId', 2);
+                $database->bind(':SupplierId', $SupplierId);
+                $database->bind(':Service', $Service);
+                $database->bind(':StartDate', $StartDate);
+                $database->bind(':EndDate', $EndDate);
+                if ($database->execute()) {
+                    header("location: services.php");
+                }
+                break;
+
         default:
             // code...
             break;
