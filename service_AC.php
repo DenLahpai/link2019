@@ -111,6 +111,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </form>
                 </div>
                 <!-- end of hotel form -->
+                <!-- grid-div -->
+                <div class="grid-div">
+                    <?php
+                    $rows_Services = table_Services ('select_all', 1, NULL);
+                    foreach ($rows_Services as $row_Services) {
+                        echo "<!-- grid-item -->";
+                        echo "<div class=\"grid-item\">";
+                        echo "<ul>";
+                        echo "<li class=\"bold\">".$row_Services->SuppliersName."</li>";
+                        echo "<li>".$row_Services->Service." Room</li>";
+                        //TODO resume here
+                        echo "</ul>";
+                        echo "</div>";
+                        echo "<!-- end of grid-item -->";
+                    }
+                    ?>
+                </div>
+                <!-- end grid-div -->
             </main>
         </div>
         <!-- end of content -->
@@ -118,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </body>
     <script type="text/javascript" src="scripts/scripts.js"></script>
     <script type="text/javascript">
-        
+
         //function to check empty field and submit the form
         function insertServiceHotel () {
             var SupplierId = document.getElementById('SupplierId');

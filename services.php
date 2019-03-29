@@ -16,6 +16,7 @@ require_once "functions.php";
             include "includes/nav.html";
             ?>
             <main>
+                <!-- form -->
                 <div class="form">
                     <ul>
                         <li>
@@ -39,6 +40,7 @@ require_once "functions.php";
                         </li>
                     </ul>
                 </div>
+                <!-- end of form -->
             </main>
         </div>
         <!-- end of content -->
@@ -47,7 +49,7 @@ require_once "functions.php";
     <script type="text/javascript">
         function selectType () {
             var type = document.getElementById('type');
-            if (type.value == "" || type.value == null) {
+            if (type.value == "" || type.value == null || type == 0) {
                 document.getElementsByClassName('error')[0].innerHTML = "Please select a service type!";
             }
             else {

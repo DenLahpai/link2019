@@ -69,9 +69,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </form>
                 </div>
                 <!-- end of flight form -->
+                <!-- grid-div -->
+                <div class="grid-div">
+                    <?php
+                    $rows_Services = table_Services ('select_all', 2, NULL);
+                    foreach ($rows_Services as $row_Services) {
+                        echo "<!-- grid-item -->";
+                        echo "<div class=\"grid-item\">";
+                        echo "<ul>";
+                        echo "<li class=\"bold\">".$row_Services->SuppliersName."</li>";
+                        echo "<li>".$row_Services->Service."</li>";
+                        echo "<li>Valid From:".date("d-M-Y", strtotime($row_Services->StartDate))."</li>";
+                        echo "<li>Valid Until:".date("d-M-Y", strtotime($row_Services->EndDate))."</li>";
+                        echo "<li><a href=\"edit_services.php?ServicesId=$row_Services->ServicesId\">Edit</a></li>";
+                        echo "</ul>";
+                        echo "</div>";
+                        echo "<!-- end of grid item -->";
+                    }
+                    ?>
+                </div>
+                <!-- end of grid-div -->
             </main>
         </div>
         <!-- end of content -->
+        <?php include "includes/footer.html"; ?>
     </body>
     <script type="text/javascript" src="scripts/scritps.js"></script>
     <script type="text/javascript">

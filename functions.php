@@ -1472,7 +1472,31 @@ function table_Services ($job, $var1, $var2) {
                     header("location: services.php");
                 }
                 break;
-
+        case 'select_all':
+            // $var1 = ServiceTypeId
+            $query = "SELECT
+                Services.Id AS ServicesId,
+                Suppliers.Name AS SuppliersName,
+                Services.Service,
+                Services.Additional,
+                Services.MaxPax,
+                Services.StartDate,
+                Services.EndDate,
+                Services.Cost1_USD,
+                Services.Cost1_MMK,
+                Services.Cost2_USD,
+                Services.Cost2_MMK,
+                Services.Cost3_USD,
+                Services.Cost3_MMK
+                FROM Services
+                LEFT OUTER JOIN Suppliers
+                ON Services.SupplierId = Suppliers.Id
+                WHERE Services.ServiceTypeId = :ServiceTypeId
+            ;";
+            $database->query($query);
+            $database->bind(':ServiceTypeId', $var1);
+            return $r = $database->resultset();
+            break;
         default:
             // code...
             break;
