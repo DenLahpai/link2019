@@ -24,26 +24,53 @@ function checkThreeFields(field1, field2, field3) {
     }
 }
 
-// script to select currency
+// function to display selected Currency
 function selectCurrency() {
-    var currency = document.getElementById('currency').value;
-    if (currency === 'USD') {
-        document.getElementById('costUSD').style.display = 'block';
-        document.getElementById('costMMK').style.display = 'none';
-        document.getElementById('sellPerUSD').style.display = 'block';
-        document.getElementById('sellPerMMK').style.display = 'none';
+    var currency = document.getElementById('currency');
+    var USD = document.getElementsByClassName('USD');
+    var MMK = document.getElementsByClassName('MMK');
+
+    if (currency.value === 'USD') {
+        var m = 0;
+        var u = 0;
+        //showing the USD
+        while (u < USD.length) {
+            USD[u].style.display = 'block';
+            u++;
+        }
+        //hiding the MMK
+        while (m < MMK.length) {
+            MMK[m].style.display = 'none';
+            m++;
+        }
     }
-    else if (currency === 'MMK') {
-        document.getElementById('costMMK').style.display = 'block';
-        document.getElementById('costUSD').style.display = 'none';
-        document.getElementById('sellPerUSD').style.display = 'none';
-        document.getElementById('sellPerMMK').style.display = 'block';
+    else if (currency.value === 'MMK') {
+        var m = 0;
+        var u = 0;
+        // showing the MMK
+        while (m < MMK.length) {
+            MMK[m].style.display = 'block';
+            m++;
+        }
+        //hiding the USD
+        while (u < USD.length) {
+            USD[u].style.display = 'none';
+            u++;
+        }
     }
     else {
-        document.getElementById('costUSD').style.display = 'none';
-        document.getElementById('costMMK').style.display = 'none';
-        document.getElementById('sellPerUSD').style.display = 'none';
-        document.getElementById('sellPerMMK').style.display = 'none';
+        var m = 0;
+        var u = 0;
+        //hiding the USD
+        while (u < USD.length) {
+            USD[u].style.display = 'none';
+            u++;
+        }
+        //hiding the MMK
+        while (m < MMK.length) {
+            MMK[m].style.display = 'none';
+            m++;
+        }
     }
 }
 

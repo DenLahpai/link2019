@@ -24,6 +24,14 @@ $Date_in = trim($_REQUEST['Date_in']);
     $page_title = $row_Bookings->Reference.": Adding Service";
     include "includes/head.html";
     ?>
+    <style media="screen">
+        .MMK {
+            display: none;
+        }
+        .USD {
+            display: none;
+        }
+    </style>
     <body>
         <!-- content -->
         <div class="content">

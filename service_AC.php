@@ -116,57 +116,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- end of content -->
         <?php include "includes/footer.html"; ?>
     </body>
+    <script type="text/javascript" src="scripts/scripts.js"></script>
     <script type="text/javascript">
-        var currency = document.getElementById('currency');
-        var USD = document.getElementsByClassName('USD');
-        var MMK = document.getElementsByClassName('MMK');
-
-        // function to display selected Currency
-        function selectCurrency() {
-            if (currency.value === 'USD') {
-                var m = 0;
-                var u = 0;
-                //showing the USD
-                while (u < USD.length) {
-                    USD[u].style.display = 'block';
-                    u++;
-                }
-                //hiding the MMK
-                while (m < MMK.length) {
-                    MMK[m].style.display = 'none';
-                    m++;
-                }
-            }
-            else if (currency.value === 'MMK') {
-                var m = 0;
-                var u = 0;
-                // showing the MMK
-                while (m < MMK.length) {
-                    MMK[m].style.display = 'block';
-                    m++;
-                }
-                //hiding the USD
-                while (u < USD.length) {
-                    USD[u].style.display = 'none';
-                    u++;
-                }
-            }
-            else {
-                var m = 0;
-                var u = 0;
-                //hiding the USD
-                while (u < USD.length) {
-                    USD[u].style.display = 'none';
-                    u++;
-                }
-                //hiding the MMK
-                while (m < MMK.length) {
-                    MMK[m].style.display = 'none';
-                    m++;
-                }
-            }
-        }
-
+        
         //function to check empty field and submit the form
         function insertServiceHotel () {
             var SupplierId = document.getElementById('SupplierId');
