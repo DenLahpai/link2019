@@ -95,6 +95,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </form>
             </div>
             <!-- end of land transfer form -->
+            <!-- grid-div -->
+            <div class="grid-div">
+                <?php
+                $rows_Services = table_Services ('select_all', 3, NULL);
+                foreach ($rows_Services as $row_Services) {
+                    echo "<!-- grid-item -->";
+                    echo "<div class=\"grid-item\">";
+                    echo "<ul>";
+                    echo "<li class=\"bold\">".$row_Services->SuppliersName."</li>";
+                    echo "<li>Service: ".$row_Services->Service."</li>";
+                    echo "<li>Vehicle: ".$row_Services->Additional."</li>";
+                    echo "<li>Max Pers: ".$row_Services->MaxPax."</li>";
+                    echo "<li>Valid From: ".date("d-M-Y", strtotime($row_Services->StartDate))."</li>";
+                    echo "<li>Valid Until: ".date("d-M-Y", strtotime($row_Services->EndDate))."</li>";
+                    echo "<li><a href=\"edit_services.php?ServicesId=$row_Services->ServicesId\">Edit</a></li>";
+                    echo "</ul>";
+                    echo "</div>";
+                    echo "<!-- end of grid-item -->";
+                }
+                ?>
+            </div>
+            <!-- end of grid-div -->
         </main>
         <!-- end of content -->
         <?php include "includes/footer.html"; ?>
