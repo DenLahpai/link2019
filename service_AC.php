@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <form action="#" method="post">
                         <ul>
                             <li>
-                                Supplier:
+                                Hotel:
                                 <select name="SupplierId" id="SupplierId">
                                     <option value="">Select One</option>
                                     <?php
@@ -121,7 +121,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         echo "<ul>";
                         echo "<li class=\"bold\">".$row_Services->SuppliersName."</li>";
                         echo "<li>".$row_Services->Service." Room</li>";
-                        //TODO resume here
+                        echo "<li>Valid From: ".date("d-M-Y", strtotime($row_Services->StartDate))."</li>";
+                        echo "<li>Valid From: ".date("d-M-Y", strtotime($row_Services->EndDate))."</li>";
+                        echo "<li>";
+                        echo "<li><a href=\"edit_service.php?ServicesId=$row_Services->ServicesId\">Edit</a></li>";
                         echo "</ul>";
                         echo "</div>";
                         echo "<!-- end of grid-item -->";

@@ -1426,52 +1426,163 @@ function table_Services ($job, $var1, $var2) {
                     break;
             }
             if ($database->execute()) {
-                header("location:services.php");
+                header("location:service_AC.php");
             }
             break;
 
-            case 'check_before_insert_FL':
-                $SupplierId = $_REQUEST['SupplierId'];
-                $Service = trim($_REQUEST['Service']);
-                $query = "SELECT * FROM Services
-                    WHERE SupplierId = :SupplierId
-                    AND Service = :Service
-                ;";
-                $database->query($query);
-                $database->bind(':SupplierId', $SupplierId);
-                $database->bind(':Service', $Service);
-                return $r = $database->rowCount();
-                break;
+        case 'check_before_insert_FL':
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $query = "SELECT * FROM Services
+                WHERE SupplierId = :SupplierId
+                AND Service = :Service
+            ;";
+            $database->query($query);
+            $database->bind(':SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            return $r = $database->rowCount();
+            break;
 
-            case 'insert_FL':
-                $SupplierId = $_REQUEST['SupplierId'];
-                $Service = trim($_REQUEST['Service']);
-                $StartDate = $_REQUEST['StartDate'];
-                $EndDate = $_REQUEST['EndDate'];
-                $query = "INSERT INTO Services (
-                    ServiceTypeId,
-                    SupplierId,
-                    Service,
-                    StartDate,
-                    EndDate
-                    ) VALUES (
-                    :ServiceTypeId,
-                    :SupplierId,
-                    :Service,
-                    :StartDate,
-                    :EndDate
-                    )
-                ;";
-                $database->query($query);
-                $database->bind(':ServiceTypeId', 2);
-                $database->bind(':SupplierId', $SupplierId);
-                $database->bind(':Service', $Service);
-                $database->bind(':StartDate', $StartDate);
-                $database->bind(':EndDate', $EndDate);
-                if ($database->execute()) {
-                    header("location: services.php");
-                }
-                break;
+        case 'insert_FL':
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $query = "INSERT INTO Services (
+                ServiceTypeId,
+                SupplierId,
+                Service,
+                StartDate,
+                EndDate
+                ) VALUES (
+                :ServiceTypeId,
+                :SupplierId,
+                :Service,
+                :StartDate,
+                :EndDate
+                )
+            ;";
+            $database->query($query);
+            $database->bind(':ServiceTypeId', 2);
+            $database->bind(':SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            $database->bind(':StartDate', $StartDate);
+            $database->bind(':EndDate', $EndDate);
+            if ($database->execute()) {
+                header("location: service_FL.php");
+            }
+            break;
+
+        case 'check_before_insert_LT':
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $Additional = trim($_REQUEST['Additional']);
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $query = "SELECT * FROM Services
+                WHERE SupplierId = :SupplierId
+                AND Service = :Service
+                AND Additional = :Additional
+                AND StartDate = :StartDate
+                AND EndDate = :EndDate
+            ;";
+            $database->query($query);
+            $database->bind(':SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            $database->bind(':Additional', $Additional);
+            $database->bind(':StartDate', $StartDate);
+            $database->bind(':EndDate', $EndDate);
+            return $r = $database->rowCount();
+            break;
+
+        case 'insert_LT':
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $Additional = trim($_REQUEST['Additional']);
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $MaxPax = $_REQUEST['MaxPax'];
+            $currency = $_REQUEST['currency'];
+
+            switch ($currency) {
+                case 'USD':
+                    $Cost1_USD = $_REQUEST['Cost1_USD'];
+                    $query = "INSERT INTO Services (
+                        ServiceTypeId,
+                        SupplierId,
+                        Service,
+                        Additional,
+                        StartDate,
+                        EndDate,
+                        MaxPax,
+                        Cost1_USD
+                        ) VALUES (
+                        :ServiceTypeId,
+                        :SupplierId,
+                        :Service,
+                        :Additional,
+                        :StartDate,
+                        :EndDate,
+                        :MaxPax,
+                        :Cost1_USD
+                        )
+                    ;";
+                    $database->query($query);
+                    $database->bind(':ServiceTypeId', 3);
+                    $database->bind(':SupplierId', $SupplierId);
+                    $database->bind(':Service', $Service);
+                    $database->bind(':Additional', $Additional);
+                    $database->bind(':StartDate', $StartDate);
+                    $database->bind(':EndDate', $EndDate);
+                    $database->bind(':MaxPax', $MaxPax);
+                    $database->bind(':Cost1_USD',$Cost1_USD);
+                    if ($database->execute()) {
+                        header("location: service_LT.php");
+                    }
+                    break;
+                case 'MMK':
+                    $Cost1_MMK = $_REQUEST['Cost1_MMK'];
+                    $query = "INSERT INTO Services (
+                        ServiceTypeId,
+                        SupplierId,
+                        Service,
+                        Additional,
+                        StartDate,
+                        EndDate,
+                        MaxPax,
+                        Cost1_MMK
+                        ) VALUES (
+                        :ServiceTypeId,
+                        :SupplierId,
+                        :Service,
+                        :Additional,
+                        :StartDate,
+                        :EndDate,
+                        :MaxPax,
+                        :Cost1_MMK
+                        )
+                    ;";
+                    $database->query($query);
+                    $database->bind(':ServiceTypeId', 3);
+                    $database->bind(':SupplierId', $SupplierId);
+                    $database->bind(':Service', $Service);
+                    $database->bind(':Additional', $Additional);
+                    $database->bind(':StartDate', $StartDate);
+                    $database->bind(':EndDate', $EndDate);
+                    $database->bind(':MaxPax', $MaxPax);
+                    $database->bind(':Cost1_MMK',$Cost1_MMK);
+                    if ($database->execute()) {
+                        header("location: service_LT.php");
+                    }
+                    break;
+
+                default:
+                    // code...
+                    break;
+            }
+
+            break;
+
         case 'select_all':
             // $var1 = ServiceTypeId
             $query = "SELECT
@@ -1677,7 +1788,6 @@ function table_Clients ($job, $var1, $var2) {
             break;
     }
 }
-
 
 // function to use the table Booking_Clients
 function table_Bookings_Clients ($job, $var1, $var2) {
