@@ -170,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             if (currency.value == 'USD') {
                 if (Cost1_USD.value == "" || Cost1_USD.value == null) {
-                    Cost1_USD.style.background = 'brown';
+                    Cost1_USD.style.background = 'red';
                     error = 1;
                 }
             }
@@ -182,16 +182,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             if (error == 1) {
                document.getElementsByClassName('error')[0].innerHTML = 'Please fill out all the filed(s) in red!';
-           }
-           else if (error == 2) {
+            }
+            else if (error == 2) {
                document.getElementsByClassName('error')[0].innerHTML = 'The date in the field Valid From cannot be later than the date in the field Valid Until!';
-           }
-           else if (error == 0) {
+            }
+            else if (error == 0) {
                document.getElementById('buttonSubmit').type = 'submit';
-           }
-           else {
+            }
+            else {
                document.getElementsByClassName('error')[0].innerHTML = 'Please contact the developer!';
-           }
+            }
         }
     </script>
 </html>
