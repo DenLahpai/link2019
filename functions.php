@@ -1585,6 +1585,25 @@ function table_Services ($job, $var1, $var2) {
 
         case 'check_before_insert_BO':
             // TODO RESUME HERE
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $MaxPax = $_REQUEST['MaxPax'];
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $query = "SELECT * FROM Services
+                WHERE SupplierId = :SupplierId
+                AND Service = :Service
+                AND MaxPax = :MaxPax
+                AND StartDate = :StartDate
+                AND EndDate = :EndDate
+            ;";
+            $database->query($query);
+            $database->bind(':SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            $database->bind(':MaxPax', $MaxPax);
+            $database->bind(':StartDate', $StartDate);
+            $database->bind(':EndDate', $EndDate);
+            return $r = $database->rowCount();
             break;
 
         case 'select_all':
