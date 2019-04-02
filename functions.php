@@ -1583,6 +1583,10 @@ function table_Services ($job, $var1, $var2) {
 
             break;
 
+        case 'check_before_insert_BO':
+            // TODO RESUME HERE
+            break;
+
         case 'select_all':
             // $var1 = ServiceTypeId
             $query = "SELECT

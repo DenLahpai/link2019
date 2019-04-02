@@ -1,5 +1,14 @@
 <?php
 require_once "functions.php";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $rowCount = table_Services ('check_before_insert_BO' , NULL, NULL);
+    if ($rowCount == 0) {
+
+    }
+    else {
+        $error = "Duplicate Entry!";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
