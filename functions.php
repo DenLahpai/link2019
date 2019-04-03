@@ -1610,7 +1610,7 @@ function table_Services ($job, $var1, $var2) {
             $MaxPax = $_REQUEST['MaxPax'];
             $StartDate = $_REQUEST['StartDate'];
             $EndDate = $_REQUEST['EndDate'];
-            $currency = $_REQUEST['currency']
+            $currency = $_REQUEST['currency'];
             switch ($currency) {
                 case 'USD':
                     $Cost1_USD = $_REQUEST['Cost1_USD'];
@@ -1641,6 +1641,7 @@ function table_Services ($job, $var1, $var2) {
                         header("location: service_BO.php");
                     }
                     break;
+
                 case 'MMK':
                     $Cost1_MMK = $_REQUEST['Cost1_MMK'];
                     $query = "INSERT INTO Services (
