@@ -151,7 +151,7 @@ require_once "functions.php";
             }
             else {
                document.getElementsByClassName('error')[0].innerHTML = 'Please contact the developer!';
-            }
+           }
         }
     </script>
 </html>
