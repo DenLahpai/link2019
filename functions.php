@@ -1580,7 +1580,101 @@ function table_Services ($job, $var1, $var2) {
                     // code...
                     break;
             }
+            break;
 
+        case 'check_before_insert_BO':
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $MaxPax = $_REQUEST['MaxPax'];
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $query = "SELECT * FROM Services
+                WHERE SupplierId = :SupplierId
+                AND Service = :Service
+                AND MaxPax = :MaxPax
+                AND StartDate = :StartDate
+                AND EndDate = :EndDate
+            ;";
+            $database->query($query);
+            $database->bind(':SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            $database->bind(':MaxPax', $MaxPax);
+            $database->bind(':StartDate', $StartDate);
+            $database->bind(':EndDate', $EndDate);
+            return $r = $database->rowCount();
+            break;
+
+        case 'insert_BO':
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $MaxPax = $_REQUEST['MaxPax'];
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $currency = $_REQUEST['currency']
+            switch ($currency) {
+                case 'USD':
+                    $Cost1_USD = $_REQUEST['Cost1_USD'];
+                    $query = "INSERT INTO Services (
+                        SupplierId,
+                        Service,
+                        MaxPax,
+                        StartDate,
+                        EndDate,
+                        Cost1_USD
+                        ) VALUES (
+                        :SupplierId,
+                        :Service,
+                        :MaxPax,
+                        :StartDate,
+                        :EndDate,
+                        :Cost1_USD
+                        )
+                    ;";
+                    $database->query($query);
+                    $database->bind(':SupplierId', $SupplierId);
+                    $database->bind(':Service', $Service);
+                    $database->bind(':MaxPax', $MaxPax);
+                    $database->bind(':StartDate', $StartDate);
+                    $database->bind(':EndDate', $EndDate);
+                    $database->bind(':Cost1_USD', $Cost1_USD);
+                    if ($database->execute()) {
+                        header("location: service_BO.php");
+                    }
+                    break;
+                case 'MMK':
+                    $Cost1_MMK = $_REQUEST['Cost1_MMK'];
+                    $query = "INSERT INTO Services (
+                        SupplierId,
+                        Service,
+                        MaxPax,
+                        StartDate,
+                        EndDate,
+                        Cost1_MMK
+                        ) VALUES (
+                        :SupplierId,
+                        :Service,
+                        :MaxPax,
+                        :StartDate,
+                        :EndDate,
+                        :Cost1_MMK
+                        )
+                    ;";
+                    $database->query($query);
+                    $database->bind(':SupplierId', $SupplierId);
+                    $database->bind(':Service', $Service);
+                    $database->bind(':MaxPax', $MaxPax);
+                    $database->bind(':StartDate', $StartDate);
+                    $database->bind(':EndDate', $EndDate);
+                    $database->bind(':Cost1_MMK', $Cost1_MMK);
+                    if ($database->execute()) {
+                        header("location: service_BO.php");
+                    }
+                    break;
+
+                default:
+                    // code...
+                    break;
+            }
             break;
 
         case 'select_all':
