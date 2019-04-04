@@ -36,9 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <main>
                 <form class="" action="#" method="post">
                     <ul>
-                        <li class="bold">Are you sure to delete the following services from your booking?</li>
-                        <li class="">
+                        <li class="bold">Are you sure to delete the following services from current booking?</li>
+                        <li class="invisible">
                             <input type="number" name="BookingsId" id="BookingsId" value="<? echo $row_Services->BookingsId; ?>">
+                        </li>
+                        <li>
+                            <?php
+                            echo $row_Services->SuppliersName.": ".$row_Services->Service." | ".$row_Services->Pick_up." - ".$row_Services->Drop_off;
+                            ?>
                         </li>
                         <li>
                             <button type="button" name="button" onclick="this.form.submit();">Yes</button>

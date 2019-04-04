@@ -1141,6 +1141,7 @@ function table_Services_booking ($job, $var1, $var2) {
                 Services_booking.Sell_USD,
                 Services_booking.Sell_MMK,
                 Services.Id AS ServicesId,
+                Services.Service AS Service,
                 Services.ServiceTypeId AS ServiceTypeId,
                 Suppliers.Name AS SuppliersName,
                 ServiceStatus.Status AS Status
