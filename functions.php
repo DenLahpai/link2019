@@ -1655,6 +1655,7 @@ function table_Services ($job, $var1, $var2) {
                         header("location: service_BO.php");
                     }
                     break;
+
                 case 'MMK':
                     $Cost1_MMK = $_REQUEST['Cost1_MMK'];
                     $query = "INSERT INTO Services (
