@@ -1238,6 +1238,20 @@ function table_Services_booking ($job, $var1, $var2) {
             }
             break;
 
+        case 'delete':
+            $BookingsId = $_REQUEST['BookingsId'];
+            $query = "UPDATE Services_booking SET
+                BookingsId = :BookingsId
+                WHERE Id = :Services_bookingId
+            ;";
+            $database->query($query);
+            $database->bind(':BookingsId', 0);
+            $database->bind(':Services_bookingId', $var1);
+            if ($database->execute()) {
+                header("location: booking_services.php?BookingsId=$BookingsId");
+            }
+            break;
+
         default:
             // code...
             break;
@@ -1610,7 +1624,7 @@ function table_Services ($job, $var1, $var2) {
             $MaxPax = $_REQUEST['MaxPax'];
             $StartDate = $_REQUEST['StartDate'];
             $EndDate = $_REQUEST['EndDate'];
-            $currency = $_REQUEST['currency']
+            $currency = $_REQUEST['currency'];
             switch ($currency) {
                 case 'USD':
                     $Cost1_USD = $_REQUEST['Cost1_USD'];

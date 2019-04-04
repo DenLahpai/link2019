@@ -38,7 +38,8 @@ foreach ($rows_Bookings as $row_Bookings) {
                         echo "<li>Flight No: ".$row_flights->Flight_no." ".date("H:i", strtotime($row_flights->Pick_up_time))." - ".date('H:i', strtotime($row_flights->Drop_off_time));
                         echo "<li>Status: ".$row_flights->Status."</li>";
                         echo "<li>Confirmation No: ".$row_flights->Cfm_no."</li>";
-                        echo "<li><a href=\"edit_services_booking.php?Services_bookingId=$row_flights->Services_bookingId\"><button class=\"button link\">Edit</button></a></li>";
+                        echo "<li><a href=\"edit_services_booking.php?Services_bookingId=$row_flights->Services_bookingId\"><button class=\"button link\">Edit</button></a>&nbsp; &nbsp";
+                        echo "<a href=\"delete_services_booking.php?Services_bookingId=$row_flights->Services_bookingId\"><button class=\"button link\">Delete</button></a></li>";
                         echo "</ul>";
                         echo "</div>";
                         echo "<!-- end of grid-item -->";

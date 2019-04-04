@@ -9,7 +9,7 @@ foreach ($rows_Bookings as $row_Bookings) {
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <?php
-    $page_title = 'Flights Confirmations: '.$row_Bookings->Reference;
+    $page_title = 'Flights Confirmations - '.$row_Bookings->Reference;
     include "includes/head.html";
     ?>
     <body>
