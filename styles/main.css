@@ -108,10 +108,14 @@ main form ul li {
 footer {
     text-align: center;
     background: var(--button-color);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 footer p {
-    padding: 24px;
+    padding: 6px;
 }
 
 button {
