@@ -1,19 +1,16 @@
 <?php
 require_once "functions.php";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $rowCount = table_Services ('check_before_insert_BO' , NULL, NULL);
+    $rowCount = table_Services ('check_before_insert_EF', NULL, NULL);
     if ($rowCount == 0) {
-        table_Services ('insert_BO', NULL, NULL);
-    }
-    else {
-        $error = "Duplicate Entry!";
+        
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <?php
-    $page_title = "Service Boat";
+    $page_title = "New Serivce: Entrance Fees";
     include "includes/head.html";
     ?>
     <style media="screen">
@@ -28,13 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- content -->
         <div class="content">
             <?php
-            $header = "New Service: Boat";
+            $header = "New Service: Entrance Fees";
             include "includes/header.html";
             include "includes/nav.html";
             ?>
             <main>
-                <!-- boat form -->
-                <div class="boat form">
+                <!-- Entrance fees form -->
+                <div class="EF form">
                     <form action="#" method="post">
                         <ul>
                             <li>
@@ -51,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </li>
                             <li>
                                 Service:
-                                <input type="text" name="Service" id="Service" placeholder="Service">
+                                <input type="text" name="Service" id="Service" placeholder="Entrance Fees for">
                             </li>
                             <li>
                                 Valid From:
@@ -62,12 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="date" name="EndDate" id="EndDate">
                             </li>
                             <li>
-                                Max Pax (Capacity):
-                                <input type="number" name="MaxPax" id="MaxPax" value="2">
-                            </li>
-                            <li>
-                                Currency:
-                                <select name="currency" id="currency" onchange="selectCurrency();">
+                                <select id="currency" name="currency" onchange="selectCurrency();">
                                     <option value="">Select One</option>
                                     <option value="USD">USD</option>
                                     <option value="MMK">MMK</option>
@@ -85,32 +77,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <?php if (!empty($error)) { echo $error; } ?>
                             </li>
                             <li>
-                                <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="insertServiceBoat();">Submit</button>
+                                <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="insertServiceEF();">Submit</button>
                             </li>
                         </ul>
                     </form>
                 </div>
-                <!-- end of boat form -->
+                <!-- end of Entrance fees form -->
             </main>
         </div>
         <!-- end of content -->
-        <?php include "includes/footer.html"; ?>
     </body>
-    <script type="text/javascript" src="scripts/scripts.js"></script>
+    <script type="text/javascript" src="script/scripts.js"></script>
     <script type="text/javascript">
-        // function to check empty field(s) and submit the form
-        function insertServiceBoat () {
+        //function to check empty field(s) and submit the form
+        function insertServiceEF () {
             var SupplierId = document.getElementById('SupplierId');
             var Service = document.getElementById('Service');
             var StartDate = document.getElementById('StartDate');
             var EndDate = document.getElementById('EndDate');
-            var MaxPax = document.getElementById('MaxPax');
             var currency = document.getElementById('currency');
             var Cost1_USD = document.getElementById('Cost1_USD');
             var Cost1_MMK = document.getElementById('Cost1_MMK');
             var error = 0;
 
-            if (SupplierId.value == "" || SupplierId.value == null) {
+            if (SupplierId.value == "" || SupplierdId.value == null) {
                 SupplierId.style.background = 'red';
                 error = 1;
             }
@@ -129,10 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (StartDate.value > EndDate.value) {
                 StartDate.style.background = 'brown';
                 EndDate.style.background = 'brown';
-                error = 1;
-            }
-            if (MaxPax.value == 0 || MaxPax.value == "" || MaxPax.value == null) {
-                MaxPax.style.background = 'red';
                 error = 1;
             }
             if (currency.value == "" || currency.value == null) {
