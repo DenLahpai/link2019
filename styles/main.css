@@ -13,6 +13,7 @@
 
 body {
     background: #FFF;
+    min-height: 100%;
 }
 
 .content {
@@ -26,6 +27,7 @@ body {
     " section section section "
     " main main main "
     " aside aside aside "
+    "footer footer footer "
     ;
 }
 
@@ -108,9 +110,6 @@ main form ul li {
 footer {
     text-align: center;
     background: var(--button-color);
-    position: fixed;
-    left: 0;
-    bottom: 0;
     width: 100%;
 }
 
