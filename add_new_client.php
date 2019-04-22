@@ -19,9 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         table_Clients ('insert', NULL, NULL);
         $rows_new_Clients = table_Bookings_Clients ('insert_new_client', NULL, NULL);
         foreach ($rows_new_Clients as $row_new_Clients) {
-            $new_ClientsId = $row_new_Clients->Id;
+            // $new_ClientsId = $row_new_Clients->Id;
         }
-        table_Bookings_Clients ('insert', $BookingsId, $new_ClientsId);
+        table_Bookings_Clients ('insert', $BookingsId, $row_new_Clients->Id);
     }
     else {
         $error = "Duplicate Entry!";
