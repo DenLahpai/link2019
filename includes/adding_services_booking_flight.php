@@ -1,7 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     table_Services_booking('insert_flight', $BookingsId, $ServicesId);
-
 }
 ?>
 <!-- service form -->
