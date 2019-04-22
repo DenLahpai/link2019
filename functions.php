@@ -2030,7 +2030,6 @@ function table_Bookings_Clients ($job, $var1, $var2) {
     }
 }
 
-
 //This cool function that converts number to words doesn't belong to me
 function convert_number_to_words($number) {
 
