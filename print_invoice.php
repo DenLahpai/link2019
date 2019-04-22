@@ -241,6 +241,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <option value="5">CB MMK & USD</option>
                             <option value="6">Aya MMK</option>
                             <option value="7">DBS</option>
+                            <option value="8">FOC</option>
+                            <option value="9">YOMA</option>
+                            <option value="10">MAB</option>
                         </select>
                     </p>
                     <div id="Cash" class="invisible">
@@ -307,7 +310,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div id="Aya" class="invisible">
                         <p>
-                            Account Name: L Mung Den Nong, PRS(C)0004 <br>
+                            Account Name: L Mung Den Nong, 12/SaKhaNa(N)083146 <br>
                             Account No: 0144223010004909 <br>
                             Bank Name: Aya Bank <br>
                             Please send us a copy of the bank transfer slip once the payment has been made.
@@ -323,6 +326,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             Bank Code: 7171 <br>
                             Swift Code: DBSSSGSG <br>
                             Please send us a copy of the bank transfer order once the remittance has been done. <br>
+                        </p>
+                    </div>
+                    <div id="YOMA" class="invisible">
+                        <p>
+                            Account Name: L Mung Den Nong, 12/SaKhaNa(N)083146 <br>
+                            Account No: 002145188000473 <br>
+                            Bank Name: Yoma Bank <br>
+                            Please send us a copy of the bank transfer slip once the payment has been made.
+                        </p>
+                    </div>
+                    <div id="MAB" class="invisible">
+                        <p>
+                            Account Name: L Mung Den Nong, 12/SaKhaNa(N)083146 <br>
+                            Account No: 0430121043003128014 <br>
+                            Bank Name: MAB (Myanmar Apex Bank) <br>
+                            Please send us a copy of the bank transfer slip once the payment has been made.
                         </p>
                     </div>
                 </div>
@@ -345,6 +364,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     document.getElementById('CB').style.display = 'none';
                     document.getElementById('Aya').style.display = 'none';
                     document.getElementById('DBS').style.display = 'none';
+                    document.getElementById('YOMA').style.display = 'none';
+                    document.getElementById('MAB').style.display = 'none';
                     break;
 
                 case '2':
@@ -355,6 +376,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     document.getElementById('CB').style.display = 'none';
                     document.getElementById('Aya').style.display = 'none';
                     document.getElementById('DBS').style.display = 'none';
+                    document.getElementById('YOMA').style.display = 'none';
+                    document.getElementById('MAB').style.display = 'none';
                     break;
 
                 case '3':
@@ -365,6 +388,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     document.getElementById('CB').style.display = 'none';
                     document.getElementById('Aya').style.display = 'none';
                     document.getElementById('DBS').style.display = 'none';
+                    document.getElementById('YOMA').style.display = 'none';
+                    document.getElementById('MAB').style.display = 'none';
                     break;
 
                 case  '4':
@@ -375,6 +400,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     document.getElementById('CB').style.display = 'none';
                     document.getElementById('Aya').style.display = 'none';
                     document.getElementById('DBS').style.display = 'none';
+                    document.getElementById('YOMA').style.display = 'none';
+                    document.getElementById('MAB').style.display = 'none';
                     break;
 
                 case '5':
@@ -385,6 +412,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     document.getElementById('CB').style.display = 'block';
                     document.getElementById('Aya').style.display = 'none';
                     document.getElementById('DBS').style.display = 'none';
+                    document.getElementById('YOMA').style.display = 'none';
+                    document.getElementById('MAB').style.display = 'none';
                     break;
 
                 case '6':
@@ -395,6 +424,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     document.getElementById('CB').style.display = 'none';
                     document.getElementById('Aya').style.display = 'block';
                     document.getElementById('DBS').style.display = 'none';
+                    document.getElementById('YOMA').style.display = 'none';
+                    document.getElementById('MAB').style.display = 'none';
                     break;
 
                 case '7':
@@ -405,6 +436,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     document.getElementById('CB').style.display = 'none';
                     document.getElementById('Aya').style.display = 'none';
                     document.getElementById('DBS').style.display = 'block';
+                    document.getElementById('YOMA').style.display = 'none';
+                    document.getElementById('MAB').style.display = 'none';
+                    break;
+
+                case '8':
+                document.getElementById('Cash').style.display = 'none';
+                    document.getElementById('UOB').style.display = 'none';
+                    document.getElementById('CreditCard').style.display = 'none';
+                    document.getElementById('KBZ').style.display = 'none';
+                    document.getElementById('CB').style.display = 'none';
+                    document.getElementById('Aya').style.display = 'none';
+                    document.getElementById('DBS').style.display = 'none';
+                    document.getElementById('YOMA').style.display = 'none';
+                    document.getElementById('MAB').style.display = 'none';
+                    break;
+
+                case '9':
+                    document.getElementById('Cash').style.display = 'none';
+                    document.getElementById('UOB').style.display = 'none';
+                    document.getElementById('CreditCard').style.display = 'none';
+                    document.getElementById('KBZ').style.display = 'none';
+                    document.getElementById('CB').style.display = 'none';
+                    document.getElementById('Aya').style.display = 'none';
+                    document.getElementById('DBS').style.display = 'none';
+                    document.getElementById('YOMA').style.display = 'block';
+                    document.getElementById('MAB').style.display = 'none';
+                    break;
+
+                case '10':
+                    document.getElementById('Cash').style.display = 'none';
+                    document.getElementById('UOB').style.display = 'none';
+                    document.getElementById('CreditCard').style.display = 'none';
+                    document.getElementById('KBZ').style.display = 'none';
+                    document.getElementById('CB').style.display = 'none';
+                    document.getElementById('Aya').style.display = 'none';
+                    document.getElementById('DBS').style.display = 'none';
+                    document.getElementById('YOMA').style.display = 'none';
+                    document.getElementById('MAB').style.display = 'block';
                     break;
 
                 default:
@@ -415,6 +484,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     document.getElementById('CB').style.display = 'none';
                     document.getElementById('Aya').style.display = 'none';
                     document.getElementById('DBS').style.display = 'none';
+                    document.getElementById('YOMA').style.display = 'none';
+                    document.getElementById('MAB').style.display = 'none';
                     break;
             }
         }
