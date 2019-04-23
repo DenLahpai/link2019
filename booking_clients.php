@@ -64,8 +64,8 @@ foreach ($rows_Bookings as $row_Bookings) {
                 <!-- end of grid-div -->
             </main>
         </div>
-        <!-- end of content -->
         <?php include "includes/footer.html"; ?>
+        <!-- end of content -->
     </body>
     <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>

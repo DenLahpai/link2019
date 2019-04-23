@@ -42,9 +42,9 @@ require_once "functions.php";
                 </div>
                 <!-- end of form -->
             </main>
+            <?php include "includes/footer.html"; ?>
         </div>
         <!-- end of content -->
-        <?php include "includes/footer.html"; ?>
     </body>
     <script type="text/javascript">
         function selectType () {

@@ -115,6 +115,7 @@ $rows_Suppliers = table_Suppliers('select', NULL, NULL);
                 </div>
                 <!-- end of search -->
             </main>
+            <?php include "includes/footer.html"; ?>
         </div>
         <!-- end of content -->
     </body>

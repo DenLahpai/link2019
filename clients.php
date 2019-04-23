@@ -150,7 +150,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </main>
         </div>
         <!-- end of content -->
-        <?php include "includes/footer.html"; ?>
     </body>
     <script type="text/javascript">
         var modal = document.getElementById('modalClients');

@@ -41,6 +41,7 @@ require_once "functions.php";
                 </div>
                 <!-- end of links -->
             </main>
+            <?php include "includes/footer.html"; ?>
         </div>
         <!-- end of content -->
     </body>

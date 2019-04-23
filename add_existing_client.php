@@ -92,9 +92,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <!-- endo of modalClients -->
             </main>
+            <?php include "includes/footer.html"; ?>
         </div>
         <!-- end of content -->
-        <?php include "includes/footer.html"; ?>
+
     </body>
     <script type="text/javascript">
         var modal = document.getElementById('modalClients');

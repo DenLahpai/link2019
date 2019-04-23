@@ -28,98 +28,100 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </style>
     <body>
         <!-- content -->
-        <?php
-        $header = "New Service: Land Tranfer";
-        include "includes/header.html";
-        include "includes/nav.html";
-        ?>
-        <main>
-            <!-- land transfer form -->
-            <div class="land-transfer form">
-                <form  action="#" method="post">
-                    <ul>
-                        <li>
-                            Supplier:
-                            <select id="SupplierId" name="SupplierId">
-                                <option value="">Select One</option>
-                                <?php
-                                $rows_Suppliers = table_Suppliers ('select', NULL, NULL);
-                                foreach ($rows_Suppliers as $row_Suppliers) {
-                                    echo "<option value=\"$row_Suppliers->Id\">".$row_Suppliers->Name."</option>";
-                                }
-                                ?>
-                            </select>
-                        </li>
-                        <li>
-                            Service:
-                            <input type="text" name="Service" id="Service" placeholder="Route">
-                        </li>
-                        <li>
-                            Vehicle Type:
-                            <input type="text" name="Additional" id="Additional" placeholder="Saloon / Hi-ace/ bus">
-                        </li>
-                        <li>
-                            Valid From:
-                            <input type="date" name="StartDate" id="StartDate">
-                        </li>
-                        <li>
-                            Valid Until:
-                            <input type="date" name="EndDate" id="EndDate">
-                        </li>
-                        <li>
-                            Max Pax (Capacity):
-                            <input type="number" name="MaxPax" id="MaxPax" value="2">
-                        </li>
-                        <li>
-                            <select id="currency" name="currency" onchange="selectCurrency();">
-                                <option value="">Select One</option>
-                                <option value="USD">USD</option>
-                                <option value="MMK">MMK</option>
-                            </select>
-                        </li>
-                        <li class="USD">
-                            Cost in USD:
-                            <input type="number" step="0.01" name="Cost1_USD" id="Cost1_USD">
-                        </li>
-                        <li class="MMK">
-                            Cost in MMK:
-                            <input type="number" name="Cost1_MMK" id="Cost1_MMK">
-                        </li>
-                        <li class="error">
-                            <?php if (!empty($error)) { echo $error; } ?>
-                        </li>
-                        <li>
-                            <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="insertServiceLandTransfer();">Submit</button>
-                        </li>
-                    </ul>
-                </form>
-            </div>
-            <!-- end of land transfer form -->
-            <!-- grid-div -->
-            <div class="grid-div">
-                <?php
-                $rows_Services = table_Services ('select_all', 3, NULL);
-                foreach ($rows_Services as $row_Services) {
-                    echo "<!-- grid-item -->";
-                    echo "<div class=\"grid-item\">";
-                    echo "<ul>";
-                    echo "<li class=\"bold\">".$row_Services->SuppliersName."</li>";
-                    echo "<li>Service: ".$row_Services->Service."</li>";
-                    echo "<li>Vehicle: ".$row_Services->Additional."</li>";
-                    echo "<li>Max Pers: ".$row_Services->MaxPax."</li>";
-                    echo "<li>Valid From: ".date("d-M-Y", strtotime($row_Services->StartDate))."</li>";
-                    echo "<li>Valid Until: ".date("d-M-Y", strtotime($row_Services->EndDate))."</li>";
-                    echo "<li><a href=\"edit_services.php?ServicesId=$row_Services->ServicesId\">Edit</a></li>";
-                    echo "</ul>";
-                    echo "</div>";
-                    echo "<!-- end of grid-item -->";
-                }
-                ?>
-            </div>
-            <!-- end of grid-div -->
-        </main>
+        <div class="content">
+            <?php
+            $header = "New Service: Land Tranfer";
+            include "includes/header.html";
+            include "includes/nav.html";
+            ?>
+            <main>
+                <!-- land transfer form -->
+                <div class="land-transfer form">
+                    <form  action="#" method="post">
+                        <ul>
+                            <li>
+                                Supplier:
+                                <select id="SupplierId" name="SupplierId">
+                                    <option value="">Select One</option>
+                                    <?php
+                                    $rows_Suppliers = table_Suppliers ('select', NULL, NULL);
+                                    foreach ($rows_Suppliers as $row_Suppliers) {
+                                        echo "<option value=\"$row_Suppliers->Id\">".$row_Suppliers->Name."</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </li>
+                            <li>
+                                Service:
+                                <input type="text" name="Service" id="Service" placeholder="Route">
+                            </li>
+                            <li>
+                                Vehicle Type:
+                                <input type="text" name="Additional" id="Additional" placeholder="Saloon / Hi-ace/ bus">
+                            </li>
+                            <li>
+                                Valid From:
+                                <input type="date" name="StartDate" id="StartDate">
+                            </li>
+                            <li>
+                                Valid Until:
+                                <input type="date" name="EndDate" id="EndDate">
+                            </li>
+                            <li>
+                                Max Pax (Capacity):
+                                <input type="number" name="MaxPax" id="MaxPax" value="2">
+                            </li>
+                            <li>
+                                <select id="currency" name="currency" onchange="selectCurrency();">
+                                    <option value="">Select One</option>
+                                    <option value="USD">USD</option>
+                                    <option value="MMK">MMK</option>
+                                </select>
+                            </li>
+                            <li class="USD">
+                                Cost in USD:
+                                <input type="number" step="0.01" name="Cost1_USD" id="Cost1_USD">
+                            </li>
+                            <li class="MMK">
+                                Cost in MMK:
+                                <input type="number" name="Cost1_MMK" id="Cost1_MMK">
+                            </li>
+                            <li class="error">
+                                <?php if (!empty($error)) { echo $error; } ?>
+                            </li>
+                            <li>
+                                <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="insertServiceLandTransfer();">Submit</button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+                <!-- end of land transfer form -->
+                <!-- grid-div -->
+                <div class="grid-div">
+                    <?php
+                    $rows_Services = table_Services ('select_all', 3, NULL);
+                    foreach ($rows_Services as $row_Services) {
+                        echo "<!-- grid-item -->";
+                        echo "<div class=\"grid-item\">";
+                        echo "<ul>";
+                        echo "<li class=\"bold\">".$row_Services->SuppliersName."</li>";
+                        echo "<li>Service: ".$row_Services->Service."</li>";
+                        echo "<li>Vehicle: ".$row_Services->Additional."</li>";
+                        echo "<li>Max Pers: ".$row_Services->MaxPax."</li>";
+                        echo "<li>Valid From: ".date("d-M-Y", strtotime($row_Services->StartDate))."</li>";
+                        echo "<li>Valid Until: ".date("d-M-Y", strtotime($row_Services->EndDate))."</li>";
+                        echo "<li><a href=\"edit_services.php?ServicesId=$row_Services->ServicesId\">Edit</a></li>";
+                        echo "</ul>";
+                        echo "</div>";
+                        echo "<!-- end of grid-item -->";
+                    }
+                    ?>
+                </div>
+                <!-- end of grid-div -->
+            </main>
+            <?php include "includes/footer.html"; ?>
+        </div>
         <!-- end of content -->
-        <?php include "includes/footer.html"; ?>
     </body>
     <script type="text/javascript" src="scripts/scripts.js"></script>
     <script type="text/javascript">

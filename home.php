@@ -87,6 +87,7 @@ require "functions.php";
                 </div>
                 <!-- end of booking form -->
             </main>
+
         </div>
         <!-- end of content -->
         <?php include "includes/footer.html"; ?>

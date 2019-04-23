@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <form action="#" method="post">
                         <ul>
                             <li>
-                                Airport Code:
+                        <?php include "includes/footer.html"; ?>        Airport Code:
                                 <input type="text" name="AirportCode" id="AirportCode" value="<? echo $row_Cities->AirportCode; ?>">
                             </li>
                             <li>
@@ -79,9 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <!-- end of booking form -->
             </main>
+            <?php include "includes/footer.html"; ?>
         </div>
         <!-- end of content -->
-        <?php include "includes/footer.html"; ?>
     </body>
     <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>

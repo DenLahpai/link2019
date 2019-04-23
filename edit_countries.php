@@ -54,7 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </li>
                             <li class="error">
                                 <?php
-                                if (!empty($error)) {
+                                if
+                                    (!empty($error)) {
                                     echo $error;
                                 }
                                 ?>
@@ -67,9 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <!-- end of booking form -->
             </main>
+            <?php include "includes/footer.html"; ?>
         </div>
         <!-- end of content -->
-        <?php include "includes/footer.html"; ?>
     </body>
     <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>

@@ -39,8 +39,8 @@ require_once "functions.php";
                 </div>
                 <!-- end of grid-div -->
             </main>
+            <?php include "includes/footer.html"; ?>
         </div>
         <!-- end of content -->
-        <?php include "includes/footer.html"; ?>
     </body>
 </html>

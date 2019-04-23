@@ -58,8 +58,8 @@ $Date_in = trim($_REQUEST['Date_in']);
                 ?>
             </main>
         </div>
-        <!-- end of content -->
         <?php include "includes/footer.html"; ?>
+        <!-- end of content -->
     </body>
     <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>

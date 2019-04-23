@@ -46,11 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="text" name="Region" id="Region" placeholder="Region" >
                             </li>
                             <li class="error">
-                                <?php 
+                                <?php
                                 if (!empty($error)) {
                                     echo $error;
-                                }   
-                                ?>                             
+                                }
+                                ?>
                             </li>
                             <li>
                                 <button type="button" class="button submit" id="buttonSubmit" name="buttonSubmit" onclick="checkThreeFields('Code', 'Country', 'Region');">Submit</button>
@@ -87,9 +87,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <!-- end of report table -->
             </main>
+            <?php include "includes/footer.html"; ?>
+
         </div>
         <!-- end of content -->
-        <?php include "includes/footer.html"; ?>
     </body>
     <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>

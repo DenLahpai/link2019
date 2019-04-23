@@ -29,8 +29,8 @@ function getUsers() {
                 </div>
                 <!-- end of login -->
             </main>
+            <?php include "includes/footer.html"; ?>
         </div>
         <!-- end of content -->
-        <?php include "includes/footer.html"; ?>
     </body>
 </html>

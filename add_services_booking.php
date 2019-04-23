@@ -111,7 +111,7 @@ if (isset($_REQUEST['buttonSubmit'])) {
                 <!-- end of list service -->
             </main>
         </div>
-        <!-- end of content -->
         <?php include "includes/footer.html"; ?>
+        <!-- end of content -->
     </body>
 </html>

@@ -3,7 +3,7 @@ require_once "functions.php";
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rowCount = table_Services ('check_before_insert_EF', NULL, NULL);
     if ($rowCount == 0) {
-        
+
     }
 }
 ?>
@@ -84,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <!-- end of Entrance fees form -->
             </main>
+            <?php include "includes/footer.html"; ?>
         </div>
         <!-- end of content -->
     </body>

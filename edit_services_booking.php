@@ -40,9 +40,9 @@ foreach ($rows_Services_booking as $row_Services_booking) {
                 }
                 ?>
             </main>
+            <?php include "includes/footer.html"; ?>
         </div>
         <!-- end of content -->
     </body>
-    <?php include "includes/footer.html"; ?>
     <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>

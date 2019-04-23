@@ -33,13 +33,13 @@ require_once "functions.php";
                         </li>
                         <li>
                             <a href="report_Online_Payers.php">Online Payers</a>
-                        </li>                        
+                        </li>
                     </ul>
                 </div>
                 <!-- end of links -->
             </main>
+            <?php include "includes/footer.html"; ?>
         </div>
         <!-- end of content -->
-        <?php include "includes/footer.html"; ?>
     </body>
 </html>

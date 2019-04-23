@@ -136,8 +136,8 @@ $rows_ServiceStatus = table_ServiceStatus('select_all', NULL, NULL);
                 </div>
                 <!-- end of service form -->
             </main>
+            <?php include "includes/footer.html"; ?>
         </div>
-        <!-- end of content -->
-        <?php include "includes/footer.html"; ?>
+        <!-- end of content -->        
     </body>
 </html>

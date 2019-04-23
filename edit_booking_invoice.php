@@ -149,6 +149,7 @@ else {
                 </div>
                 <!-- end of table invoice -->
             </main>
+            <?php include "includes/footer.html"; ?>            
         </div>
         <!-- end of content -->
     </body>
