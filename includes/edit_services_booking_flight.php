@@ -94,19 +94,19 @@ if ($_SERVER['REQUEST_METHOD'] ==  'POST') {
                     <option value="MMK">MMK</option>
                 </select>
             </li>
-            <li id="costUSD" class="invisible">
+            <li id="costUSD" class="USD">
                 Cost in USD / Pers:
                 <input type="number" step="0.01" name="Cost1_USD" id="Cost1_USD" value="<? echo $row_Services_booking->Cost1_USD; ?>">
             </li>
-            <li id="costMMK" class="invisible">
+            <li id="costMMK" class="MMK">
                 Cost in MMK / Pers:
                 <input type="number" name="Cost1_MMK" value="<? echo $row_Services_booking->Cost1_MMK; ?>">
             </li>
-            <li id="sellPerUSD" class="invisible">
+            <li id="sellPerUSD" class="USD">
                 Sell in USD / Pers:
                 <input type="number" step="0.01" name="sellPerUSD" id="sellPerUSD" value="<? echo $row_Services_booking->Sell_USD / $row_Services_booking->Pax; ?>">
             </li>
-            <li id="sellPerMMK" class="invisible">
+            <li id="sellPerMMK" class="MMK">
                 Sell in MMK / Pers:
                 <input type="number" name="sellPerMMK" value="<? echo $row_Services_booking->Sell_USD / $row_Services_booking->Pax; ?>">
             </li>
