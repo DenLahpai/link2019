@@ -1091,8 +1091,35 @@ function table_Services_booking ($job, $var1, $var2) {
             $Cost2_MMK = $_REQUEST['Cost2_MMK'];
             $Cost3_USD = $_REQUEST['Cost3_USD'];
             $Cost3_MMK = $_REQUEST['Cost3_MMK'];
+
+            //getting $Total_cost_USD
+            $total_Sgl_USD = ($Sgl * $Cost2_USD * $Quantity);
+            $total_Twn_USD = ($Twn * $Cost1_USD * $Quantity);
+            $total_Dbl_USD = ($Dbl * $Cost1_USD * $Quantity);
+            $total_Tpl_USD = ($Tpl * $Cost3_USD * $Quantity);
+            $Total_cost_USD = $total_Sgl_USD + $total_Twn_USD + $total_Dbl_USD + $total_Tpl_USD;
+
+            //getting $Total_cost_MMK
+            $total_Sgl_MMK = ($Sgl * $Cost2_MKK * $Quantity);
+            $total_Twn_MMK = ($Twn * $Cost1_MKK * $Quantity);
+            $total_Dbl_MMK = ($Dbl * $Cost1_MMK * $Quantity);
+            $total_Tpl_MMK = ($Tpl * $Cost3_MMK * $Quantity);
+            $Total_cost_MMK = $total_Sgl_MMK + $total_Twn_MMK + $total_Dbl_MMK + $total_Tpl_MMK;
+
             $Markup = $_REQUEST['Markup'];
-            // TODO
+
+            $Sell1_USD = $_REQUEST['Sell1_USD'];
+            $Sell1_MMK = $_REQUEST['Sell1_MMK'];
+            $Sell2_USD = $_REQUEST['Sell2_USD'];
+            $Sell2_MMK = $_REQUEST['Sell2_MMK'];
+            $Sell3_USD = $_REQUEST['Sell3_USD'];
+            $Sell3_MMK = $_REQUEST['Sell3_MMK'];
+
+            $total_sell_Sgl_USD = ($Sell2_USD * $Sgl * $Quantity);
+            $total_sell_Sgl_MMK = ($Sell2_MMK * $Sgl * $Quantity);
+            $total_sell_Twn_USD = ($Sell1_USD * $Twn * $Quantity);
+            $total_sell_Twn_MMK = ($Sell1_MMK * $Twn * $Quantity);
+
 
             break;
 

@@ -199,6 +199,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <option value="5">CB MMK & USD</option>
                                 <option value="6">Aya MMK</option>
                                 <option value="7">DBS</option>
+                                <option value="9">YOMA</option>
+                                <option value="10">MAB</option>
                             </select>
                         </form>
                     </p>

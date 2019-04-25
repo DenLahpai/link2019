@@ -51,18 +51,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </li>
             <li>
                 USD:
-                <input type="number" step="0.01" name="Cost1_USD" id="Cost1_USD" value="<? echo $row_Services->Cost1_USD; ?>" readonly>
+                <input type="number" step="0.01" name="Cost2_USD" id="Cost2_USD" value="<? echo $row_Services->Cost2_USD; ?>" readonly>
                 MMK:
-                <input type="number" name="Cost1_MMK" id="Cost1_MMK" value="<? echo $row_Services->Cost1_MMK; ?>" readonly>
+                <input type="number" name="Cost2_MMK" id="Cost2_MMK" value="<? echo $row_Services->Cost2_MMK; ?>" readonly>
             </li>
             <li>
                 Double / Twin Room
             </li>
             <li>
                 USD:
-                <input type="number" step="0.01" name="Cost2_USD" id="Cost2_USD" value="<? echo $row_Services->Cost2_USD; ?>">
+                <input type="number" step="0.01" name="Cost1_USD" id="Cost1_USD" value="<? echo $row_Services->Cost1_USD; ?>">
                 MMK:
-                <input type="number" step="0.01" name="Cost2_MMK" id="Cost2_MMK" value="<? echo $row_Services->Cost2_MMK; ?>">
+                <input type="number" step="0.01" name="Cost1_MMK" id="Cost1_MMK" value="<? echo $row_Services->Cost1_MMK; ?>">
             </li>
             <li>
                 Triple Room
@@ -85,18 +85,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </li>
             <li>
                 USD:
-                <input type="number" step="0.01" name="Sell1_USD" id="Sell1_USD" value="">
+                <input type="number" step="0.01" name="Sell2_USD" id="Sell2_USD" value="">
                 MMK:
-                <input type="number" name="Sell1_MMK" id="Sell1_MMK" value="">
+                <input type="number" name="Sell2_MMK" id="Sell2_MMK" value="">
             </li>
             <li>
                 Double / Twin Room
             </li>
             <li>
                 USD:
-                <input type="number" name="Sell2_USD" id="Sell2_USD" step="0.01" value="">
+                <input type="number" name="Sell1_USD" id="Sell1_USD" step="0.01" value="">
                 MMK:
-                <input type="number" name="Sell2_MMK" id="Sell2_MMK" value="">
+                <input type="number" name="Sell1_MMK" id="Sell1_MMK" value="">
             </li>
             <li>
                 Triple Room
