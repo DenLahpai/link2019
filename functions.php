@@ -1119,7 +1119,23 @@ function table_Services_booking ($job, $var1, $var2) {
             $total_sell_Sgl_MMK = ($Sell2_MMK * $Sgl * $Quantity);
             $total_sell_Twn_USD = ($Sell1_USD * $Twn * $Quantity);
             $total_sell_Twn_MMK = ($Sell1_MMK * $Twn * $Quantity);
+            $total_sell_Dbl_USD = ($Sell1_USD * $Dbl * $Quantity);
+            $total_sell_Dbl_MMK = ($Sell1_MMK * $Dbl * $Quantity);
+            $total_sell_Tpl_USD = ($Sell3_USD * $Tpl * $Quantity);
+            $total_sell_Tpl_MMK = ($Sell3_MMK * $Tpl * $Quantity);
 
+            $Sell_USD = $total_sell_Sgl_USD + $total_sell_Twn_USD + $total_sell_Dbl_USD
+            + $total_sell_Tpl_USD;
+
+            $Sell_MMK = $total_sell_Sgl_MMK + $total_sell_Twn_MMK + $total_sell_Dbl_MMK
+            + $total_sell_Tpl_MMK;
+
+            $query = "INSERT INTO services_booking (
+                
+                ) VALUES (
+
+                )
+            ;";
 
             break;
 
@@ -1761,6 +1777,7 @@ function table_Clients ($job, $var1, $var2) {
             $database->query($query);
             return $r = $database->resultset();
             break;
+
         case 'check_before_insert':
             //getting data from the form
             $Title = $_REQUEST['Title'];
@@ -2171,8 +2188,6 @@ function convert_number_to_words($number) {
 
 
 ############################# REPORTS #################################
-
-
 
 // functions to get reports from the table Invoices
 function report_Invoices() {
