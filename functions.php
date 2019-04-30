@@ -1130,12 +1130,12 @@ function table_Services_booking ($job, $var1, $var2) {
             $Sell_MMK = $total_sell_Sgl_MMK + $total_sell_Twn_MMK + $total_sell_Dbl_MMK
             + $total_sell_Tpl_MMK;
 
-            $query = "INSERT INTO services_booking (
-                
-                ) VALUES (
-
-                )
-            ;";
+            // $query = "INSERT INTO services_booking (
+            //
+            //     ) VALUES (
+            //
+            //     )
+            // ;"; TODO
 
             break;
 
