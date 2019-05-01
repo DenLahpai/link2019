@@ -1,7 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // table_Services_booking ('insert_hotel', $BookingsId, $ServicesId);
-    echo "Submit!";
+    table_Services_booking ('insert_hotel', $BookingsId, $ServicesId);
 }
 ?>
 <!-- service form -->
@@ -22,26 +21,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </li>
             <li>
                 Check-out:
-                <input type="date" name="Date_out" id="Date_out" value="">
+                <input type="date" name="Date_out" id="Date_out" value="" onchange="getQuantity();">
+            </li>
+            <li>
+                Night(s):
+                <input type="number" name="Quantity" id="Quantity" readonly>
             </li>
             <li>
                 Number of Rooms:
             </li>
             <li>
                 Single:
-                <input type="number" name="Sgl" id="Sgl">
+                <input type="number" name="Sgl" id="Sgl" value="0">
             </li>
             <li>
                 Double:
-                <input type="number" name="Dbl" id="Dbl">
+                <input type="number" name="Dbl" id="Dbl" value="0">
             </li>
             <li>
                 Twin:
-                <input type="number" name="Twn" id="Twn">
+                <input type="number" name="Twn" id="Twn" value="0">
             </li>
             <li>
                 Triple:
-                <input type="number" name="Tpl" id="Tpl">
+                <input type="number" name="Tpl" id="Tpl" value="0">
             </li>
             <li class="bold">
                 Cost
@@ -116,6 +119,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 <!-- end of service form -->
 <script type="text/javascript">
+    //function to number of nights
+    function getQuantity () {
+        var Date_in = document.getElementById('Date_in');
+        var Date_out = document.getElementById('Date_out');
+        if (Date_out.value > Date_in.value) {
+            var date1 = new Date(Date_in.value);
+            var date2 = new Date(Date_out.value);
+            var diffTime = Math.abs(date2.getTime() - date1.getTime());
+            var diffDay = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('Quantity').value = diffDay;
+            Date_out.style.background = 'none';
+        }
+        else {
+            Date_out.style.background = 'brown';
+            alert('Check-out date must be later than the check-in date!');
+        }
+    }
+
     function checkHotel() {
         var Date_in = document.getElementById('Date_in');
         var Date_out = document.getElementById('Date_out');
