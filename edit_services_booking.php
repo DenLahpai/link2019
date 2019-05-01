@@ -28,7 +28,7 @@ foreach ($rows_Services_booking as $row_Services_booking) {
                 <?php
                 switch ($ServiceTypeId) {
                     case '1':
-                        // code...
+                        include "includes/edit_services_booking_hotel.php";
                         break;
                     case '2':
                         include "includes/edit_services_booking_flight.php";

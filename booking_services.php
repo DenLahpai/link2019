@@ -28,7 +28,7 @@ foreach ($rows_Bookings as $row_Bookings) {
                 <!-- grid-div -->
                 <div class="grid-div">
                     <?php
-                    $rows_flights = table_Services_booking('select_flights', $row_Bookings->Id, NULL);
+                    $rows_flights = table_Services_booking('select_flights', $BookingsId, NULL);
                     foreach ($rows_flights as $row_flights) {
                         echo "<!-- grid-item -->";
                         echo "<div class=\"grid-item\">";
@@ -52,7 +52,40 @@ foreach ($rows_Bookings as $row_Bookings) {
                 </h3>
                 <!-- grid-div -->
                 <div class="grid-div">
-
+                    <?php
+                    $rows_hotels = table_Services_booking ('select_hotels', $BookingsId, NULL);
+                    foreach ($rows_hotels as $row_hotels) {
+                        echo "<!-- grid-item -->";
+                        echo "<div class=\"grid-item\">";
+                        echo "<ul>";
+                        echo "<li>Hotel: <span class=\"bold\">".$row_hotels->SuppliersName."</span></li>";
+                        echo "<li>Room Type: ".$row_hotels->Service."</li>";
+                        echo "<li>Room(s): ";
+                        if ($row_hotels->Sgl > 0) {
+                            echo $row_hotels->Sgl." Sgl, ";
+                        }
+                        if ($row_hotels->Dbl > 0) {
+                            echo $row_hotels->Dbl." Dbl, ";
+                        }
+                        if ($row_hotels->Twn > 0) {
+                            echo $row_hotels->Twn." Twn, ";
+                        }
+                        if ($row_hotels->Tpl > 0) {
+                            echo $row_hotels->Tpl." Tpl ";
+                        }
+                        echo "</li>";
+                        echo "<li>Check-in: ".date('d-M-y', strtotime($row_hotels->Date_in))." | ";
+                        echo "Check-out: ".date('d-M-y', strtotime($row_hotels->Date_out))."</li>";
+                        echo "<li>Night(s): ".$row_hotels->Quantity."</li>";
+                        echo "<li>Status: ".$row_hotels->Status."</li>";
+                        echo "<li>Confirmation: ".$row_hotels->Cfm_no."</li>";
+                        echo "<li><a href=\"edit_services_booking.php?Services_bookingId=$row_hotels->Services_bookingId\"><button class=\"button link\">Edit</button></a>&nbsp; &nbsp";
+                        echo "<a href=\"delete_services_booking.php?Services_bookingId=$row_hotels->Services_bookingId\"><button class=\"button link\">Delete</button></a></li>";
+                        echo "</ul>";
+                        echo "</div>";
+                        echo "<!-- end of grid-item -->";
+                    }
+                    ?>
                 </div>
                 <!-- end of grid-div -->
             </main>

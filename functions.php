@@ -1080,7 +1080,8 @@ function table_Services_booking ($job, $var1, $var2) {
             //$var2 = $ServicesId
             $Date_in = ($_REQUEST['Date_in']);
             $Date_out = ($_REQUEST['Date_out']);
-            
+            $Quantity = $_REQUEST['Quantity'];
+
             $Sgl = $_REQUEST['Sgl'];
             $Dbl = $_REQUEST['Dbl'];
             $Twn = $_REQUEST['Twn'];
@@ -1153,7 +1154,7 @@ function table_Services_booking ($job, $var1, $var2) {
                 Sell_MMK
                 ) VALUES (
                 :BookingsId,
-                :ServicesId
+                :ServicesId,
                 :Date_in,
                 :Date_out,
                 :Sgl,
@@ -1201,15 +1202,21 @@ function table_Services_booking ($job, $var1, $var2) {
             break;
 
         case 'select_hotels':
+            // $var1 = $BookingsId
             $query = "SELECT
                 Services_booking.Id AS Services_bookingId,
                 Services_booking.ServicesId,
                 Services_booking.Date_in,
-                Service_booking.Date_out,
-                Service_booking.Quantity,
+                Services_booking.Date_out,
+                Services_booking.Quantity,
+                Services_booking.Sgl,
+                Services_booking.Dbl,
+                Services_booking.Twn,
+                Services_booking.Tpl,
                 Services_booking.StatusId,
                 Services_booking.Cfm_no,
                 Services.Id AS ServicesId,
+                Services.Service AS Service,
                 Suppliers.Name AS SuppliersName,
                 ServiceStatus.Code AS StatusCode,
                 ServiceStatus.Status AS Status
@@ -1223,6 +1230,9 @@ function table_Services_booking ($job, $var1, $var2) {
                 WHERE Services.ServiceTypeId = '1'
                 AND Services_booking.BookingsId = :BookingsId
             ;";
+            $database->query($query);
+            $database->bind(':BookingsId', $var1);
+            return $r = $database->resultset();
             break;
 
         case 'select_one':
