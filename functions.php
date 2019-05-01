@@ -1076,6 +1076,8 @@ function table_Services_booking ($job, $var1, $var2) {
 
         case 'insert_hotel':
             // getting data from the form
+            //$var1 = $BookingsId
+            //$var2 = $ServicesId
             $Date_in = new DateTime($_REQUEST['Date_in']);
             $Date_out = new DateTime($_REQUEST['Date_out']);
             $nights = date_diff($Date_in, $Date_out);
@@ -1130,13 +1132,74 @@ function table_Services_booking ($job, $var1, $var2) {
             $Sell_MMK = $total_sell_Sgl_MMK + $total_sell_Twn_MMK + $total_sell_Dbl_MMK
             + $total_sell_Tpl_MMK;
 
-            // $query = "INSERT INTO services_booking (
-            //
-            //     ) VALUES (
-            //
-            //     )
-            // ;"; TODO
-
+            $query = "INSERT INTO services_booking (
+                BookingsId,
+                ServicesId,
+                Date_in,
+                Date_out,
+                Sgl,
+                Dbl,
+                Twn,
+                Tpl,
+                Quantity,
+                Cost1_USD,
+                Cost1_MMK,
+                Cost2_USD,
+                Cost2_MMK,
+                Cost3_USD,
+                Cost3_MMK,
+                Total_cost_USD,
+                Total_cost_MMK,
+                Markup,
+                Sell_USD,
+                Sell_MMK
+                ) VALUES (
+                :BookingsId,
+                :ServicesId
+                :Date_in,
+                :Date_out,
+                :Sgl,
+                :Dbl,
+                :Twn,
+                :Tpl,
+                :Quantity,
+                :Cost1_USD,
+                :Cost1_MMK,
+                :Cost2_USD,
+                :Cost2_MMK,
+                :Cost3_USD,
+                :Cost3_MMK,
+                :Total_cost_USD,
+                :Total_cost_MMK,
+                :Markup,
+                :Sell_USD,
+                :Sell_MMK
+                )
+            ;";
+            $database->query($query);
+            $database->bind(':BookingsId', $var1);
+            $database->bind(':ServicesId', $var2);
+            $database->bind(':Date_in', $Date_in);
+            $database->bind(':Date_out', $Date_out);
+            $database->bind(':Sgl', $Sgl);
+            $database->bind(':Dbl', $Dbl);
+            $database->bind(':Twn', $Twn);
+            $database->bind(':Tpl', $Tpl);
+            $database->bind(':Quantity', $Quantity);
+            $database->bind(':Cost1_USD', $Cost1_USD);
+            $database->bind(':Cost1_MMK', $Cost1_MKK);
+            $database->bind(':Cost2_USD', $Cost2_USD);
+            $database->bind(':Cost2_MMK', $Cost2_MMK);
+            $database->bind(':Cost3_USD', $Cost3_USD);
+            $database->bind(':Cost3_MMK', $Cost3_MMK);
+            $database->bind(':Total_cost_USD', $Total_cost_USD);
+            $database->bind(':Total_cost_MMK', $Total_cost_MMK);
+            $database->bind(':Markup', $Markup);
+            $database->bind(':Sell_USD', $Sell_USD);
+            $database->bind(':Sell_MMK', $Sell_MMK);
+            if ($database->execute()) {
+                header("location: booking_services.php?BookingsId=$var1");
+            }
             break;
 
         case 'select_hotels':
