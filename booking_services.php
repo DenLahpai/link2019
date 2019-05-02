@@ -48,7 +48,7 @@ foreach ($rows_Bookings as $row_Bookings) {
                 </div>
                 <!-- end of grid-div -->
                 <h3>
-                    Hotels <a href="<? echo "confirmation_hotels.php?BookingsId=$BookingsId"; ?>" target="_blank">Confirmation</a>
+                    Hotels <a href="<? echo "confirmations_hotels.php?BookingsId=$BookingsId"; ?>" target="_blank">Confirmation</a>
                 </h3>
                 <!-- grid-div -->
                 <div class="grid-div">

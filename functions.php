@@ -1218,6 +1218,7 @@ function table_Services_booking ($job, $var1, $var2) {
                 Services.Id AS ServicesId,
                 Services.Service AS Service,
                 Suppliers.Name AS SuppliersName,
+                Suppliers.City,
                 ServiceStatus.Code AS StatusCode,
                 ServiceStatus.Status AS Status
                 FROM Services_booking
