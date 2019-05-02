@@ -3,11 +3,17 @@ require_once "functions.php";
 
 //getting one data from the table Services_booking
 $Services_bookingId = trim($_REQUEST['Services_bookingId']);
+if (!is_numeric ($Services_bookingId)) {
+    echo "There was a problem! Please go back and try again!";
+    die ();
+}
 $rows_Services_booking = table_Services_booking('select_one', $Services_bookingId, NULL);
 foreach ($rows_Services_booking as $row_Services_booking) {
     $BookingsId = $row_Services_booking->BookingsId;
     $ServiceTypeId =$row_Services_booking->ServiceTypeId;
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">

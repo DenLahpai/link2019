@@ -1131,7 +1131,7 @@ function table_Services_booking ($job, $var1, $var2) {
             $Sell_MMK = $total_sell_Sgl_MMK + $total_sell_Twn_MMK + $total_sell_Dbl_MMK
             + $total_sell_Tpl_MMK;
 
-            $query = "INSERT INTO services_booking (
+            $query = "INSERT INTO Services_booking (
                 BookingsId,
                 ServicesId,
                 Date_in,
@@ -1240,7 +1240,13 @@ function table_Services_booking ($job, $var1, $var2) {
                 Services_booking.BookingsId AS BookingsId,
                 Services_booking.ServicesId,
                 Services_booking.Date_in,
+                Services_booking.Date_out,
+                Services_booking.Quantity,
                 Services_booking.Pax,
+                Services_booking.Sgl,
+                Services_booking.Dbl,
+                Services_booking.Twn,
+                Services_booking.Tpl,
                 Services_booking.Flight_no,
                 Services_booking.Pick_up,
                 Services_booking.Drop_off,
@@ -1257,6 +1263,7 @@ function table_Services_booking ($job, $var1, $var2) {
                 Services.Id AS ServicesId,
                 Services.Service AS Service,
                 Services.ServiceTypeId AS ServiceTypeId,
+                Services.SupplierId AS SupplierId,
                 Suppliers.Name AS SuppliersName,
                 ServiceStatus.Status AS Status
                 FROM Services_booking

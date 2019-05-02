@@ -80,7 +80,8 @@ foreach ($rows_Bookings as $row_Bookings) {
                         echo "<li>Status: ".$row_hotels->Status."</li>";
                         echo "<li>Confirmation: ".$row_hotels->Cfm_no."</li>";
                         echo "<li><a href=\"edit_services_booking.php?Services_bookingId=$row_hotels->Services_bookingId\"><button class=\"button link\">Edit</button></a>&nbsp; &nbsp";
-                        echo "<a href=\"delete_services_booking.php?Services_bookingId=$row_hotels->Services_bookingId\"><button class=\"button link\">Delete</button></a></li>";
+                        echo "<a href=\"delete_services_booking.php?Services_bookingId=$row_hotels->Services_bookingId\"><button class=\"button link\">Delete</button></a>&nbsp; &nbsp";
+                        echo "<a href=\"voucher_hotel.php?Services_bookingId=$row_hotels->Services_bookingId\" target=\"_blank\"><button class=\"button link\">Voucher</button></a></li>";
                         echo "</ul>";
                         echo "</div>";
                         echo "<!-- end of grid-item -->";
