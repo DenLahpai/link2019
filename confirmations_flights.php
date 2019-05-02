@@ -16,9 +16,6 @@ foreach ($rows_Bookings as $row_Bookings) {
     <body>
         <!-- print -->
         <div class="print">
-            <?php
-            $header = "Flights Confirmation: ".$row_Bookings->Reference." - ".$row_Bookings->Name;
-            ?>
             <!-- pageHeader -->
             <div class="pageHeader">
                 <table>
