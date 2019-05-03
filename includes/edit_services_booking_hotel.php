@@ -47,15 +47,70 @@
                 Cost
             </li>
             <li>
+                Single Room
+            </li>
+            <li>
+                USD:
+                <input type="number" step="0.01" name="Cost2_USD" id="Cost2_USD" value="<? echo $row_Services_booking->Cost2_USD; ?>" readonly>
+                MMK:
+                <input type="number" name="Cost2_MMK" id="Cost1_MMK" value="<? echo $row_Services_booking->Cost2_MMK?>" readonly>
+            </li>
+            <li>
                 Double / Twin Room
             </li>
             <li>
                 USD:
-                <input type="number" step="0.01" name="Cost1_USD" id="Cost1_USD" value="<? echo $row_Services_booking->Cost1_USD; ?>">
+                <input type="number" step="0.01" name="Cost1_USD" id="Cost1_USD" value="<? echo $row_Services_booking->Cost1_USD; ?>" readonly>
                 MMK:
-                <input type="number" name="Cost1_MMK" id="Cost1_MMK" value="<? echo $row_Services_booking->Cost1_MMK; ?>">
+                <input type="number" name="Cost1_MMK" id="Cost1_MMK" value="<? echo $row_Services_booking->Cost1_MMK; ?>" readonly>
             </li>
-
+            <li>
+                Triple
+            </li>
+            <li>
+                USD:
+                <input type="number" step="0.01" name="Cost3_USD" id="Cost3_USD" value="<? echo $row_Services_booking->Cost3_USD; ?>" readonly>
+                MMK:
+                <input type="number" name="Cost3_MMK" id="Cost3_MMK" value="<? echo $row_Services_booking->Cost3_MMK; ?>" readonly>
+            </li>
+            <li>
+                Markup %:
+                <input type="number" step="0.01" name="Markup" id="Markup" value="<? echo $row_Services_booking->Markup; ?>">
+            </li>
+            <li class="bold">
+                Sell
+            </li>
+            <li>
+                Single Room
+            </li>
+            <li>
+                USD:
+                <input type="number" step="0.01" name="Sell2_USD" id="Sell2_USD" value="<? echo $Sell2_USD; ?>">
+                MMK:
+                <input type="number" name="Sell2_MMK" id="Sell2_MMK" value="<? echo $Sell2_MMK;?>">
+            </li>
+            <li>
+                Double / Twin Room
+            </li>
+            <li>
+                USD:
+                <input type="number" name="Sell1_USD" id="Sell1_USD" step="0.01" value="<? echo $Sell1_USD; ?>">
+                MMK:
+                <input type="number" name="Sell1_MMK" id="Sell1_MMK" value="<? echo $Sell1_MMK; ?>">
+            </li>
+            <li>
+                Triple Room
+            </li>
+            <li>
+                USD:
+                <input type="number" step="0.01" name="Sell3_USD" id="Sell3_USD" value="<? echo $Sell3_USD; ?>">
+                MMK:
+                <input type="number" name="Sell3_MMK" id="Sell3_MMK" value="<? echo $Sell3_MMK; ?>">
+            </li>
+            <li class="error"></li>
+            <li>
+                <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="">Update</button>
+            </li>
         </ul>
     </form>
 </div>
