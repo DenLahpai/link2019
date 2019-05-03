@@ -47,6 +47,15 @@
                 Cost
             </li>
             <li>
+                Single Room
+            </li>
+            <li>
+                USD:
+                <input type="number" step="0.01" name="Cost2_USD" id="Cost2_USD" value="<? echo $row_Services_booking->Cost2_USD; ?>">
+                MMK:
+                <input type="number" name="Cost2_MMK" id="Cost2_MMK" value="<? $row_Services_booking->Cost2_MMK?>">
+            </li>
+            <li>
                 Double / Twin Room
             </li>
             <li>
@@ -55,7 +64,9 @@
                 MMK:
                 <input type="number" name="Cost1_MMK" id="Cost1_MMK" value="<? echo $row_Services_booking->Cost1_MMK; ?>">
             </li>
+            <li>
 
+            </li>
         </ul>
     </form>
 </div>
