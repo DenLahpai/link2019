@@ -1,4 +1,8 @@
 <?php
+//getting the selling prices
+$Sell1_USD = $row_Services_booking->Cost1_USD + ($row_Services_booking->Cost1_USD * $row_Services_booking->Markup / 100);
+$Sell1_MMK = $row_Services_booking->Cost1_MMK + ($row_Services_booking->Cost1_MMK * $row_Services_booking->Markup / 100);
+
 ?>
 <!-- service form -->
 <div class="service form">
