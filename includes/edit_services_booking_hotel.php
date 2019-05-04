@@ -51,15 +51,9 @@
             </li>
             <li>
                 USD:
-<<<<<<< HEAD
-                <input type="number" step="0.01" name="Cost2_USD" id="Cost2_USD" value="<? echo $row_Services_booking->Cost2_USD; ?>">
-                MMK:
-                <input type="number" name="Cost2_MMK" id="Cost2_MMK" value="<? $row_Services_booking->Cost2_MMK?>">
-=======
                 <input type="number" step="0.01" name="Cost2_USD" id="Cost2_USD" value="<? echo $row_Services_booking->Cost2_USD; ?>" readonly>
                 MMK:
                 <input type="number" name="Cost2_MMK" id="Cost1_MMK" value="<? echo $row_Services_booking->Cost2_MMK?>" readonly>
->>>>>>> bcc44c40b20954585d735c3baf450af68d372df8
             </li>
             <li>
                 Double / Twin Room
@@ -117,12 +111,6 @@
             <li>
                 <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="">Update</button>
             </li>
-<<<<<<< HEAD
-            <li>
-
-            </li>
-=======
->>>>>>> bcc44c40b20954585d735c3baf450af68d372df8
         </ul>
     </form>
 </div>
