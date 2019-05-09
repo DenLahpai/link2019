@@ -17,17 +17,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rowCount = table_Clients ('check_before_insert', NULL, NULL);
     if ($rowCount == 0) {
         table_Clients ('insert', NULL, NULL);
-        $rows_new_Clients = table_Bookings_Clients ('insert_new_client', NULL, NULL);
-        foreach ($rows_new_Clients as $row_new_Clients) {
-            // $new_ClientsId = $row_new_Clients->Id;
+        $rows_newClients = table_Bookings_Clients ('insert_new_client', NULL, NULL);
+        foreach ($rows_newClients as $row_newClients) {
+            // code...
         }
-        table_Bookings_Clients ('insert', $BookingsId, $row_new_Clients->Id);
+        table_Bookings_Clients ('insert', $BookingsId, $row_newClients->Id);
     }
     else {
         $error = "Duplicate Entry!";
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
