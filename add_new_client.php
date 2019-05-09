@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         table_Clients ('insert', NULL, NULL);
         $rows_newClients = table_Bookings_Clients ('insert_new_client', NULL, NULL);
         foreach ($rows_newClients as $row_newClients) {
-            // code...
+            $newClientsId = $row_newClients->Id;
         }
         table_Bookings_Clients ('insert', $BookingsId, $row_newClients->Id);
     }

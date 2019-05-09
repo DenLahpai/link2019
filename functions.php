@@ -2073,7 +2073,7 @@ function table_Bookings_Clients ($job, $var1, $var2) {
             $Email = trim($_REQUEST['Email']);
             $Website = trim($_REQUEST['Website']);
 
-            $query = "SELECT Id FROM Clients
+            $query = "SELECT * FROM Clients
                 WHERE Title = :Title
                 AND FirstName = :FirstName
                 AND LastName = :LastName
