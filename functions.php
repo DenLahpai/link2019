@@ -1287,6 +1287,8 @@ function table_Services_booking ($job, $var1, $var2) {
             break;
 
         case 'update_flight':
+            //$var1 = $Services_bookingId
+            //$var2 = $BookingsId
             //getting data from the form
             $Date_in = $_REQUEST['Date_in'];
             $Flight_no = trim($_REQUEST['Flight_no']);
@@ -1352,6 +1354,40 @@ function table_Services_booking ($job, $var1, $var2) {
             if ($database->execute()) {
                 header("location: booking_services.php?BookingsId=$var2");
             }
+            break;
+
+        case 'update_hotel':
+            // $var1 = $Services_bookingId
+            // $var2 = $BookingsId
+            //getting data from the form
+            $Date_in = $_REQUEST['Date_in'];
+            $Date_out = $_REQUEST['Date_out'];
+            $Quantity = $_REQUEST['Quantity'];
+            $Sgl = $_REQUEST['Sgl'];
+            $Dbl = $_REQUEST['Dbl'];
+            $Twn = $_REQUEST['Twn'];
+            $Tpl = $_REQUEST['Tpl'];
+            $Remark = trim($_REQUEST['Remark']);
+            $Spc_rq = trim($_REQUEST['Spc_rq']);
+            $StatusId = $_REQUEST['StatusId'];
+            $Cfm_no = trim($_REQUEST['Cfm_no']);
+            $Markup = $_REQUEST['Markup'];
+
+            $Sell1_USD = $_REQUEST['Sell1_USD'];
+            $Sell1_MMK = $_REQUEST['Sell1_MMK'];
+            $Sell2_USD = $_REQUEST['Sell2_USD'];
+            $Sell2_MMK = $_REQUEST['Sell2_MMK'];
+            $Sell3_USD = $_REQUEST['Sell3_USD'];
+            $Sell3_MMK = $_REQUEST['Sell3_MMK'];
+
+            $total_sell1_USD = $Sell1_USD * $Quantity * ($Dbl + $Twn);
+            $total_sell1_MMK = $Sell1_MMK * $Quantity * ($Dbl + $Twn);
+            $total_sell2_USD = $Sell2_USD * $Quantity * $Sgl;
+            $total_sell2_MMK = $Sell2_MMK * $Quantity * $Sgl;
+            $total_sell3_USD = $Sell3_USD * $Quantity * $Tpl;
+            $total_Sell3_MMK = $Sell3_MMK * $Quantity * $Tpl;
+            
+
             break;
 
         case 'delete':
@@ -3515,7 +3551,7 @@ function report_Bookings() {
             LEFT OUTER JOIN Users ON
             Bookings.UserId = Users.Id
             WHERE Bookings.CorporatesId = :CorporatesId
-            AND Bookings.Status >= :Statuss
+            AND Bookings.Status = :Status
             AND CONCAT(
             Bookings.Reference,
             Bookings.Name,
