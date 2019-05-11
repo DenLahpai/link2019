@@ -113,6 +113,20 @@ function getQuantity () {
     }
 }
 
+//function to get checkout date
+function getDate_out () {
+    var checkin = new Date(document.getElementById('Date_in').value);
+    var nights = document.getElementById('Quantity').value;
+    var checkout = checkin.setTime(checkin.getTime() + (nights * 24 * 60 * 60 * 1000));
+    var checkoutDate = new Date(checkout);
+    var formatCheckoutDate = checkoutDate.getFullYear() + "-0" + (checkoutDate.getMonth() + 1) + "-" + checkoutDate.getDate();
+    alert(formatCheckoutDate);
+
+    document.getElementById('Date_out').value = formatCheckoutDate ;
+    // alert(checkoutDate);
+
+}
+
 //function to calculate selling prices for hotel
 function calculateHotelSell() {
     var Markup = document.getElementById('Markup');
@@ -148,4 +162,43 @@ function adjustMarkup(sell, cost) {
     var Markup = (profit / cost.value) * 100;
     document.getElementById('Markup').value = Markup;
     calculateHotelSell();
+}
+
+//function to check and submit accommodation service
+function checkHotel() {
+    var Date_in = document.getElementById('Date_in');
+    var Date_out = document.getElementById('Date_out');
+    var Sgl = document.getElementById('Sgl');
+    var Dbl = document.getElementById('Dbl');
+    var Twn = document.getElementById('Twn');
+    var Tpl = document.getElementById('Tpl');
+    var num0 = Sgl.value - 0;
+    var num1 = Dbl.value - 0;
+    var num2 = Twn.value - 0;
+    var num3 = Tpl.value - 0;
+    var rooms = num0 + num1 + num2 + num3;
+    var Markup = document.getElementById('Markup');
+
+    if (Date_out.value == "") {
+        Date_out.style.background = 'red';
+        document.getElementsByClassName('error')[0].innerHTML = 'Please input a check-out date!';
+    }
+    else if (Date_out.value < Date_in.value) {
+        Date_out.style.background = 'red';
+        document.getElementsByClassName('error')[0].innerHTML = 'Check-out date cannot be earlier than check-in date!';
+    }
+    else if (rooms === 0) {
+        Sgl.style.background = 'brown';
+        Dbl.style.background = 'brown';
+        Twn.style.background = 'brown';
+        Tpl.style.background = 'brown';
+        document.getElementsByClassName('error')[0].innerHTML = 'Please input a proper number of room(s)!';
+    }
+    else if (Markup.value == 0 || Markup.value === null || Markup.value === "") {
+        Markup.style.background = 'brown';
+        document.getElementsByClassName('error')[0].innerHTML = 'Please input a proper markup!';
+    }
+    else {
+        document.getElementById('buttonSubmit').type = 'submit';
+    }
 }

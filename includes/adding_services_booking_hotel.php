@@ -21,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </li>
             <li>
                 Check-out:
-                <input type="date" name="Date_out" id="Date_out" value="" onchange="getQuantity();">
+                <input type="date" name="Date_out" id="Date_out" onchange="getQuantity();">
             </li>
             <li>
                 Night(s):
-                <input type="number" name="Quantity" id="Quantity" readonly>
+                <input type="number" name="Quantity" id="Quantity">
             </li>
             <li>
                 Number of Rooms:
@@ -88,27 +88,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </li>
             <li>
                 USD:
-                <input type="number" step="0.01" name="Sell2_USD" id="Sell2_USD" value="">
+                <input type="number" step="0.01" name="Sell2_USD" id="Sell2_USD" onchange="adjustMarkup('Sell2_USD', 'Cost2_USD')">
                 MMK:
-                <input type="number" name="Sell2_MMK" id="Sell2_MMK" value="">
+                <input type="number" name="Sell2_MMK" id="Sell2_MMK" onchange="adjustMarkup('Sell2_MMK', 'Cost2_MMK');">
             </li>
             <li>
                 Double / Twin Room
             </li>
             <li>
                 USD:
-                <input type="number" name="Sell1_USD" id="Sell1_USD" step="0.01" value="">
+                <input type="number" name="Sell1_USD" id="Sell1_USD" step="0.01" onchange="adjustMarkup('Sell1_USD', 'Cost1_USD');">
                 MMK:
-                <input type="number" name="Sell1_MMK" id="Sell1_MMK" value="">
+                <input type="number" name="Sell1_MMK" id="Sell1_MMK" onchange="adjustMarkup('Sell1_MMK', 'Cost1_MMK');">
             </li>
             <li>
                 Triple Room
             </li>
             <li>
                 USD:
-                <input type="number" step="0.01" name="Sell3_USD" id="Sell3_USD" value="">
+                <input type="number" step="0.01" name="Sell3_USD" id="Sell3_USD" onchange="adjustMarkup('Sell3_USD', Cost3_USD);">
                 MMK:
-                <input type="number" name="Sell3_MMK" id="Sell3_MMK" value="">
+                <input type="number" name="Sell3_MMK" id="Sell3_MMK" onchange="adjustMarkup('Sell3_MMK', 'Cost3_MMK');">
             </li>
             <li class="error"></li>
             <li>
@@ -118,45 +118,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 </div>
 <!-- end of service form -->
-<script type="text/javascript">
-
-    function checkHotel() {
-        var Date_in = document.getElementById('Date_in');
-        var Date_out = document.getElementById('Date_out');
-        var Sgl = document.getElementById('Sgl');
-        var Dbl = document.getElementById('Dbl');
-        var Twn = document.getElementById('Twn');
-        var Tpl = document.getElementById('Tpl');
-        var num0 = Sgl.value - 0;
-        var num1 = Dbl.value - 0;
-        var num2 = Twn.value - 0;
-        var num3 = Tpl.value - 0;
-        var rooms = num0 + num1 + num2 + num3;
-        var Markup = document.getElementById('Markup');
-
-        if (Date_out.value == "") {
-            Date_out.style.background = 'red';
-            document.getElementsByClassName('error')[0].innerHTML = 'Please input a check-out date!';
-        }
-        else if (Date_out.value < Date_in.value) {
-            Date_out.style.background = 'red';
-            document.getElementsByClassName('error')[0].innerHTML = 'Check-out date cannot be earlier than check-in date!';
-        }
-        else if (rooms === 0) {
-            Sgl.style.background = 'brown';
-            Dbl.style.background = 'brown';
-            Twn.style.background = 'brown';
-            Tpl.style.background = 'brown';
-            document.getElementsByClassName('error')[0].innerHTML = 'Please input a proper number of room(s)!';
-        }
-        else if (Markup.value == 0 || Markup.value === null || Markup.value === "") {
-            Markup.style.background = 'brown';
-            document.getElementsByClassName('error')[0].innerHTML = 'Please input a proper markup!';
-        }
-        else {
-            document.getElementById('buttonSubmit').type = 'submit';
-        }
-    }
-
-    
-</script>

@@ -156,7 +156,3 @@ $Sell3_MMK = $row_Services_booking->Cost3_MMK + ($row_Services_booking->Cost3_MM
     </form>
 </div>
 <!-- end of service form -->
-<script type="text/javascript">
-
-
-</script>
