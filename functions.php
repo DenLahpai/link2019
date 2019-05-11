@@ -1286,7 +1286,7 @@ function table_Services_booking ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
-        case 'update_one':
+        case 'update_flight':
             //getting data from the form
             $Date_in = $_REQUEST['Date_in'];
             $Flight_no = trim($_REQUEST['Flight_no']);
@@ -1300,22 +1300,10 @@ function table_Services_booking ($job, $var1, $var2) {
             $Cost1_USD = $_REQUEST['Cost1_USD'];
             $Cost1_MMK = $_REQUEST['Cost1_MMK'];
 
+            $Markup = $_REQUEST['Markup'];
+
             $sellPerUSD = $_REQUEST['sellPerUSD'];
             $sellPerMMK = $_REQUEST['sellPerMMK'];
-
-            //getting Markup
-            $profitUSD = $sellPerUSD - $Cost1_USD;
-            $profitMMK = $sellPerMMK - $Cost2_MKK;
-
-            if ($profitUSD == 0 && $profitMMK == 0) {
-                $Markup = 0;
-            }
-            elseif ($profitMMK == 0 && $profitUSD != 0) {
-                $Markup = ($profitUSD / $Cost1_USD) * 100;
-            }
-            elseif ($profitUSD === 0 && $profitMMK != 0) {
-                $Markup = ($profitMMK / $Cost1_MMK) * 100;
-            }
 
 			//getting the total costs
 			$Total_cost_USD = $Cost1_USD * $Pax;

@@ -1,7 +1,7 @@
 <?php
 //getting data from the form
 if ($_SERVER['REQUEST_METHOD'] ==  'POST') {
-    table_Services_booking('update_one', $Services_bookingId, $BookingsId);
+    table_Services_booking('update_flight', $Services_bookingId, $BookingsId);
 }
 ?>
 <!-- service form -->
@@ -102,13 +102,17 @@ if ($_SERVER['REQUEST_METHOD'] ==  'POST') {
                 Cost in MMK / Pers:
                 <input type="number" name="Cost1_MMK" value="<? echo $row_Services_booking->Cost1_MMK; ?>">
             </li>
+            <li>
+                Markup %:
+                <input type="number" step="0.01" name="Markup" id="Markup" value="<? echo $row_Services_booking->Markup;?>">
+            </li>
             <li id="sellPerUSD" class="USD">
                 Sell in USD / Pers:
-                <input type="number" step="0.01" name="sellPerUSD" id="sellPerUSD" value="<? echo $row_Services_booking->Sell_USD / $row_Services_booking->Pax; ?>">
+                <input type="number" step="0.01" name="sellPerUSD" id="Sell1_USD" value="<? echo $row_Services_booking->Sell_USD / $row_Services_booking->Pax; ?>" onchange="adjustMarkup('Sell1_USD', 'Cost1_USD');">
             </li>
             <li id="sellPerMMK" class="MMK">
                 Sell in MMK / Pers:
-                <input type="number" name="sellPerMMK" value="<? echo $row_Services_booking->Sell_USD / $row_Services_booking->Pax; ?>">
+                <input type="number" name="sellPerMMK" id="Sell1_MMK" value="<? echo $row_Services_booking->Sell_MMK / $row_Services_booking->Pax; ?>" onchange="adjustMarkup('Sell1_MMK', 'Cost1_MMK')">
             </li>
             <li>
                 <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="checkThreeFields('Date_in', 'Pick_up_time', 'Drop_off_time')">Update</button>
