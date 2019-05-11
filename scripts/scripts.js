@@ -94,3 +94,58 @@ function compareDates(date1, date2) {
         document.getElementById('buttonSubmit').type = 'submit';
     }
 }
+
+//function to get number of nights for accommodations
+function getQuantity () {
+    var Date_in = document.getElementById('Date_in');
+    var Date_out = document.getElementById('Date_out');
+    if (Date_out.value > Date_in.value) {
+        var date1 = new Date(Date_in.value);
+        var date2 = new Date(Date_out.value);
+        var diffTime = Math.abs(date2.getTime() - date1.getTime());
+        var diffDay = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        document.getElementById('Quantity').value = diffDay;
+        Date_out.style.background = 'none';
+    }
+    else {
+        Date_out.style.background = 'brown';
+        alert('Check-out date must be later than the check-in date!');
+    }
+}
+
+//function to calculate selling prices for hotel
+function calculateHotelSell() {
+    var Markup = document.getElementById('Markup');
+    var MarkupPC = document.getElementById('Markup').value -0;
+    var Cost1_USD = document.getElementById('Cost1_USD').value -0;
+    var Cost1_MMK = document.getElementById('Cost1_MMK').value -0;
+    var Cost2_USD = document.getElementById('Cost2_USD').value -0;
+    var Cost2_MMK = document.getElementById('Cost2_MMK').value -0;
+    var Cost3_USD = document.getElementById('Cost3_USD').value -0;
+    var Cost3_MMK = document.getElementById('Cost3_MMK').value -0;
+
+    Sell1_USD = (Cost1_USD * MarkupPC / 100) + Cost1_USD;
+    Sell1_MMK = (Cost1_MMK * MarkupPC / 100) + Cost1_MMK;
+    Sell2_USD = (Cost2_USD * MarkupPC / 100) + Cost2_USD;
+    Sell2_MMK = (Cost2_MMK * MarkupPC / 100) + Cost2_MMK;
+    Sell3_USD = (Cost3_USD * MarkupPC / 100) + Cost3_USD;
+    Sell3_MMK = (Cost3_MMK * MarkupPC / 100) + Cost3_MMK;
+
+    document.getElementById('Sell1_USD').value = Sell1_USD;
+    document.getElementById('Sell1_MMK').value = Sell1_MMK;
+    document.getElementById('Sell2_USD').value = Sell2_USD;
+    document.getElementById('Sell2_MMK').value = Sell2_MMK;
+    document.getElementById('Sell3_USD').value = Sell3_USD;
+    document.getElementById('Sell3_MMK').value = Sell3_MMK;
+}
+
+//function to adjust the Markup
+function adjustMarkup(sell, cost) {
+    var sell = document.getElementById(sell);
+    var cost = document.getElementById(cost);
+    var Markup = document.getElementById('Markup');
+    var profit = sell.value - cost.value;
+    var Markup = (profit / cost.value) * 100;
+    document.getElementById('Markup').value = Markup;
+    calculateHotelSell();
+}

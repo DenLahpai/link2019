@@ -56,6 +56,35 @@ $Sell3_MMK = $row_Services_booking->Cost3_MMK + ($row_Services_booking->Cost3_MM
                 <input type="number" name="Tpl" id="Tpl" value="<? echo $row_Services_booking->Tpl; ?>">
             </li>
             <li>
+                Remark:
+                <input type="text" name="Remark" id="Remark" value="<? echo $row_Services_booking->Remark; ?>">
+            </li>
+            <li>
+                Special Request:
+                <input type="text" name="Spc_rq" id="Spc_rq" value="<? echo $row_Services_booking->Spc_rq; ?>">
+            </li>
+            <li>
+                Status:
+                <select name="StatusId">
+                    <option value="">Select One</option>
+                    <?php
+                    $rows_ServiceStatus = table_ServiceStatus ('select_all', NULL, NULL);
+                    foreach ($rows_ServiceStatus as $row_ServiceStatus) {
+                        if ($row_Services_booking->StatusId == $row_ServiceStatus->Id) {
+                            echo "<option value=\"$row_ServiceStatus->Id\" selected>".$row_ServiceStatus->Status."</option>";
+                        }
+                        else {
+                            echo "<option value=\"$row_ServiceStatus->Id\">".$row_ServiceStatus->Status."</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </li>
+            <li>
+                Confirmation No:
+                <input type="text" name="Cfm_no" id="Cfm_no" value="<? echo $row_Services_booking->Cfm_no; ?>">
+            </li>
+            <li class="bold">
                 Cost
             </li>
             <li>
@@ -87,7 +116,7 @@ $Sell3_MMK = $row_Services_booking->Cost3_MMK + ($row_Services_booking->Cost3_MM
             </li>
             <li>
                 Markup %:
-                <input type="number" step="0.01" name="Markup" id="Markup" value="<? echo $row_Services_booking->Markup; ?>" onchange="adjustSell();">
+                <input type="number" step="0.01" name="Markup" id="Markup" value="<? echo $row_Services_booking->Markup; ?>" onchange="calculateHotelSell();">
             </li>
             <li class="bold">
                 Sell
@@ -99,16 +128,16 @@ $Sell3_MMK = $row_Services_booking->Cost3_MMK + ($row_Services_booking->Cost3_MM
                 USD:
                 <input type="number" step="0.01" name="Sell2_USD" id="Sell2_USD" value="<? echo $Sell2_USD; ?>"  onchange="adjustMarkup('Sell2_USD', 'Cost2_USD');">
                 MMK:
-                <input type="number" name="Sell2_MMK" id="Sell2_MMK" value="<? echo $Sell2_MMK;?>">
+                <input type="number" name="Sell2_MMK" id="Sell2_MMK" value="<? echo $Sell2_MMK;?>" onchange="adjustMarkup('Sell2_MMK', Cost2_MMK);">
             </li>
             <li>
                 Double / Twin Room
             </li>
             <li>
                 USD:
-                <input type="number" name="Sell1_USD" id="Sell1_USD" step="0.01" value="<? echo $Sell1_USD; ?>">
+                <input type="number" name="Sell1_USD" id="Sell1_USD" step="0.01" value="<? echo $Sell1_USD; ?>" onchange="adjustMarkup('Sell1_USD', 'Cost1_USD');">
                 MMK:
-                <input type="number" name="Sell1_MMK" id="Sell1_MMK" value="<? echo $Sell1_MMK; ?>">
+                <input type="number" name="Sell1_MMK" id="Sell1_MMK" value="<? echo $Sell1_MMK; ?>" onchange="adjustMarkup('Sell1_MMK', Cost1_MMK);">
             </li>
             <li>
                 Triple Room
@@ -128,34 +157,6 @@ $Sell3_MMK = $row_Services_booking->Cost3_MMK + ($row_Services_booking->Cost3_MM
 </div>
 <!-- end of service form -->
 <script type="text/javascript">
-    //function to adjust the Markup
-    function adjustMarkup(sell, cost) {
 
-        var sell = document.getElementById(sell);
-        var cost = document.getElementById(cost);
-        var Markup = document.getElementById('Markup');
-        var profit = sell.value - cost.value;
-        var Markup = (profit / cost.value) * 100;
-        document.getElementById('Markup').value = Markup;
-        adjustSell();
-    }
 
-    //function to adjust selling
-    function adjustSell() {
-        var Cost1_USD = document.getElementById('Cost1_USD').value - 0;
-        var Cost1_MMK = document.getElementById('Cost1_MMK').value - 0;
-        var Cost2_USD = document.getElementById('Cost2_USD').value - 0;
-        var Cost2_MMK = document.getElementById('Cost2_MMK').value - 0;
-        var Cost3_USD = document.getElementById('Cost3_USD').value - 0;
-        var Cost3_MMK = document.getElementById('Cost3_MMK').value - 0;
-
-        var Markup = document.getElementById('Markup').value - 0;
-
-        document.getElementById('Sell1_USD').value = Cost1_USD + (Cost1_USD * Markup / 100);
-        document.getElementById('Sell1_MMK').value = Cost1_MMK + (Cost1_MMK * Markup / 100);
-        document.getElementById('Sell2_USD').value = Cost2_USD + (Cost2_USD * Markup / 100);
-        document.getElementById('Sell2_MMK').value = Cost2_MMK + (Cost2_MMK * Markup / 100);
-        document.getElementById('Sell3_USD').value = Cost3_USD + (Cost3_USD * Markup / 100);
-        document.getElementById('Sell3_MMK').value = Cost3_MMK + (Cost3_MMK * Markup / 100);
-    }
 </script>
