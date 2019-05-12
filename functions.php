@@ -1372,6 +1372,28 @@ function table_Services_booking ($job, $var1, $var2) {
             $StatusId = $_REQUEST['StatusId'];
             $Cfm_no = trim($_REQUEST['Cfm_no']);
             $Markup = $_REQUEST['Markup'];
+            $Cost1_USD = $_REQUEST['Cost1_USD'];
+            $Cost1_MKK = $_REQUEST['Cost1_MMK'];
+            $Cost2_USD = $_REQUEST['Cost2_USD'];
+            $Cost2_MKK = $_REQUEST['Cost2_MMK'];
+            $Cost3_USD = $_REQUEST['Cost3_USD'];
+            $Cost3_MKK = $_REQUEST['Cost3_MMK'];
+
+            $Total_cost_Dbl_USD = $Cost1_USD * $Quantity * $Dbl;
+            $Total_cost_Twn_USD = $Cost1_USD * $Quantity * $Twn;
+            $Total_cost_Sgl_USD = $Cost2_USD * $Quantity * $Sgl;
+            $Total_cost_Tpl_USD = $Cost3_USD * $Quantity * $Tpl;
+
+            $Total_cost_Dbl_MMK = $Cost1_MMK * $Quantity * $Dbl;
+            $Total_cost_Twn_MMK = $Cost1_MMK * $Quantity * $Twn;
+            $Total_cost_Sgl_MMK = $Cost2_MMK * $Quantity * $Sgl;
+            $Total_cost_Tpl_MMK = $Cost3_MMK * $Quantity * $Tpl;
+
+            $Total_cost_USD = $Total_cost_Dbl_USD + $Total_cost_Twn_USD + $Total_cost_Sgl_USD
+            + $Total_cost_Tpl_USD;
+
+            $Total_cost_MMK = $Total_cost_Dbl_MMK + $Total_cost_Twn_MMK + $Total_cost_Sgl_MMK
+            + $Total_cost_Tpl_MMK;
 
             $Sell1_USD = $_REQUEST['Sell1_USD'];
             $Sell1_MMK = $_REQUEST['Sell1_MMK'];
@@ -1380,14 +1402,43 @@ function table_Services_booking ($job, $var1, $var2) {
             $Sell3_USD = $_REQUEST['Sell3_USD'];
             $Sell3_MMK = $_REQUEST['Sell3_MMK'];
 
-            $total_sell1_USD = $Sell1_USD * $Quantity * ($Dbl + $Twn);
-            $total_sell1_MMK = $Sell1_MMK * $Quantity * ($Dbl + $Twn);
-            $total_sell2_USD = $Sell2_USD * $Quantity * $Sgl;
-            $total_sell2_MMK = $Sell2_MMK * $Quantity * $Sgl;
-            $total_sell3_USD = $Sell3_USD * $Quantity * $Tpl;
-            $total_Sell3_MMK = $Sell3_MMK * $Quantity * $Tpl;
-            
+            $total_sell_Dbl_USD = $Sell1_USD * $Quantity * $Dbl;
+            $total_sell_Dbl_MMK = $Sell1_MMK * $Quantity * $Dbl;
+            $total_sell_Twn_USD = $Sell1_USD * $Quantity * $Twn;
+            $total_sell_Twn_MMK = $Sell1_MMK * $Quantity * $Twn;
+            $total_sell_Sgl_USD = $Sell2_USD * $Quantity * $Sgl;
+            $total_sell_Sgl_MMK = $Sell2_MMK * $Quantity * $Sgl;
+            $total_sell_Tpl_USD = $Sell3_USD * $Quantity * $Tpl;
+            $total_sell_Tpl_MMK = $Sell3_MMK * $Quantity * $Tpl;
 
+            $Sell_USD = $total_sell_Dbl_USD + $total_sell_Twn_USD + $total_sell_Sgl_USD + $total_sell_Tpl_USD;
+
+            $Sell_MMK = $total_sell_Dbl_MMK + $total_sell_Twn_MMK + $total_sell_Sgl_MMK + $total_sell_Tpl_MMK;
+
+            $query = "UPDATE Services_booking SET
+                Date_in = :Date_in,
+                Date_out = :Date_out,
+                Sgl = :Sgl,
+                Dbl = :Dbl,
+                Twn = :Twn,
+                Tpl = :Tpl,
+                Quantity = :Quantity,
+                Remark = :Remark,
+                Spc_rq = :Spc_rq,
+                StatusId = :StatusId,
+                Cfm_no = :Cfm_no,
+                Total_cost_USD = :Total_cost_USD,
+                Total_cost_MMK = :Total_cost_MMK,
+                Markup = :Markup,
+                Sell_USD = :Sell_USD,
+                Sell_MMK = :Sell_MMK
+                WHERE Id = :Services_bookingId
+            ;";
+            $database->query($query);
+            $database->bind(':Date_in', $Date_in);
+            $database->bind(':Date_out', $Date_out);
+            $database->bind(':Sgl', $Sgl);
+            //TODO resume HERE
             break;
 
         case 'delete':
