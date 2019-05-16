@@ -1434,7 +1434,7 @@ function table_Services_booking ($job, $var1, $var2) {
                 Sell_USD = :Sell_USD,
                 Sell_MMK = :Sell_MMK
                 WHERE Id = :Services_bookingId
-            ;";
+            ;" ;
             $database->query($query);
             $database->bind(':Date_in', $Date_in);
             $database->bind(':Date_out', $Date_out);
