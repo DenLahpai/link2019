@@ -9,7 +9,9 @@ $Sell2_MMK = $row_Services_booking->Cost2_MMK + ($row_Services_booking->Cost2_MM
 $Sell3_USD = $row_Services_booking->Cost3_USD + ($row_Services_booking->Cost3_USD * $row_Services_booking->Markup / 100);
 $Sell3_MMK = $row_Services_booking->Cost3_MMK + ($row_Services_booking->Cost3_MMK * $row_Services_booking->Markup / 100);
 
-//TODO update the data in the table Serivces_booking table
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    table_Services_booking ('update_hotel', $Services_bookingId, $BookingsId);
+}
 
 ?>
 <!-- service form -->
@@ -71,10 +73,10 @@ $Sell3_MMK = $row_Services_booking->Cost3_MMK + ($row_Services_booking->Cost3_MM
                     $rows_ServiceStatus = table_ServiceStatus ('select_all', NULL, NULL);
                     foreach ($rows_ServiceStatus as $row_ServiceStatus) {
                         if ($row_Services_booking->StatusId == $row_ServiceStatus->Id) {
-                            echo "<option value=\"$row_ServiceStatus->Id\" selected>".$row_ServiceStatus->Status."</option>";
+                            echo "<option value=\"$row_ServiceStatus->Id\" selected>".$row_ServiceStatus->Code."</option>";
                         }
                         else {
-                            echo "<option value=\"$row_ServiceStatus->Id\">".$row_ServiceStatus->Status."</option>";
+                            echo "<option value=\"$row_ServiceStatus->Id\">".$row_ServiceStatus->Code."</option>";
                         }
                     }
                     ?>
@@ -150,7 +152,7 @@ $Sell3_MMK = $row_Services_booking->Cost3_MMK + ($row_Services_booking->Cost3_MM
             </li>
             <li class="error"></li>
             <li>
-                <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="">Update</button>
+                <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="checkHotel();">Update</button>
             </li>
         </ul>
     </form>

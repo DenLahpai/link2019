@@ -1219,7 +1219,7 @@ function table_Services_booking ($job, $var1, $var2) {
                 Services.Service AS Service,
                 Suppliers.Name AS SuppliersName,
                 Suppliers.City,
-                ServiceStatus.Code AS StatusCode,
+                ServiceStatus.Code AS Code,
                 ServiceStatus.Status AS Status
                 FROM Services_booking
                 LEFT OUTER JOIN Services
@@ -1271,6 +1271,7 @@ function table_Services_booking ($job, $var1, $var2) {
                 Services.ServiceTypeId AS ServiceTypeId,
                 Services.SupplierId AS SupplierId,
                 Suppliers.Name AS SuppliersName,
+                ServiceStatus.Code AS Code,
                 ServiceStatus.Status AS Status
                 FROM Services_booking
                 LEFT OUTER JOIN Services
@@ -1438,7 +1439,23 @@ function table_Services_booking ($job, $var1, $var2) {
             $database->bind(':Date_in', $Date_in);
             $database->bind(':Date_out', $Date_out);
             $database->bind(':Sgl', $Sgl);
-            //TODO resume HERE
+            $database->bind(':Dbl', $Dbl);
+            $database->bind(':Twn', $Twn);
+            $database->bind(':Tpl', $Tpl);
+            $database->bind(':Quantity', $Quantity);
+            $database->bind(':Remark', $Remark);
+            $database->bind(':Spc_rq', $Spc_rq);
+            $database->bind(':StatusId', $StatusId);
+            $database->bind(':Cfm_no', $Cfm_no);
+            $database->bind(':Total_cost_USD', $Total_cost_USD);
+            $database->bind(':Total_cost_MMK', $Total_cost_MMK);
+            $database->bind(':Markup', $Markup);
+            $database->bind(':Sell_USD', $Sell_USD);
+            $database->bind(':Sell_MMK', $Sell_MMK);
+            $database->bind(':Services_bookingId', $var1);
+            if ($database->execute()) {
+                header("location: booking_services.php?BookingsId=$var2");
+            }
             break;
 
         case 'delete':

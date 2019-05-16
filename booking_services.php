@@ -77,7 +77,7 @@ foreach ($rows_Bookings as $row_Bookings) {
                         echo "<li>Check-in: ".date('d-M-y', strtotime($row_hotels->Date_in))." | ";
                         echo "Check-out: ".date('d-M-y', strtotime($row_hotels->Date_out))."</li>";
                         echo "<li>Night(s): ".$row_hotels->Quantity."</li>";
-                        echo "<li>Status: ".$row_hotels->Status."</li>";
+                        echo "<li>Status: ".$row_hotels->Code."</li>";
                         echo "<li>Confirmation: ".$row_hotels->Cfm_no."</li>";
                         echo "<li><a href=\"edit_services_booking.php?Services_bookingId=$row_hotels->Services_bookingId\"><button class=\"button link\">Edit</button></a>&nbsp; &nbsp";
                         echo "<a href=\"delete_services_booking.php?Services_bookingId=$row_hotels->Services_bookingId\"><button class=\"button link\">Delete</button></a>&nbsp; &nbsp";
