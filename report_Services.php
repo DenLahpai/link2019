@@ -8,7 +8,7 @@ $rows_ServiceType = table_ServiceType('select', NULL, NULL);
 $rows_ServiceStatus = table_ServiceStatus('select_all', NULL, NULL);
 
 //getting data from the table Corporates
-$rows_Corporates = table_Corporates('select', NULL, NULL);
+$rows_Corporates = table_Corporates('select_all', NULL, NULL);
 
 //getting date from the table Suppliers
 $rows_Suppliers = table_Suppliers('select', NULL, NULL);
@@ -62,12 +62,65 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     }
                                     ?>
                                 </select>
+                                &nbsp;
+                                Status:
+                                <select name="StatusId">
+                                    <option value="">Select One</option>
+                                    <?php
+                                    foreach ($rows_ServiceStatus as $row_ServiceStatus) {
+                                        if ($ServiceStatusId == $row_ServiceStatus->Id){
+                                            echo "<option value=\"$row_ServiceStatus->Id\" selected>".$row_ServiceStatus->Code."</option>";
+                                        }
+                                        else {
+                                            echo "<option value=\"$row_ServiceStatus->Id\">".$row_ServiceStatus->Code."</option>";
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </li>
+                            <li>
+                                Corporates:
+                                <select name="CorporatesId">
+                                    <option value="">Select One</option>
+                                    <?php
+                                    foreach ($rows_Corporates as $row_Corporates) {
+                                        if ($CorporatesId == $row_Corporates->Id) {
+                                            echo "<option value=\"$row_Corporates->Id\" selected>".$row_Corporates->Name."</option>";
+                                        }
+                                        else {
+                                            echo "<option value=\"$row_Corporates->Id\">".$row_Corporates->Name."</option>";
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                                &nbsp;
+                                Suppliers:
+                                <select name="SuppliersId">
+                                    <option value="">Select One</option>
+                                    <?php
+                                    foreach ($rows_Suppliers as $row_Suppliers) {
+                                        if ($SuppliersId == $row_Suppliers->Id) {
+                                            echo "<option value=\"$row_Suppliers->Id\" selected>".$row_Suppliers->Name."</option>";
+                                        }
+                                        else {
+                                            echo "<option value=\"$row_Suppliers->Id\">".$row_Suppliers->Name."</option>";
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </li>
+                            <li>
+                                <input type="text" name="search" placeholder="Search" value="<? if (!empty($search)) { echo $search; }?>">
+                            </li>
+                            <li>
+                                <button type="button" class="button submit" id="buttonSubmit" name="buttonSubmit" onclick="compareDates('ServiceDate1', 'ServiceDate2');">Search</button>
                             </li>
                         </ul>
                     </form>
                 </div>
                 <!-- end of search -->
             </main>
+            <?php include "includes/footer.html"; ?>
         </div>
         <!-- end of content -->
     </body>

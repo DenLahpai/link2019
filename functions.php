@@ -859,7 +859,6 @@ function table_InvoiceDetails ($job, $var1, $var2) {
 
     switch ($job) {
         case 'insert':
-
             // inserting data of 20 rows
             $i = 1;
             while ($i <= 20) {
