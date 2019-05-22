@@ -4568,18 +4568,307 @@ function report_Services_booking () {
     $database = new Database();
     $ServiceDate1 = $_REQUEST['ServiceDate1'];
     $ServiceDate2 = $_REQUEST['ServiceDate2'];
-    $ServiceType = $_REQUEST['ServiceType'];
+    if (empty($ServiceDate2)) {
+        $ServiceDate2 = $ServiceDate1;
+    }
+    $ServiceTypeId = $_REQUEST['ServiceTypeId'];
     $StatusId = $_REQUEST['StatusId'];
-    $CorporatesId = $_REQUEST['CorporatesId'];
     $SuppliersId = $_REQUEST['SuppliersId'];
     $search = trim($_REQUEST['search']);
     $mySearch = '%'.$search.'%';
 
-    if ($ServiceDate1 == NULL && $ServiceType == NULL && $Status == NULL && $CorporatesId == NULL && $SuppliersId == NULL) {
+    if ($ServiceDate1 == NULL && $ServiceTypeId == NULL && $StatusId == NULL && $SuppliersId == NULL && $search == NULL) {
         $n = 00000;
-        $query = "SELECT ;";
-        //TODO Resume report_Services.php HERE.
+        $query = "SELECT
+            Bookings.Reference,
+            Bookings.Name AS BookingsName,
+            Bookings.ArvDate,
+            ServiceType.Code AS ServiceTypeCode,
+            Suppliers.Name AS SuppliersName,
+            Services.Service,
+            Services.Additional,
+            Services_booking.Date_in,
+            Services_booking.Date_out,
+            Services_booking.Pax,
+            Services_booking.Pick_up,
+            Services_booking.Drop_off,
+            Services_booking.Spc_rq,
+            ServiceStatus.Code AS ServiceStatusCode,
+            Services_booking.Cfm_no
+            FROM Services_booking
+            LEFT OUTER JOIN Bookings ON Services_booking.BookingsId = Bookings.Id
+            LEFT OUTER JOIN Services ON Services_booking.ServicesId = Services.Id
+            LEFT OUTER JOIN ServiceType ON Services.ServiceTypeId = ServiceType.Id
+            LEFT OUTER JOIN Suppliers ON Services.SupplierId = Suppliers.Id
+            LEFT OUTER JOIN ServiceStatus ON Services_booking.StatusId = ServiceStatus.Id
+        ;";
+        $database->query($query);
+
     }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId == NULL && $StatusId == NULL && $SuppliersId == NULL && $search != NULL) {
+        $n = 00001;
+        $query .= " WHERE CONCAT (
+            Bookings.Reference,
+            Bookings.Name,
+            Suppliers.Name,
+            Services.Service,
+            Services.Additional,
+            Service_booking.Pick_up,
+            Services_booking.Drop_off,
+            Services_booking.Spc_rq,
+            Services_booking.Cfm_no
+            ) LIKE :mySearch
+        ;";
+    }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId == NULL && $StatusId == NULL && $SuppliersId != NULL && $search == NULL) {
+        $n = 00010;
+        $query .= " WHERE Suppliers.Id = :SuppliersId ;";
+        $database->query($query);
+        $database->bind(':SuppliersId', $SuppliersId);
+    }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId == NULL && $StatusId != NULL && $SuppliersId == NULL && $search == NULL) {
+        $n = 00100;
+        $query .= " WHERE Services_booking.StatusId  ;";
+        $database->query($query);
+        $database->bind(':StatusId', $StatusId);
+    }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId != NULL && $StatusId == NULL && $SuppliersId == NULL && $search == NULL) {
+        $n = 01000;
+        $query .= " WHERE Services.ServiceTypeId = :ServiceTypeId ;";
+        $database->query($query);
+        $database->bind(':ServiceTypeId', $ServiceTypeId);
+    }
+
+    elseif ($ServiceDate1 != NULL && $ServiceTypeId != NULL && $StatusId == NULL && $SuppliersId == NULL && $search == NULL) {
+        $n = 10000;
+        $query .= " WHERE Services_booking.Date_in >= :ServiceDate1
+            AND Services_booking.Date_out <= :ServicesDate2
+        ;";
+        $database->query($query);
+        $database->bind(':ServiceDate1', $ServiceDate1);
+        $database->bind(':ServiceDate2', $ServiceDate2);
+    }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId == NULL && $StatusId == NULL && $SuppliersId != NULL && $search != NULL) {
+        $n = 00011;
+        $query .= " WHERE CONCAT (
+            Bookings.Reference,
+            Bookings.Name,
+            Suppliers.Name,
+            Services.Service,
+            Services.Additional,
+            Service_booking.Pick_up,
+            Services_booking.Drop_off,
+            Services_booking.Spc_rq,
+            Services_booking.Cfm_no
+            ) LIKE :mySearch
+            AND Suppliers.Id = :SuppliersId
+        ;";
+        $database->query($query);
+        $database->bind(':mySearch', $mySearch);
+        $database->bind(':SuppliersId', $SupplierId);
+    }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId == NULL && $StatusId != NULL && $SuppliersId == NULL && $search != NULL) {
+        $n = 00101;
+        $query .= " WHERE CONCAT (
+            Bookings.Reference,
+            Bookings.Name,
+            Suppliers.Name,
+            Services.Service,
+            Services.Additional,
+            Service_booking.Pick_up,
+            Services_booking.Drop_off,
+            Services_booking.Spc_rq,
+            Services_booking.Cfm_no
+            ) LIKE :mySearch
+            AND Services_booking.StatusId = :StatusId
+        ;";
+        $database->query($query);
+        $database->bind(':mySearch', $mySearch);
+        $database->bind(':StatusId', $StatusId);
+    }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId == NULL && $StatusId != NULL && $SuppliersId != NULL && $search == NULL) {
+        $n = 00110;
+        $query .= " WHERE
+            Suppliers.Id = :SuppliersId
+            AND Services_booking.StatusId = :StatusId
+        ;";
+        $database->query($query);
+        $database->bind(':SuppliersId', $SupplierId);
+        $database->bind(':StatusId', $StatusId);
+    }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId != NULL && $StatusId == NULL && $SuppliersId == NULL && $search != NULL) {
+        $n = 01001;
+        $query .= " WHERE CONCAT (
+            Bookings.Reference,
+            Bookings.Name,
+            Suppliers.Name,
+            Services.Service,
+            Services.Additional,
+            Service_booking.Pick_up,
+            Services_booking.Drop_off,
+            Services_booking.Spc_rq,
+            Services_booking.Cfm_no
+            ) LIKE :mySearch
+            AND Services.ServiceTypeId = :ServiceTypeId
+        ;";
+        $database->query($query);
+        $database->bind(':mySearch', $mySearch);
+        $database->bind(':ServiceTypeId', $ServiceTypeId);
+    }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId != NULL && $StatusId == NULL && $SuppliersId != NULL && $search == NULL) {
+        $n = 01010;
+        $query .= " WHERE Suppliers.Id = :SuppliersId
+            AND Services.ServiceTypeId = :ServiceTypeId
+        ;";
+        $database->query($query);
+        $database->bind(':SuppliersId', $SuppliersId);
+        $database->bind(':ServiceTypeId', $ServiceTypeId);
+    }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId != NULL && $StatusId != NULL && $SuppliersId == NULL && $search == NULL) {
+        $n = 01100;
+        $query .= " WHERE Services_booking.StatusId = :StatusId
+            AND Services.ServiceTypeId = :ServiceTypeId
+        ;";
+        $database->query($query);
+        $database->bind(':StatusId', $StatusId);
+        $database->bind(':ServiceTypeId', $ServiceTypeId);
+    }
+
+    elseif ($ServiceDate1 != NULL && $ServiceTypeId == NULL && $StatusId == NULL && $SuppliersId == NULL && $search != NULL) {
+        $n = 10001;
+        $query .= "  WHERE CONCAT (
+            Bookings.Reference,
+            Bookings.Name,
+            Suppliers.Name,
+            Services.Service,
+            Services.Additional,
+            Service_booking.Pick_up,
+            Services_booking.Drop_off,
+            Services_booking.Spc_rq,
+            Services_booking.Cfm_no
+            ) LIKE :mySearch
+            AND Services_booking.Date_in >= :ServiceDate1
+            AND Services_booking.Date_in <= :ServiceDate2
+            ;";
+            $database->query($query);
+            $database->bind(':mySearch', $mySearch);
+            $database->bind(':ServiceDate1', $ServiceDate1);
+            $database->bind(':ServiceDate2', $ServiceDate2);
+    }
+
+    elseif ($ServiceDate1 != NULL && $ServiceTypeId == NULL && $StatusId == NULL && $SuppliersId != NULL && $search == NULL) {
+        $n = 10010;
+        $query .= " WHERE Services_booking.Date_in >= :ServiceDate1
+            AND Services_booking.Date_out <= :ServiceDate2
+            AND Suppliers.Id = :SuppliersId
+        ;";
+        $database->query($query);
+        $database->bind(':ServiceDate1', $ServiceDate1);
+        $database->bind(':ServiceDate2', $ServiceDate2);
+        $database->bind(':SuppliersId', $SuppliersId);
+    }
+
+    elseif ($ServiceDate1 != NULL && $ServiceTypeId == NULL && $StatusId != NULL && $SuppliersId == NULL && $search == NULL) {
+        $n = 10100;
+        $query .= " WHERE Services_booking.Date_in >= :ServiceDate1
+            AND Services_booking.Date_in <= :ServiceDate2
+            AND Services_booking.StatusId = :StatusId
+        ;";
+        $database->query($query);
+        $database->bind(':ServiceDate1', $ServiceDate1);
+        $database->bind(':ServiceDate2', $ServiceDate2);
+        $database->bind(':StatusId', $StatusId);
+    }
+
+    elseif ($ServiceDate1 != NULL && $ServiceTypeId != NULL && $StatusId == NULL && $SuppliersId == NULL && $search == NULL) {
+        $n = 11000;
+        $query .= " WHERE Services_booking.Date_in >= :ServiceDate1
+            AND Services_booking.Date_in <= :ServiceDate2
+            AND Services.ServiceTypeId = :ServiceTypeId
+        ;";
+        $database->query($query);
+        $database->bind(':ServiceDate1', $ServiceDate1);
+        $database->bind(':ServiceDate2', $ServiceDate2);
+        $database->bind(':ServiceTypeId', $ServiceTypeId);
+    }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId == NULL && $StatusId != NULL && $SuppliersId != NULL && $search != NULL) {
+        $n = 00111;
+        $query .= " WHERE CONCAT (
+            Bookings.Reference,
+            Bookings.Name,
+            Suppliers.Name,
+            Services.Service,
+            Services.Additional,
+            Service_booking.Pick_up,
+            Services_booking.Drop_off,
+            Services_booking.Spc_rq,
+            Services_booking.Cfm_no
+            ) LIKE :mySearch
+            AND Suppliers.Id = :SuppliersId
+            AND Services_booking.StatusId = :StatusId
+        ;";
+        $database->query($query);
+        $database->bind(':mySearch', $mySearch);
+        $database->bind(':SuppliersId', $SuppliersId);
+        $database->bind(':StatusId', $StatusId);
+    }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId != NULL && $StatusId == NULL && $SuppliersId != NULL && $search != NULL) {
+        $n = 01011;
+        $query .= " WHERE CONCAT (
+            Bookings.Reference,
+            Bookings.Name,
+            Suppliers.Name,
+            Services.Service,
+            Services.Additional,
+            Service_booking.Pick_up,
+            Services_booking.Drop_off,
+            Services_booking.Spc_rq,
+            Services_booking.Cfm_no
+            ) LIKE :mySearch
+            AND Suppliers.Id = :SuppliersId
+            AND Services.ServiceTypeId = :ServiceTypeId
+        ;";
+        $database->query($query);
+        $database->bind(':mySearch', $mySearch);
+        $database->bind(':SuppliersId', $SuppliersId);
+        $database->bind(':ServiceTypeId', $ServiceTypeId);
+    }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId != NULL && $StatusId != NULL && $SuppliersId == NULL && $search != NULL) {
+        $n = 01101;
+        $query .= " WHERE CONCAT (
+            Bookings.Reference,
+            Bookings.Name,
+            Suppliers.Name,
+            Services.Service,
+            Services.Additional,
+            Service_booking.Pick_up,
+            Services_booking.Drop_off,
+            Services_booking.Spc_rq,
+            Services_booking.Cfm_no
+            ) LIKE :mySearch
+            AND Suppliers.Id = :SuppliersId
+            AND Services_booking.StatusId = :StatusId
+        ;";
+        $database->query($query);
+        $database->bind(':mySearch', $mySearch);
+        $database->bind(':SuppliersId', $SuppliersId);
+        $database->bind(':StatusId', $StatusId);
+    }
+
+    return $r = $database->resultset();
 }
 
 

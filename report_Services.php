@@ -14,7 +14,15 @@ $rows_Corporates = table_Corporates('select_all', NULL, NULL);
 $rows_Suppliers = table_Suppliers('select', NULL, NULL);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+    $ServiceDate1 = $_REQUEST['ServiceDate1'];
+    $ServiceDate2 = $_REQUEST['ServiceDate2'];
+    if (empty($ServiceDate2)) {
+        $ServiceDate2 = $ServiceDate1;
+    }
+    $ServiceTypeId = $_REQUEST['ServiceTypeId'];
+    $StatusId = $_REQUEST['StatusId'];
+    $SuppliersId = $_REQUEST['SuppliersId'];
+    $search = trim($_REQUEST['search']);
 }
 
 ?>
@@ -79,21 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </select>
                             </li>
                             <li>
-                                Corporates:
-                                <select name="CorporatesId">
-                                    <option value="">Select One</option>
-                                    <?php
-                                    foreach ($rows_Corporates as $row_Corporates) {
-                                        if ($CorporatesId == $row_Corporates->Id) {
-                                            echo "<option value=\"$row_Corporates->Id\" selected>".$row_Corporates->Name."</option>";
-                                        }
-                                        else {
-                                            echo "<option value=\"$row_Corporates->Id\">".$row_Corporates->Name."</option>";
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                                &nbsp;
                                 Suppliers:
                                 <select name="SuppliersId">
                                     <option value="">Select One</option>
