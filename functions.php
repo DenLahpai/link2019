@@ -4646,7 +4646,7 @@ function report_Services_booking () {
     elseif ($ServiceDate1 != NULL && $ServiceTypeId != NULL && $StatusId == NULL && $SuppliersId == NULL && $search == NULL) {
         $n = 10000;
         $query .= " WHERE Services_booking.Date_in >= :ServiceDate1
-            AND Services_booking.Date_out <= :ServicesDate2
+            AND Services_booking.Date_out <= :ServiceDate2
         ;";
         $database->query($query);
         $database->bind(':ServiceDate1', $ServiceDate1);
@@ -4867,6 +4867,133 @@ function report_Services_booking () {
         $database->bind(':SuppliersId', $SuppliersId);
         $database->bind(':StatusId', $StatusId);
     }
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId != NULL && $StatusId != NULL && $SuppliersId != NULL && $search == NULL) {
+        $n = 01110;
+        $query .= " WHERE Services.ServiceTypeId = :ServiceTypeId
+            AND Services_booking.StatusId = :StatusId
+            AND Suppliers.Id = :SuppliersId
+        ;";
+        $database->query($query);
+        $database->bind(':ServiceTypeId', $ServiceTypeId);
+        $database->bind(':StatusId', $StatusId);
+        $database->bind(':SuppliersId', $SuppliersId);
+    }
+
+    elseif ($ServiceDate1 != NULL && $ServiceTypeId == NULL && $StatusId == NULL && $SuppliersId != NULL && $search != NULL) {
+        $n = 10011;
+        $query .= " WHERE CONCAT (
+            Bookings.Reference,
+            Bookings.Name,
+            Suppliers.Name,
+            Services.Service,
+            Services.Additional,
+            Service_booking.Pick_up,
+            Services_booking.Drop_off,
+            Services_booking.Spc_rq,
+            Services_booking.Cfm_no
+            ) LIKE :mySearch
+            AND Suppliers.Id = :SuppliersId
+            AND Services_booking.Date_in >= :ServiceDate1
+            AND Services_booking.Date_in <= :ServiceDate2
+        ;";
+        $database->query($query);
+        $database->bind(':mySearch', $mySearch);
+        $database->bind(':SuppliersId', $SuppliersId);
+        $database->bind(':ServiceDate1', $ServiceDate1);
+        $database->bind(':ServiceDate2', $ServiceDate2);
+    }
+
+    elseif ($ServiceDate1 != NULL && $ServiceTypeId == NULL && $StatusId != NULL && $SuppliersId == NULL && $search != NULL) {
+        $n = 10101;
+        $query .= " WHERE CONCAT (
+            Bookings.Reference,
+            Bookings.Name,
+            Suppliers.Name,
+            Services.Service,
+            Services.Additional,
+            Service_booking.Pick_up,
+            Services_booking.Drop_off,
+            Services_booking.Spc_rq,
+            Services_booking.Cfm_no
+            ) LIKE :mySearch
+            AND Services_booking.StatusId = :StatusId
+            AND Services_booking.Date_in >= :ServiceDate1
+            AND Services_booking.Date_in <= :ServiceDate2
+        ;";
+        $database->query($query);
+        $database->bind(':mySearch', $mySearch);
+        $database->bind(':StatusId', $StatusId);
+        $database->bind(':ServiceDate1', $ServiceDate1);
+        $database->bind(':ServiceDate2', $ServiceDate2);
+    }
+
+    elseif ($ServiceDate1 != NULL && $ServiceTypeId != NULL && $StatusId != NULL && $SuppliersId == NULL && $search == NULL) {
+        $n = 10110;
+        $query = " WHERE Services_booking.Date_in >= :ServiceDate1
+            AND Services_booking.Date_in <= :ServiceDate2
+            AND Services.ServiceTypeId = :ServiceTypeId
+            AND Services_booking.StatusId = :StatusId
+        ;";
+        $database->query($query);
+        $database->bind(':ServiceDate1', $ServiceDate1);
+        $database->bind(':ServiceDate2', $ServiceDate2);
+        $database->bind(':ServiceTypeId', $ServiceTypeId);
+        $database->bind(':StatusId', $StatusId);
+    }
+
+    elseif ($ServiceDate1 != NULL && $ServiceTypeId != NULL && $StatusId == NULL && $SuppliersId == NULL && $search != NULL) {
+        $n = 11001;
+        $query .= " WHERE CONCAT (
+            Bookings.Reference,
+            Bookings.Name,
+            Suppliers.Name,
+            Services.Service,
+            Services.Additional,
+            Service_booking.Pick_up,
+            Services_booking.Drop_off,
+            Services_booking.Spc_rq,
+            Services_booking.Cfm_no
+            ) LIKE :mySearch
+            AND Services_booking.Date_in >= :ServiceDate1
+            AND Services_booking.Date_in <= :ServiceDate2
+            AND Services.ServiceTypeId = :ServiceTypeId
+        ;";
+        $database->query($query);
+        $database->bind(':mySearch', $mySearch);
+        $database->bind(':ServiceDate1', $ServiceDate1);
+        $database->bind(':ServiceDate2', $ServiceDate2);
+        $database->bind(':ServiceTypeId', $ServiceTypeId);
+    }
+
+    elseif ($ServiceDate1 != NULL && $ServiceTypeId != NULL && $StatusId == NULL && $SuppliersId != NULL && $search == NULL) {
+        $n = 11010;
+        $query .= " WHERE Services_booking.Date_in >= :ServiceDate1
+            AND Services_booking.Date_in <= :ServiceDate2
+            AND Services.ServiceTypeId = :ServiceTypeId
+            AND Suppliers.Id = :SuppliersId
+        ;";
+        $database->query($query);
+        $database->bind(':ServiceDate1', $ServiceDate1);
+        $database->bind(':ServiceDate2', $ServiceDate2);
+        $database->bind(':ServiceTypeId', $ServiceTypeId);
+        $database->bind(':SuppliersId', $SuppliersId);
+    }
+
+    elseif ($ServiceDate1 != NULL && $ServiceTypeId != NULL && $StatusId != NULL && $SuppliersId == NULL && $search == NULL) {
+        $n = 11100;
+        $query .= " WHERE Services_booking.Date_in >= :ServiceDate1
+            AND Services_booking.Date_in <= :ServiceDate2
+            AND Services.ServiceTypeId = :ServiceTypeId
+            AND Services_booking.StatusId = :StatusId
+        ;";
+        $database->query($query);
+        $database->bind(':ServiceDate1', $ServiceDate1);
+        $database->bind(':ServiceDate2', $ServiceDate2);
+        $database->bind(':ServiceTypeId', $ServiceTypeId)
+        $database->bind(':StatusId', $StatusId);
+    }
+    // TODO resume here
 
     return $r = $database->resultset();
 }
