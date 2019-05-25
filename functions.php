@@ -4993,7 +4993,30 @@ function report_Services_booking () {
         $database->bind(':ServiceTypeId', $ServiceTypeId)
         $database->bind(':StatusId', $StatusId);
     }
-    // TODO resume here
+
+    elseif ($ServiceDate1 == NULL && $ServiceTypeId != NULL && $StatusId != NULL && $SuppliersId != NULL && $search != NULL) {
+        $n = 01111;
+        $query .= " WHERE CONCAT (
+            Bookings.Reference,
+            Bookings.Name,
+            Suppliers.Name,
+            Services.Service,
+            Services.Additional,
+            Service_booking.Pick_up,
+            Services_booking.Drop_off,
+            Services_booking.Spc_rq,
+            Services_booking.Cfm_no
+            ) LIKE :mySearch
+            AND Services.ServiceTypeId = :ServiceTypeId
+            AND Services_booking.StatusId = :StatusId
+            AND Suppliers.Id = :SuppliersId
+        ;";
+        $database->query($query);
+        $database->bind(':mySearch', $mySearch);
+        $database->bind(':ServiceTypeId', $ServiceTypeId);
+        $database->bind(':StatusId', $StatusId);
+        $database->bind(':SuppiersId', $SupplierId);
+    }
 
     return $r = $database->resultset();
 }
