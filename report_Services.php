@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <option value="">Select One</option>
                                     <?php
                                     foreach ($rows_ServiceStatus as $row_ServiceStatus) {
-                                        if ($ServiceStatusId == $row_ServiceStatus->Id){
+                                        if ($StatusId == $row_ServiceStatus->Id){
                                             echo "<option value=\"$row_ServiceStatus->Id\" selected>".$row_ServiceStatus->Code."</option>";
                                         }
                                         else {
@@ -112,9 +112,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </form>
                 </div>
                 <!-- end of search -->
+                <!-- report table -->
+                <div class="report table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Reference</th>
+                                <th>Booking Name</th>
+                                <th>Supplier</th>
+                                <th>Service</th>
+                                <th>Route</th>
+                                <th>Pick_up_time</th>
+                                <th>Drop_off_time</th>
+                                <th>Status</th>
+                                <th>Cfm No</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                                $rows_report_Services_booking = report_Services_booking(NULL, NULL);
+                                foreach ($rows_report_Services_booking as $row_report_Services_booking) {
+                                    echo "<tr>";
+                                    echo "<td>".date('d-m-y', strtotime($row_report_Services_booking->Date_in))."</td>";
+                                    echo "<td>".$row_report_Services_booking->Reference."</td>";
+                                    echo "<td>".$row_report_Services_booking->BookingsName."</td>";
+                                    echo "<td>".$row_report_Services_booking->SuppliersName."</td>";
+                                    echo "<td>".$row_report_Services_booking->Service."</td>";
+                                    echo "<td>".$row_report_Services_booking->Pick_up." - ".$row_report_Services_booking->Drop_off."</td>";
+                                    echo "<td>";
+                                    if (!empty($row_report_Services_booking->Pick_up_time)) {
+                                        date("H:i", strtotime($row_report_Services_booking->Pick_up_time));
+                                    }
+                                    echo "</td>";
+                                    echo "<td>";
+                                    if (!empty($row_report_Services_booking->Drop_off_time)) {
+                                        echo date("H:i", strtotime($row_report_Services_booking->Drop_off_time));
+                                    }
+                                    echo"</td>";
+                                    echo "<td>".$row_report_Services_booking->ServiceStatusCode."</td>";
+                                    echo "<td>".$row_report_Services_booking->Cfm_no."</td>";
+                                    echo "</tr>";
+                                }
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- end of report table -->
             </main>
             <?php include "includes/footer.html"; ?>
         </div>
         <!-- end of content -->
     </body>
+    <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>

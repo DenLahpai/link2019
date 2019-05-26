@@ -4576,38 +4576,40 @@ function report_Services_booking () {
     $SuppliersId = $_REQUEST['SuppliersId'];
     $search = trim($_REQUEST['search']);
     $mySearch = '%'.$search.'%';
+    $query = "SELECT
+        Bookings.Reference,
+        Bookings.Name AS BookingsName,
+        Bookings.ArvDate,
+        ServiceType.Code AS ServiceTypeCode,
+        Suppliers.Name AS SuppliersName,
+        Services.Service,
+        Services.Additional,
+        Services_booking.Date_in,
+        Services_booking.Date_out,
+        Services_booking.Pax,
+        Services_booking.Pick_up,
+        Services_booking.Drop_off,
+        Services_booking.Pick_up_time,
+        Services_booking.Drop_off_time,
+        Services_booking.Spc_rq,
+        ServiceStatus.Code AS ServiceStatusCode,
+        Services_booking.Cfm_no
+        FROM Services_booking
+        LEFT OUTER JOIN Bookings ON Services_booking.BookingsId = Bookings.Id
+        LEFT OUTER JOIN Services ON Services_booking.ServicesId = Services.Id
+        LEFT OUTER JOIN ServiceType ON Services.ServiceTypeId = ServiceType.Id
+        LEFT OUTER JOIN Suppliers ON Services.SupplierId = Suppliers.Id
+        LEFT OUTER JOIN ServiceStatus ON Services_booking.StatusId = ServiceStatus.Id
+    ";
 
     if ($ServiceDate1 == NULL && $ServiceTypeId == NULL && $StatusId == NULL && $SuppliersId == NULL && $search == NULL) {
-        $n = 00000;
-        $query = "SELECT
-            Bookings.Reference,
-            Bookings.Name AS BookingsName,
-            Bookings.ArvDate,
-            ServiceType.Code AS ServiceTypeCode,
-            Suppliers.Name AS SuppliersName,
-            Services.Service,
-            Services.Additional,
-            Services_booking.Date_in,
-            Services_booking.Date_out,
-            Services_booking.Pax,
-            Services_booking.Pick_up,
-            Services_booking.Drop_off,
-            Services_booking.Spc_rq,
-            ServiceStatus.Code AS ServiceStatusCode,
-            Services_booking.Cfm_no
-            FROM Services_booking
-            LEFT OUTER JOIN Bookings ON Services_booking.BookingsId = Bookings.Id
-            LEFT OUTER JOIN Services ON Services_booking.ServicesId = Services.Id
-            LEFT OUTER JOIN ServiceType ON Services.ServiceTypeId = ServiceType.Id
-            LEFT OUTER JOIN Suppliers ON Services.SupplierId = Suppliers.Id
-            LEFT OUTER JOIN ServiceStatus ON Services_booking.StatusId = ServiceStatus.Id
-        ;";
+        $n = '00000';
         $database->query($query);
 
     }
 
     elseif ($ServiceDate1 == NULL && $ServiceTypeId == NULL && $StatusId == NULL && $SuppliersId == NULL && $search != NULL) {
-        $n = 00001;
+        $n = '00001';
         $query .= " WHERE CONCAT (
             Bookings.Reference,
             Bookings.Name,
@@ -4617,26 +4619,30 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
         ;";
+        $database->query($query);
+        $database->bind(':mySearch', $mySearch);
     }
 
     elseif ($ServiceDate1 == NULL && $ServiceTypeId == NULL && $StatusId == NULL && $SuppliersId != NULL && $search == NULL) {
-        $n = 00010;
+        $n = '00010';
         $query .= " WHERE Suppliers.Id = :SuppliersId ;";
         $database->query($query);
         $database->bind(':SuppliersId', $SuppliersId);
     }
 
     elseif ($ServiceDate1 == NULL && $ServiceTypeId == NULL && $StatusId != NULL && $SuppliersId == NULL && $search == NULL) {
-        $n = 00100;
-        $query .= " WHERE Services_booking.StatusId  ;";
+        $n = '00100';
+        $query .= " WHERE Services_booking.StatusId = :StatusId ;";
         $database->query($query);
         $database->bind(':StatusId', $StatusId);
     }
 
     elseif ($ServiceDate1 == NULL && $ServiceTypeId != NULL && $StatusId == NULL && $SuppliersId == NULL && $search == NULL) {
+        // TODO resume checking from here
         $n = 01000;
         $query .= " WHERE Services.ServiceTypeId = :ServiceTypeId ;";
         $database->query($query);
@@ -4664,7 +4670,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Suppliers.Id = :SuppliersId
         ;";
@@ -4684,7 +4691,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Services_booking.StatusId = :StatusId
         ;";
@@ -4700,7 +4708,7 @@ function report_Services_booking () {
             AND Services_booking.StatusId = :StatusId
         ;";
         $database->query($query);
-        $database->bind(':SuppliersId', $SupplierId);
+        $database->bind(':SuppliersId', $SuppliersId);
         $database->bind(':StatusId', $StatusId);
     }
 
@@ -4715,7 +4723,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Services.ServiceTypeId = :ServiceTypeId
         ;";
@@ -4755,7 +4764,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Services_booking.Date_in >= :ServiceDate1
             AND Services_booking.Date_in <= :ServiceDate2
@@ -4813,7 +4823,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Suppliers.Id = :SuppliersId
             AND Services_booking.StatusId = :StatusId
@@ -4835,7 +4846,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Suppliers.Id = :SuppliersId
             AND Services.ServiceTypeId = :ServiceTypeId
@@ -4857,7 +4869,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Suppliers.Id = :SuppliersId
             AND Services_booking.StatusId = :StatusId
@@ -4891,7 +4904,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Suppliers.Id = :SuppliersId
             AND Services_booking.Date_in >= :ServiceDate1
@@ -4915,7 +4929,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Services_booking.StatusId = :StatusId
             AND Services_booking.Date_in >= :ServiceDate1
@@ -4953,7 +4968,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Services_booking.Date_in >= :ServiceDate1
             AND Services_booking.Date_in <= :ServiceDate2
@@ -4990,7 +5006,7 @@ function report_Services_booking () {
         $database->query($query);
         $database->bind(':ServiceDate1', $ServiceDate1);
         $database->bind(':ServiceDate2', $ServiceDate2);
-        $database->bind(':ServiceTypeId', $ServiceTypeId)
+        $database->bind(':ServiceTypeId', $ServiceTypeId);
         $database->bind(':StatusId', $StatusId);
     }
 
@@ -5005,7 +5021,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Services.ServiceTypeId = :ServiceTypeId
             AND Services_booking.StatusId = :StatusId
@@ -5029,7 +5046,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Services_booking.Date_in >= :ServiceDate1
             AND Services_booking.Date_in <= :ServiceDate2
@@ -5055,7 +5073,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Services_booking.Date_in >= :ServiceDate1
             AND Services_booking.Date_in <= :ServiceDate2
@@ -5081,7 +5100,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Services_booking.Date_in >= :ServiceDate1
             AND Services_booking.Date_in <= :ServiceDate2
@@ -5114,7 +5134,7 @@ function report_Services_booking () {
 
     elseif ($ServiceDate1 != NULL && $ServiceTypeId != NULL && $StatusId != NULL && $SuppliersId != NULL && $search != NULL) {
         $n = 11111;
-        $query .= " HERE CONCAT (
+        $query .= " WHERE CONCAT (
             Bookings.Reference,
             Bookings.Name,
             Suppliers.Name,
@@ -5123,7 +5143,8 @@ function report_Services_booking () {
             Services_booking.Pick_up,
             Services_booking.Drop_off,
             Services_booking.Spc_rq,
-            Services_booking.Cfm_no
+            Services_booking.Cfm_no,
+            Services_booking.Remark
             ) LIKE :mySearch
             AND Services_booking.Date_in >= :ServiceDate1
             AND Services_booking.Date_in <= :ServiceDate2
