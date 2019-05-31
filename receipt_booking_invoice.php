@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <?php
-    $page_title = $row_Bookings->Reference.' - '.$InvoiceNo;
+    $page_title = "Receipt - ".$row_Bookings->Reference.' - '.$InvoiceNo;
     include "includes/head.html";
     ?>
     <body>
@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             if (!empty($Method)) {
                                 echo $Method;
                             }
-                            ?>    
+                            ?>
                         </span>
 
                         <form action="#" method="post" id="myForm">
