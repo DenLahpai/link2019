@@ -47,6 +47,7 @@ else {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     table_Invoices('update_receipt', $InvoiceNo, NULL);
+    $Method = $_REQUEST['Method'];
 }
 
 ?>
@@ -188,9 +189,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <br>
                         Sales Person : <? echo $row_Users->Fullname; ?>
                         <br>
-                        <form action="#" method="post">
+                        <span id="selectedMethod" class="invisible">
+                            <?php
+                            if (!empty($Method)) {
+                                echo $Method;
+                            }
+                            ?>    
+                        </span>
+
+                        <form action="#" method="post" id="myForm">
                         Payment Method :
-                            <select name="Method" id="Method" onchange="this.form.submit();">
+                            <select name="Method" id="Method" onchange="generateReceipt();">
                                 <option value="0">Select One</option>
                                 <option value="1">Cash</option>
                                 <option value="2">UOB USD & SGD</option>
@@ -212,4 +221,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- end of print -->
     </body>
     <script type="text/javascript" src="scripts/scripts.js"></script>
+    <script type="text/javascript">
+        var selectedMethod = document.getElementById('selectedMethod');
+        if (selectedMethod.innerHTML != null) {
+            var Method = document.getElementById('Method');
+            Method.selectedIndex = selectedMethod.innerHTML;
+        }
+        else {
+            Method.selectedIndex = '0';
+        }
+    </script>
 </html>

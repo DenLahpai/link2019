@@ -202,3 +202,16 @@ function checkHotel() {
         document.getElementById('buttonSubmit').type = 'submit';
     }
 }
+
+//function to generate Receipt
+function generateReceipt () {
+    var Method = document.getElementById('Method');
+    if (Method.value == 0) {
+        alert('Please select a proper payment method');
+    }
+    else {
+        var myForm = document.getElementById('myForm');
+        myForm.submit();
+    }
+
+}

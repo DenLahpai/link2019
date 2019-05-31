@@ -773,11 +773,8 @@ function table_Invoices ($job, $var1, $var2) {
                 $database->bind(':Method', $Method);
                 $database->bind(':PaidOn', $PaidOn);
                 $database->bind(':InvoiceNo', $var1);
-                if ($database->execute()) {
-                    header("location: receipt_booking_invoice.php?InvoiceNo=$var1");
-                }
+                $database->execute();
                 break;
-
         default:
             // code...
             break;
