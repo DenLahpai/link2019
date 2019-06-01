@@ -51,6 +51,10 @@ $Date_in = trim($_REQUEST['Date_in']);
                         include "includes/adding_services_booking_flight.php";
                         break;
 
+                    case '3':
+                        include "includes/adding_services_booking_transfer.php";
+                        break;
+
                     default:
                         // code...
                         break;
