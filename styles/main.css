@@ -381,6 +381,7 @@ button:active {
 
 .list.service ul li {
     margin-top: 3px;
+    text-align: left;
 }
 
 .list.service ul li:nth-last-of-type(even) {
@@ -388,7 +389,7 @@ button:active {
 }
 
 .list.service ul li:nth-last-of-type(odd) {
-    background: grey;
+    background: mintcream;
 }
 
 .modalClients {
