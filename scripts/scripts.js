@@ -213,5 +213,6 @@ function generateReceipt () {
         var myForm = document.getElementById('myForm');
         myForm.submit();
     }
-
 }
+
+//function to 

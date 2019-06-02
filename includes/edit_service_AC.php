@@ -59,6 +59,13 @@
                 &nbsp;
                 <input type="number" name="Cost3_MMK" id="Cost3_MMK" value="<? echo $row_Services->Cost3_MMK; ?>">
             </li>
+            <li class="error">
+                <?php
+                if (!empty($error)) {
+                    echo $error;
+                }
+                ?>
+            </li>
             <li>
                 <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="<?//TODO ?>">Submit</button>
             </li>

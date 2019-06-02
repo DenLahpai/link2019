@@ -44,4 +44,5 @@ foreach ($rows_Services as $row_Services) {
         </div>
         <!-- end of content -->
     </body>
+    <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>
