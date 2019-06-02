@@ -43,6 +43,7 @@ foreach ($rows_Services as $row_Services) {
             </main>
         </div>
         <!-- end of content -->
+        <?php include "includes/footer.html"; ?>
     </body>
     <script type="text/javascript" src="scripts/scripts.js"></script>
 </html>

@@ -1,3 +1,15 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $rowCount = table_Services('check_before_update_AC', $ServicesId, $row_Services->ServiceTypeId);
+    if ($rowCount == 0) {
+        table_Services('update_AC', $ServicesId, NULL);
+    }
+    else {
+        $error = "Duplicate Entry!";
+    }
+}
+?>
+
 <!-- hotel form -->
 <div class="hotel form">
     <form class="" action="#" method="post">
@@ -25,10 +37,10 @@
             </li>
             <li>
                 Valid From:
-                <input type="date" name="StartDate" id="EndDate" value="<? echo $row_Services->StartDate;?>" required>
+                <input type="date" name="StartDate" id="StartDate" value="<? echo $row_Services->StartDate;?>" required>
                 &nbsp;
                 Valid Until:
-                <input type="date" name="EndDate" id="EndDate" value="<? echo $row_Services->EndDate?>" required>
+                <input type="date" name="EndDate" id="EndDate" value="<? echo $row_Services->EndDate?>" onchange="compareDates('StartDate', 'EndDate');" required>
             </li>
             <li class="bold">
                 Cost for Double or Twin Room
@@ -67,7 +79,7 @@
                 ?>
             </li>
             <li>
-                <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="<?//TODO ?>">Submit</button>
+                <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="checkThreeFields('SupplierId', 'Service', 'StartDate');">Submit</button>
             </li>
         </ul>
     </form>

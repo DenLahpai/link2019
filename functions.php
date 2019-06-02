@@ -1933,6 +1933,41 @@ function table_Services ($job, $var1, $var2) {
             $database->bind(':ServiceTypeId', $var1);
             return $r = $database->resultset();
             break;
+
+        case 'check_before_update_AC':
+            // $var1 = ServicesId
+            // $var2 = ServiceTypeId
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $query = "SELECT * FROM Services
+                WHERE ServiceTypeId = :ServiceTypeId
+                AND SupplierId = :SupplierId
+                AND Service = :Service
+                AND StartDate = :StartDate
+                AND EndDate = :EndDate
+                AND Id != :ServicesId
+            ;";
+            $database->query($query);
+            $database->bind(':ServiceTypeId', $var2);
+            $database->bind(':SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            $database->bind(':StartDate', $StartDate);
+            $database->bind(':EndDate', $EndDate);
+            $database->bind(':ServicesId', $var1);
+            return $r = $database->rowCount();
+            break;
+
+        case 'update_AC':
+            // $var1 = ServicesId
+            // $var2 = ServiceTypeId
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            break;
+
         default:
             // code...
             break;
