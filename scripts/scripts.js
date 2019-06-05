@@ -222,4 +222,21 @@ function generateReceipt () {
     }
 }
 
-//function to
+//function to check if the value meets minimum requirement
+function requireMininumValue (value, min, max) {
+    var value = document.getElementById(value);
+
+    if (value.value < min) {
+        var error = 'The value entered is below limit! The value must be between '+min+' & '+max;
+        document.getElementById('buttonSubmit').disabled = true;
+    }
+    else if (value.value > max) {
+        var error = 'The value entered is above limit!';
+        document.getElementById('buttonSubmit').disabled = true;
+    }
+    else {
+        var error = "";
+        document.getElementById('buttonSubmit').disabled = false;
+    }
+    document.getElementsByClassName('error')[0].innerHTML = error;
+}

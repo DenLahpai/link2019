@@ -1097,8 +1097,8 @@ function table_Services_booking ($job, $var1, $var2) {
             $Total_cost_USD = $total_Sgl_USD + $total_Twn_USD + $total_Dbl_USD + $total_Tpl_USD;
 
             //getting $Total_cost_MMK
-            $total_Sgl_MMK = ($Sgl * $Cost2_MKK * $Quantity);
-            $total_Twn_MMK = ($Twn * $Cost1_MKK * $Quantity);
+            $total_Sgl_MMK = ($Sgl * $Cost2_MMK * $Quantity);
+            $total_Twn_MMK = ($Twn * $Cost1_MMK * $Quantity);
             $total_Dbl_MMK = ($Dbl * $Cost1_MMK * $Quantity);
             $total_Tpl_MMK = ($Tpl * $Cost3_MMK * $Quantity);
             $Total_cost_MMK = $total_Sgl_MMK + $total_Twn_MMK + $total_Dbl_MMK + $total_Tpl_MMK;
@@ -1182,7 +1182,7 @@ function table_Services_booking ($job, $var1, $var2) {
             $database->bind(':Tpl', $Tpl);
             $database->bind(':Quantity', $Quantity);
             $database->bind(':Cost1_USD', $Cost1_USD);
-            $database->bind(':Cost1_MMK', $Cost1_MKK);
+            $database->bind(':Cost1_MMK', $Cost1_MMK);
             $database->bind(':Cost2_USD', $Cost2_USD);
             $database->bind(':Cost2_MMK', $Cost2_MMK);
             $database->bind(':Cost3_USD', $Cost3_USD);
@@ -1370,11 +1370,11 @@ function table_Services_booking ($job, $var1, $var2) {
             $Cfm_no = trim($_REQUEST['Cfm_no']);
             $Markup = $_REQUEST['Markup'];
             $Cost1_USD = $_REQUEST['Cost1_USD'];
-            $Cost1_MKK = $_REQUEST['Cost1_MMK'];
+            $Cost1_MMK = $_REQUEST['Cost1_MMK'];
             $Cost2_USD = $_REQUEST['Cost2_USD'];
-            $Cost2_MKK = $_REQUEST['Cost2_MMK'];
+            $Cost2_MMK = $_REQUEST['Cost2_MMK'];
             $Cost3_USD = $_REQUEST['Cost3_USD'];
-            $Cost3_MKK = $_REQUEST['Cost3_MMK'];
+            $Cost3_MMK = $_REQUEST['Cost3_MMK'];
 
             $Total_cost_Dbl_USD = $Cost1_USD * $Quantity * $Dbl;
             $Total_cost_Twn_USD = $Cost1_USD * $Quantity * $Twn;
@@ -2024,6 +2024,7 @@ function table_Services ($job, $var1, $var2) {
             $database->bind(':ServicesId', $var1);
             return $r = $database->rowCount();
             break;
+
         case 'update_FL':
             // $var1 = $ServicesId
             // $var2 = NULL
@@ -2043,6 +2044,72 @@ function table_Services ($job, $var1, $var2) {
             $database->bind(':Service', $Service);
             $database->bind(':StartDate', $StartDate);
             $database->bind(':EndDate', $EndDate);
+            $database->bind(':ServicesId', $var1);
+            if ($database->execute()) {
+                header("location: edit_service.php?ServicesId=$var1");
+            }
+            break;
+
+        case 'check_before_update_LT':
+            // $var1 = $ServicesId
+            // $var2 = NULL
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $Additional = trim($_REQUEST['Additional']);
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $MaxPax = $_REQUEST['MaxPax'];
+            $query = "SELECT * FROM Services
+                WHERE SupplierId = :SupplierId
+                AND Service = :Service
+                AND Additional = :Additional
+                AND StartDate = :StartDate
+                AND EndDate = :EndDate
+                AND MaxPax = :MaxPax
+                AND Id != :ServicesId
+            ;";
+            $database->query($query);
+            $database->bind(';SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            $database->bind(':Additional', $Additional);
+            $database->bind(':StartDate', $StartDate);
+            $database->bind(':EndDate', $EndDate);
+            $database->bind(':MaxPax', $MaxPax);
+            $database->bind(':ServicesId', $var1);
+            return $r = $database->rowCount();
+            break;
+
+        case 'update_LT':
+            // $var1 = $ServicesId
+            // $var2 = NULL
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $Additional = trim($_REQUEST['Additional']);
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $MaxPax = $_REQUEST['MaxPax'];
+            $Cost1_USD = $_REQUEST['Cost1_USD'];
+            $Cost1_MMK = $_REQUEST['Cost1_MMK'];
+            $query = "UPDATE Services SET
+                SupplierId = :SupplierId,
+                Service = :Service,
+                Additional = :Additional,
+                StartDate = :StartDate,
+                EndDate = :EndDate,
+                MaxPax = :MaxPax,
+                Cost1_USD = :Cost1_USD,
+                Cost1_MMK = :Cost1_MMK
+                WHERE Id = :ServicesId
+            ;";
+            $database->query($query);
+            $database->bind(':SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            $database->bind(':Additional', $Additional);
+            $database->bind(':StartDate', $StartDate);
+            $database->bind(':EndDate',$EndDate);
+            $database->bind(':MaxPax', $MaxPax);
+            $database->bind(':Cost1_USD', $Cost1_USD);
+            $database->bind(':Cost1_MMK', $Cost1_MMK);
             $database->bind(':ServicesId', $var1);
             if ($database->execute()) {
                 header("location: edit_service.php?ServicesId=$var1");

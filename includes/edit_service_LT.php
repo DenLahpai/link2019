@@ -1,3 +1,14 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $rowCount = table_Services('check_before_update_LT', $ServicesId, $row_Services->ServiceTypeId);
+    if ($rowCount == 0) {
+        table_Services('update_LT', $ServicesId, NULL);
+    }
+    else {
+        $error = "Duplicate Entry!";
+    }
+}
+?>
 <!-- Land Transfer form -->
 <div class="landtransfer form">
     <form action="#" method="post">
@@ -36,7 +47,7 @@
             </li>
             <li>
                 Capacity (Pax):
-                <input type="number" name="MaxPax" id="MaxPax" value="<? echo $row_Services->MaxPax; ?>" min="0">
+                <input type="number" name="MaxPax" id="MaxPax" value="<? echo $row_Services->MaxPax; ?>" onchange="requireMininumValue('MaxPax',1, 100);">
             </li>
             <li class="bold">
                 Cost
@@ -46,6 +57,16 @@
                 <input type="number" step="0.01" name="Cost1_USD" id="Cost1_MMK" value="<? echo $row_Services->Cost1_USD; ?>">
                 MMK:
                 <input type="number" name="Cost1_MMK" id="Cost1_MMK" value="<? echo $row_Services->Cost1_MMK; ?>">
+            </li>
+            <li class="error">
+                <?php
+                if (!empty($error)) {
+                    echo $error;
+                }
+                ?>
+            </li>
+            <li>
+                <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="checkThreeFields('SupplierId', 'Service', 'StartDate');">Submit</button>
             </li>
         </ul>
     </form>
