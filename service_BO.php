@@ -91,6 +91,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </form>
                 </div>
                 <!-- end of boat form -->
+                <!-- grid-div -->
+                <div class="grid-div">
+                    <?php
+                    $rows_Services = table_Services ('select_all', 4, NULL);
+                    foreach ($rows_Services as $row_Services):
+                    ?>
+                    <!-- grid-item -->
+                    <div class="grid-item">
+                        <ul>
+                            <li class="bold">
+                                <? echo $row_Services->SuppliersName; ?>
+                            </li>
+                            <li>
+                                Service:
+                                <? echo $row_Services->Service; ?>
+                            </li>
+                            <li>
+                                Max Pax:
+                                <? echo $row_Services->MaxPax; ?>
+                            </li>
+                            <li>
+                                Valid From: <? echo date('d-M-y', strtotime($row_Services->StartDate)); ?>
+                            </li>
+                            <li>
+                                Valid Until: <? echo date('d-M-y', strtotime($row_Services->EndDate)); ?>
+                            </li>
+                            <li>
+                                <a href="<? echo "edit_service.php?ServicesId=$row_Services->ServicesId"; ?>">Edit</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end of grid-item -->
+                <?php endforeach; ?>
+                </div>
+                <!-- end of grid-div -->
             </main>
             <?php include "includes/footer.html"; ?>
         </div>

@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </li>
             <li>
                 Service:
-                <input type="text" name="Serivce" id="Service" value="<? echo $row_Services->Service; ?>">
+                <input type="text" name="Service" id="Service" value="<? echo $row_Services->Service; ?>">
             </li>
             <li>
                 Vehicle:

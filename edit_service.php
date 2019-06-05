@@ -42,6 +42,10 @@ foreach ($rows_Services as $row_Services) {
                         // getting the form for LT
                         include "includes/edit_service_LT.php";
                         break;
+                    case '4':
+                        // getting the form for BO
+                        include "includes/edit_service_BO.php";
+                        break;
                     default:
                         // code...
                         break;

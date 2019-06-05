@@ -1845,6 +1845,7 @@ function table_Services ($job, $var1, $var2) {
                 case 'USD':
                     $Cost1_USD = $_REQUEST['Cost1_USD'];
                     $query = "INSERT INTO Services (
+                        ServiceTypeId,
                         SupplierId,
                         Service,
                         MaxPax,
@@ -1852,6 +1853,7 @@ function table_Services ($job, $var1, $var2) {
                         EndDate,
                         Cost1_USD
                         ) VALUES (
+                        :ServiceTypeId,
                         :SupplierId,
                         :Service,
                         :MaxPax,
@@ -1861,6 +1863,7 @@ function table_Services ($job, $var1, $var2) {
                         )
                     ;";
                     $database->query($query);
+                    $database->bind(':ServiceTypeId', 4);
                     $database->bind(':SupplierId', $SupplierId);
                     $database->bind(':Service', $Service);
                     $database->bind(':MaxPax', $MaxPax);
@@ -1875,6 +1878,7 @@ function table_Services ($job, $var1, $var2) {
                 case 'MMK':
                     $Cost1_MMK = $_REQUEST['Cost1_MMK'];
                     $query = "INSERT INTO Services (
+                        ServiceTypeId,
                         SupplierId,
                         Service,
                         MaxPax,
@@ -1882,6 +1886,7 @@ function table_Services ($job, $var1, $var2) {
                         EndDate,
                         Cost1_MMK
                         ) VALUES (
+                        :ServiceTypeId,
                         :SupplierId,
                         :Service,
                         :MaxPax,
@@ -1891,6 +1896,7 @@ function table_Services ($job, $var1, $var2) {
                         )
                     ;";
                     $database->query($query);
+                    $database->bind(':ServiceTypeId', 4);
                     $database->bind(':SupplierId', $SupplierId);
                     $database->bind(':Service', $Service);
                     $database->bind(':MaxPax', $MaxPax);
@@ -2069,7 +2075,7 @@ function table_Services ($job, $var1, $var2) {
                 AND Id != :ServicesId
             ;";
             $database->query($query);
-            $database->bind(';SupplierId', $SupplierId);
+            $database->bind(':SupplierId', $SupplierId);
             $database->bind(':Service', $Service);
             $database->bind(':Additional', $Additional);
             $database->bind(':StartDate', $StartDate);
