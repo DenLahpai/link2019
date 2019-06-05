@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         echo "<li>Max Pers: ".$row_Services->MaxPax."</li>";
                         echo "<li>Valid From: ".date("d-M-Y", strtotime($row_Services->StartDate))."</li>";
                         echo "<li>Valid Until: ".date("d-M-Y", strtotime($row_Services->EndDate))."</li>";
-                        echo "<li><a href=\"edit_services.php?ServicesId=$row_Services->ServicesId\">Edit</a></li>";
+                        echo "<li><a href=\"edit_service.php?ServicesId=$row_Services->ServicesId\">Edit</a></li>";
                         echo "</ul>";
                         echo "</div>";
                         echo "<!-- end of grid-item -->";

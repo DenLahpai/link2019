@@ -1966,6 +1966,87 @@ function table_Services ($job, $var1, $var2) {
             $Service = trim($_REQUEST['Service']);
             $StartDate = $_REQUEST['StartDate'];
             $EndDate = $_REQUEST['EndDate'];
+            $Cost1_USD = $_REQUEST['Cost1_USD'];
+            $Cost1_MMK = $_REQUEST['Cost1_MMK'];
+            $Cost2_USD = $_REQUEST['Cost2_USD'];
+            $Cost2_MMK = $_REQUEST['Cost2_MMK'];
+            $Cost3_USD = $_REQUEST['Cost3_USD'];
+            $Cost3_MMK = $_REQUEST['Cost3_MMK'];
+            $query = "UPDATE Services SET
+                SupplierId = :SupplierId,
+                Service = :Service,
+                StartDate = :StartDate,
+                EndDate = :EndDate,
+                Cost1_USD = :Cost1_USD,
+                Cost1_MMK = :Cost1_MMK,
+                Cost2_USD = :Cost2_USD,
+                Cost2_MMK = :Cost2_MMK,
+                Cost3_USD = :Cost3_USD,
+                Cost3_MMK = :Cost3_MMK
+                WHERE Id = :ServicesId
+            ;";
+            $database->query($query);
+            $database->bind(':SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            $database->bind(':StartDate', $StartDate);
+            $database->bind(':EndDate', $EndDate);
+            $database->bind(':Cost1_USD', $Cost1_USD);
+            $database->bind(':Cost1_MMK', $Cost1_MMK);
+            $database->bind(':Cost2_USD', $Cost2_USD);
+            $database->bind(':Cost2_MMK', $Cost2_MMK);
+            $database->bind(':Cost3_USD', $Cost3_USD);
+            $database->bind(':Cost3_MMK', $Cost3_MMK);
+            $database->bind(':ServicesId', $var1);
+            if ($database->execute()) {
+                header("location: edit_service.php?ServicesId=$var1");
+            }
+            break;
+
+        case 'check_before_update_FL':
+            // $var1 = $ServicesId
+            // $var2 = NULL
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $query = "SELECT * FROM Services
+                WHERE SupplierId = :SupplierId
+                AND Service = :Service
+                AND StartDate = :StartDate
+                AND EndDate = :EndDate
+                AND Id != :ServicesId
+            ;";
+            $database->query($query);
+            $database->bind(':SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            $database->bind(':StartDate', $StartDate);
+            $database->bind(':EndDate', $EndDate);
+            $database->bind(':ServicesId', $var1);
+            return $r = $database->rowCount();
+            break;
+        case 'update_FL':
+            // $var1 = $ServicesId
+            // $var2 = NULL
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $query = "UPDATE Services SET
+                SupplierId = :SupplierId,
+                Service = :Service,
+                StartDate = :StartDate,
+                EndDate = :EndDate
+                WHERE Id = :ServicesId
+            ;";
+            $database->query($query);
+            $database->bind(':SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            $database->bind(':StartDate', $StartDate);
+            $database->bind(':EndDate', $EndDate);
+            $database->bind(':ServicesId', $var1);
+            if ($database->execute()) {
+                header("location: edit_service.php?ServicesId=$var1");
+            }
             break;
 
         default:

@@ -1,8 +1,8 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $rowCount = table_Services('check_before_update_AC', $ServicesId, $row_Services->ServiceTypeId);
+    $rowCount = table_Services('check_before_update_FL', $ServicesId, $row_Services->ServiceTypeId);
     if ($rowCount == 0) {
-        table_Services('update_AC', $ServicesId, NULL);
+        table_Services('update_FL', $ServicesId, NULL);
     }
     else {
         $error = "Duplicate Entry!";
@@ -10,12 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<!-- hotel form -->
-<div class="hotel form">
-    <form class="" action="#" method="post">
+<!-- flight form -->
+<div class="flight form">
+    <form action="#" method="post" id="myForm">
         <ul>
             <li>
-                Hotel:
+                Airline:
                 <select name="SupplierId" id="SupplierId">
                     <option value="">Select One</option>
                     <?php
@@ -32,8 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </select>
             </li>
             <li>
-                Room Type:
-                <input type="text" name="Service" id="Service" value="<? echo $row_Services->Service; ?>" required>
+                Sector:
+                <input type="text" name="Service" id="Service" value="Manual Entry">
             </li>
             <li>
                 Valid From:
@@ -41,35 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 &nbsp;
                 Valid Until:
                 <input type="date" name="EndDate" id="EndDate" value="<? echo $row_Services->EndDate?>" onchange="compareDates('StartDate', 'EndDate');" required>
-            </li>
-            <li class="bold">
-                Cost for Double or Twin Room
-            </li>
-            <li>
-                USD:
-                <input type="number" step="0.01" name="Cost1_USD" id="Cost1_USD" value="<? echo $row_Services->Cost1_USD; ?>">
-                &nbsp;
-                MMK:
-                <input type="number" name="Cost1_MMK" id="Cost1_MMK" value="<? echo $row_Services->Cost1_MMK; ?>">
-            </li>
-            <li class="bold">
-                Cost for Single Room
-            </li>
-            <li>
-                USD:
-                <input type="number" step="0.01" name="Cost2_USD" id="Cost2_USD" value="<? echo $row_Services->Cost2_USD; ?>">
-                &nbsp;
-                MMK:
-                <input type="number" name="Cost2_MMK" id="Cost2_MMK" value="<? echo $row_Services->Cost2_MMK; ?>">
-            </li>
-            <li class="bold">
-                Cost for Triple Room
-            </li>
-            <li>
-                USD:
-                <input type="number" step="0.01" name="Cost3_USD" id="Cost3_USD" value="<? echo $row_Services->Cost3_USD; ?>">
-                &nbsp;
-                <input type="number" name="Cost3_MMK" id="Cost3_MMK" value="<? echo $row_Services->Cost3_MMK; ?>">
             </li>
             <li class="error">
                 <?php
@@ -84,4 +55,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </ul>
     </form>
 </div>
-<!-- end fo hotel form -->
+<!-- end of flight form -->

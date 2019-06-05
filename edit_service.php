@@ -31,10 +31,17 @@ foreach ($rows_Services as $row_Services) {
                 <?php
                 switch ($row_Services->ServiceTypeId) {
                     case '1':
-                        // getting the form for AV
+                        // getting the form for AC
                         include "includes/edit_service_AC.php";
                         break;
-
+                    case '2':
+                        // getting the form for FL
+                        include "includes/edit_service_FL.php";
+                        break;
+                    case '3':
+                        // getting the form for LT
+                        include "includes/edit_service_LT.php";
+                        break;
                     default:
                         // code...
                         break;

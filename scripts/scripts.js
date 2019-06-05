@@ -87,11 +87,18 @@ function compareDates(date1, date2) {
 
     if (date1.value > date2.value) {
         var error = 'Please ensure that your dates are in order!';
-        date2.style.background = 'red';
-        alert(error);
+        date1.style.background = 'brown';
+        date2.style.background = 'brown';
+
+        document.getElementsByClassName('error')[0].innerHTML = error;
+        document.getElementById('buttonSubmit').disabled = true;
     }
     else {
-        document.getElementById('buttonSubmit').type = 'submit';
+        date1.style.background = 'white';
+        date2.style.background = 'white';
+
+        document.getElementsByClassName('error')[0].innerHTML = '';
+        document.getElementById('buttonSubmit').disabled = false;
     }
 }
 
@@ -215,4 +222,4 @@ function generateReceipt () {
     }
 }
 
-//function to 
+//function to
