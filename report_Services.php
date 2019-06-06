@@ -1,5 +1,6 @@
 <?php
 require_once "functions.php";
+require_once "functions_reports.php";
 
 //getting data from the table ServiceType
 $rows_ServiceType = table_ServiceType('select', NULL, NULL);

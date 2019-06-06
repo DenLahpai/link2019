@@ -1,5 +1,6 @@
 <?php
 require_once "functions.php";
+require_once "functions_reports.php";
 
 //getting data from the table Corporates
 $rows_Corporates = table_Corporates('select_all', NULL, NULL);
