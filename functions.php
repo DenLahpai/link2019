@@ -2122,6 +2122,66 @@ function table_Services ($job, $var1, $var2) {
             }
             break;
 
+        case 'check_before_update_BO':
+            // $var1 = $ServicesId
+            // $var2 = NULL
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $MaxPax = $_REQUEST['MaxPax'];
+            $query = "SELECT * FROM Services
+                WHERE SupplierId = :SupplierId
+                AND Service = :Service
+                AND StartDate = :StartDate
+                AND EndDate = :EndDate
+                AND MaxPax = :MaxPax
+                AND Id != :ServicesId
+            ;";
+            $database->query($query);
+            $database->bind(':SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            $database->bind(':StartDate', $StartDate);
+            $database->bind(':EndDate', $EndDate);
+            $database->bind(':MaxPax', $MaxPax);
+            $database->bind(':ServicesId', $var1);
+            return $r = $database->rowCount();
+            break;
+
+        case 'update_BO':
+            // $var1 = $ServicesId
+            // $var2 = NULL
+            $SupplierId = $_REQUEST['SupplierId'];
+            $Service = trim($_REQUEST['Service']);
+            $StartDate = $_REQUEST['StartDate'];
+            $EndDate = $_REQUEST['EndDate'];
+            $MaxPax = $_REQUEST['MaxPax'];
+            $Cost1_USD = $_REQUEST['Cost1_USD'];
+            $Cost1_MMK = $_REQUEST['Cost1_MMK'];
+            $query = "UPDATE Services SET
+                SupplierId = :SupplierId,
+                Service = :Service,
+                StartDate = :StartDate,
+                EndDate = :EndDate,
+                MaxPax = :MaxPax,
+                Cost1_USD = :Cost1_USD,
+                Cost1_MMK = :Cost1_MMK
+                WHERE Id = :ServicesId
+            ;";
+            $database->query($query);
+            $database->bind(':SupplierId', $SupplierId);
+            $database->bind(':Service', $Service);
+            $database->bind(':StartDate', $StartDate);
+            $database->bind(':EndDate', $EndDate);
+            $database->bind(':MaxPax', $MaxPax);
+            $database->bind(':Cost1_USD', $Cost1_USD);
+            $database->bind(':Cost1_MMK', $Cost1_MMK);
+            $database->bind(':ServicesId', $var1);
+            if ($database->execute()) {
+                header("location: edit_service.php?ServicesId=$var1");
+            }
+            break;
+
         default:
             // code...
             break;

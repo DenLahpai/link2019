@@ -1,3 +1,14 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $rowCount = table_Services('check_before_update_BO', $ServicesId, $row_Services->ServiceTypeId);
+    if ($rowCount == 0) {
+        table_Services('update_BO', $ServicesId, NULL);
+    }
+    else {
+        $error = "Duplicate Entry!";
+    }
+}
+?>
 <!-- boat form -->
 <div class="boat form">
     <form action="#" method="post">
