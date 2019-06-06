@@ -138,12 +138,12 @@ function getDate_out () {
 function calculateHotelSell() {
     var Markup = document.getElementById('Markup');
     var MarkupPC = document.getElementById('Markup').value -0;
-    var Cost1_USD = document.getElementById('Cost1_USD').value -0;
-    var Cost1_MMK = document.getElementById('Cost1_MMK').value -0;
-    var Cost2_USD = document.getElementById('Cost2_USD').value -0;
-    var Cost2_MMK = document.getElementById('Cost2_MMK').value -0;
-    var Cost3_USD = document.getElementById('Cost3_USD').value -0;
-    var Cost3_MMK = document.getElementById('Cost3_MMK').value -0;
+    var Cost1_USD = document.getElementById('Cost1_USD').value - 0;
+    var Cost1_MMK = document.getElementById('Cost1_MMK').value - 0;
+    var Cost2_USD = document.getElementById('Cost2_USD').value - 0;
+    var Cost2_MMK = document.getElementById('Cost2_MMK').value - 0;
+    var Cost3_USD = document.getElementById('Cost3_USD').value - 0;
+    var Cost3_MMK = document.getElementById('Cost3_MMK').value - 0;
 
     Sell1_USD = (Cost1_USD * MarkupPC / 100) + Cost1_USD;
     Sell1_MMK = (Cost1_MMK * MarkupPC / 100) + Cost1_MMK;
@@ -158,6 +158,18 @@ function calculateHotelSell() {
     document.getElementById('Sell2_MMK').value = Sell2_MMK;
     document.getElementById('Sell3_USD').value = Sell3_USD;
     document.getElementById('Sell3_MMK').value = Sell3_MMK;
+}
+
+//funtion to calculate selling princes for group
+function calculateGroupServiceSell () {
+    var Markup = document.getElementById('Markup');
+    var MarkupPC = document.getElementById('Markup').value - 0;
+    var Cost1_USD = document.getElementById('Cost1_USD').value - 0;
+    var Cost1_MMK = document.getElementById('Cost1_MMK').value - 0;
+    var Sell_USD = (Cost1_USD * MarkupPC / 100) + Cost1_USD;
+    var Sell_MMK = (Cost1_MMK * MarkupPC / 100) + Cost1_MMK;
+    document.getElementById('Sell_USD').value = Sell_USD;
+    document.getElementById('Sell_MMK').value = Sell_MMK;
 }
 
 //function to adjust the Markup

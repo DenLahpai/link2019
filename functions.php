@@ -1232,6 +1232,93 @@ function table_Services_booking ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
+        case 'insert_transfer':
+            // $var1 = $BookingsId
+            // $var2 = $ServicesId
+            $Date_in = $_REQUEST['Date_in'];
+            $Pax = $_REQUEST['Pax'];
+            $Pick_up = trim($_REQUEST['Pick_up']);
+            $Pick_up_time = $_REQUEST['Pick_up_time'];
+            $Drop_off = trim($_REQUEST['Drop_off']);
+            $Drop_off_time = $_REQUEST['Drop_off_time'];
+            $Spc_rq = trim($_REQUEST['Spc_rq']);
+            $StatusId = $_REQUEST['StatusId'];
+            $Cost1_USD = $_REQUEST['Cost1_USD'];
+            $Cost1_MMK = $_REQUEST['Cost1_MMK'];
+            $Markup = $_REQUEST['Markup'];
+            $Sell_USD = $_REQUEST['Sell_USD'];
+            $Sell_MMK = $_REQUEST['Sell_MMK'];
+            $query = "INSERT INTO Services_booking SET
+                BookingsId = :BookingsId,
+                ServicesId = :ServicesId,
+                Date_in = :Date_in,
+                Pax = :Pax,
+                Pick_up = :Pick_up,
+                Pick_up_time = :Pick_up_time,
+                Drop_off = :Drop_off,
+                Drop_off_time = :Drop_off_time,
+                Spc_rq = :Spc_rq,
+                StatusId = :StatusId,
+                Cost1_USD = :Cost1_USD,
+                Cost1_MMK = :Cost1_MMK,
+                Markup = :Markup,
+                Sell_USD = :Sell_USD,
+                Sell_MMK = :Sell_MMK
+            ;";
+            $database->query($query);
+            $database->bind(':BookingsId', $var1);
+            $database->bind(':ServicesId', $var2);
+            $database->bind(':Date_in', $Date_in);
+            $database->bind(':Pax', $Pax);
+            $database->bind(':Pick_up', $Pick_up);
+            $database->bind(':Pick_up_time', $Pick_up_time);
+            $database->bind(':Drop_off', $Drop_off);
+            $database->bind(':Drop_off_time', $Drop_off_time);
+            $database->bind(':Spc_rq', $Spc_rq);
+            $database->bind(':StatusId', $StatusId);
+            $database->bind(':Cost1_USD', $Cost1_USD);
+            $database->bind(':Cost1_MMK', $Cost1_MMK);
+            $database->bind(':Markup', $Markup);
+            $database->bind(':Sell_USD', $Sell_USD);
+            $database->bind(':Sell_MMK', $Sell_MMK);
+            if ($database->execute()) {
+                header("location: booking_services.php?BookingsId=$var1");
+            }
+            break;
+
+        case 'select_transfers':
+            // $var1 = $BookingsId
+            $query = "SELECT
+                Services_booking.Id AS Services_bookingId,
+                Services_booking.ServicesId,
+                Services_booking.Date_in,
+                Services_booking.StatusId,
+                Services_booking.Pick_up,
+                Services_booking.Pick_up_time,
+                Services_booking.Drop_off,
+                Services_booking.Drop_off_time,
+                Services.Id AS ServicesId,
+                Services.Service AS Service,
+                Services.Service AS Additional,
+                Suppliers.Name AS SuppliersName,
+                Suppliers.City,
+                ServiceStatus.Code AS Code,
+                ServiceStatus.Status AS Status
+                FROM Services_booking
+                LEFT OUTER JOIN Services
+                ON Services_booking.ServicesId = Services.Id
+                LEFT OUTER JOIN Suppliers
+                ON Services.SupplierId = Suppliers.Id
+                LEFT OUTER JOIN ServiceStatus
+                ON Services_booking.StatusId = ServiceStatus.Id
+                WHERE Services.ServiceTypeId = '3'
+                AND Services_booking.BookingsId = :BookingsId
+            ;";
+            $database->query($query);
+            $database->bind(':BookingsId', $var1);
+            return $r = $database->resultset();
+            break;
+
         case 'select_one':
             $query = "SELECT
                 Services_booking.BookingsId AS BookingsId,

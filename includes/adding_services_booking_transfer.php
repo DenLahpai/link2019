@@ -17,14 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </li>
             <li>
                 Date:
-                <input type="date" name="Date_in" id="Date_in" value="<? echo $row_Services->Date_in; ?>">
+                <input type="date" name="Date_in" id="Date_in" value="<? echo $Date_in; ?>">
             </li>
             <li>
                 Pax:
-                <input type="number" name="Pax" id="Pax" value="<? echo $row_Services->Pax; ?>">
-            </li>
-            <li>
-                <input type="number" name="Pax" value="<? echo $row_Bookings->Pax; ?>">
+                <input type="number" name="Pax" id="Pax" value="<? echo $row_Bookings->Pax; ?>">
             </li>
             <li>
                 Pickup:
@@ -66,10 +63,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="number" step="0.01" name="Cost1_USD" id="Cost1_USD" value="<? echo $row_Services->Cost1_USD; ?>" readonly>
                 MMK:
                 <input type="number" name="Cost1_MMK" id="Cost1_MMK" value="<? echo $row_Services->Cost1_MMK; ?>" readonly>
-                <?php //TODO resume here ?>
+            </li>
+                <li>
+                Markup %:
+                <input type="number" step="0.01" name="Markup" id="Markup" onchange="calculateGroupServiceSell();">
+            </li>
+            <li class="bold">
+                Sell
             </li>
             <li>
-                <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="checkThreeFields('Date_in', 'Pick_up', 'Pick_up_time')">Submit</button>
+                USD:
+                <input type="number" step="0.01" name="Sell_USD" id="Sell_USD" value="<? echo $row_Services->Sell_USD; ?>" readonly>
+                MMK:
+                <input type="number" name="Sell_MMK" id="Sell_MMK" value="<? echo $row_Services->Sell_MMK; ?>" readonly>
+            </li>
+            <li>
+                <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="checkThreeFields('Date_in', 'Pick_up', 'Markup')">Submit</button>
             </li>
         </ul>
     </form>

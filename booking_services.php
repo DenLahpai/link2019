@@ -89,6 +89,36 @@ foreach ($rows_Bookings as $row_Bookings) {
                     ?>
                 </div>
                 <!-- end of grid-div -->
+                <h3>
+                    Land Transfers <a href="<? echo "confirmations_transfers.php?BookingsId=$BookingsId"; ?>" target="_blank">Confirmation</a>
+                </h3>
+                <!-- grid-div -->
+                <div class="grid-div">
+                    <?php
+                    $rows_transfers = table_Services_booking ('select_transfers', $BookingsId, NULL);
+                    foreach ($rows_transfers as $row_transfers):
+                    ?>
+                    <!-- grid-item -->
+                    <div class="grid-item">
+                        <ul>
+                            <li>
+                                Supplier: <span class="bold"><? echo $row_transfers->SuppliersName; ?></span>
+                            </li>
+                            <li>
+                                Service: <? echo $row_transfers->Service; ?>
+                            </li>
+                            <li>
+                                Pickup: <? echo $row_transfers->Pick_up; ?> @ <? echo date("H:i", strtotime($row_transfers->Pick_up_time)); ?>
+                            </li>
+                            <li>
+                                Dropoff: <? echo $row_transfers->Drop_off; ?> @ <? echo date("H:i", strtotime($row_transfers->Drop_off_time)); ?>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end of grid-item -->
+                    <?php endforeach; ?>
+                </div>
+                <!-- end of grid-div -->
             </main>
             <?php include "includes/footer.html"; ?>
         </div>
