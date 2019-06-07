@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="date" name="InvoiceDate1" id="InvoiceDate1" onchange="autoFillSecondDate('InvoiceDate1','InvoiceDate2');" value="<? echo $InvoiceDate1; ?>">
                                 &nbsp;
                                 Until:
-                                <input type="date" name="InvoiceDate2" id="InvoiceDate2" value="<? echo $InvoiceDate2; ?>">
+                                <input type="date" name="InvoiceDate2" id="InvoiceDate2" value="<? echo $InvoiceDate2; ?>" onchange="compareDates('InvoiceDate1', 'InvoiceDate2');">
                             </li>
                             <li>
                                 Corporates:
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="text" name="search" placeholder="Search" value="<? if (!empty($search)) { echo $search; } ?>">
                             </li>
                             <li>
-                                <button type="button" class="button submit" id="buttonSubmit" name="buttonSubmit" onclick="compareDates('InvoiceDate1', 'InvoiceDate2');">Search</button>
+                                <button type="submit" class="button submit" id="buttonSubmit" name="buttonSubmit">Search</button>
                             </li>
                         </ul>
                     </form>

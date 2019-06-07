@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="date" name="ServiceDate1" id="ServiceDate1" value="<? echo $ServiceDate1; ?>" onchange="autoFillSecondDate('ServiceDate1', 'ServiceDate2');">
                                 &nbsp;
                                 Until:
-                                <input type="date" name="ServiceDate2" id="ServiceDate2" value="<? echo $ServiceDate2; ?>">
+                                <input type="date" name="ServiceDate2" id="ServiceDate2" value="<? echo $ServiceDate2; ?>" onchange="compareDates('ServiceDate1', 'ServiceDate2');">
                             </li>
                             <li>
                                 Service Type:
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <input type="text" name="search" placeholder="Search" value="<? if (!empty($search)) { echo $search; }?>">
                             </li>
                             <li>
-                                <button type="button" class="button submit" id="buttonSubmit" name="buttonSubmit" onclick="compareDates('ServiceDate1', 'ServiceDate2');">Search</button>
+                                <button type="submit" class="button submit" id="buttonSubmit" name="buttonSubmit">Search</button>
                             </li>
                         </ul>
                     </form>
