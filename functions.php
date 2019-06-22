@@ -1299,7 +1299,7 @@ function table_Services_booking ($job, $var1, $var2) {
                 Services_booking.Drop_off_time,
                 Services.Id AS ServicesId,
                 Services.Service AS Service,
-                Services.Service AS Additional,
+                Services.Additional AS Additional,
                 Suppliers.Name AS SuppliersName,
                 Suppliers.City,
                 ServiceStatus.Code AS Code,

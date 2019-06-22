@@ -9,7 +9,7 @@ foreach ($rows_Bookings as $row_Bookings) {
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <?php
-    $page_title = "Hotels Confirmations - ".$row_Bookings->Reference;
+    $page_title = "Transfers Confiration - ".$row_Bookings->Reference;
     include "includes/head.html";
     ?>
     <body>
@@ -40,48 +40,44 @@ foreach ($rows_Bookings as $row_Bookings) {
             <!-- end of pageHeader -->
             <!-- Confirmation  -->
             <div class="confirmation">
-                <h3>Hotels Confirmation: <? echo $row_Bookings->Reference." - ".$row_Bookings->Name." X ".$row_Bookings->Pax; ?></h3>
+                <h3>Transfers Confirmation: <? echo $row_Bookings->Reference." - ".$row_Bookings->Name." X ".$row_Bookings->Pax; ?></h3>
                 <table>
                     <thead>
                         <tr>
                             <th>City</th>
-                            <th>Hotel</th>
-                            <th>Room Type</th>
-                            <th>Room(s)</th>
-                            <th>Check-in</th>
-                            <th>Check-out</th>
-                            <th>Night(s)</th>
+                            <th>Service</th>
+                            <th>Pax</th>
+                            <th>Pick-up</th>
+                            <th>Drop-off</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $rows_hotels = table_Services_booking ('select_hotels', $BookingsId, NULL);
-                        foreach ($rows_hotels as $row_hotels) {
-                            echo "<tr>";
-                            echo "<td>".$row_hotels->City."</td>";
-                            echo "<td>".$row_hotels->SuppliersName."</td>";
-                            echo "<td>".$row_hotels->Service."</td>";
-                            echo "<td>";
-                            if ($row_hotels->Sgl > 0) {
-                                echo $row_hotels->Sgl." Sgl, ";
-                            }
-                            if ($row_hotels->Dbl > 0) {
-                                echo $row_hotels->Dbl." Dbl, ";
-                            }
-                            if ($row_hotels->Twn > 0) {
-                                echo $row_hotels->Twn." Twn, ";
-                            }
-                            if ($row_hotels->Tpl > 0) {
-                                echo $row_hotels->Tpl." Tpl";
-                            }
-                            echo "</td>";
-                            echo "<td>".date("d-m-y", strtotime($row_hotels->Date_in))."</td>";
-                            echo "<td>".date("d-m-y", strtotime($row_hotels->Date_out))."</td>";
-                            echo "<td>".$row_hotels->Quantity."</td>";
-                            echo "<td>".$row_hotels->Code."</td>";
-                        }
+                        $rows_transfers = table_Services_booking ('select_transfers', $BookingsId, NULL);
+                        foreach ($rows_transfers as $row_transfers) :
                         ?>
+                        <tr>
+                            <td>
+                                <? echo $row_transfers->City; ?>
+                            </td>
+                            <td>
+                                <? echo $row_transfers->Service. " | ".$row_transfers->Additional; ?>
+                            </td>
+                            <td>
+                                <? echo $row_Bookings->Pax; ?>
+                            </td>
+                            <td>
+                                <? echo $row_transfers->Pick_up." @ ".date("H:i", strtotime($row_transfers->Pick_up_time)); ?>
+                            </td>
+                            <td>
+                                <? echo $row_transfers->Drop_off." @ ".date("H:i", strtotime($row_transfers->Drop_off_time)); ?>
+                            </td>
+                            <td>
+                                <? echo $row_transfers->Code; ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

@@ -105,13 +105,22 @@ foreach ($rows_Bookings as $row_Bookings) {
                                 Supplier: <span class="bold"><? echo $row_transfers->SuppliersName; ?></span>
                             </li>
                             <li>
-                                Service: <? echo $row_transfers->Service; ?>
+                                Service: <? echo $row_transfers->Service; ?> | <? echo $row_transfers->Additional; ?>
                             </li>
                             <li>
                                 Pickup: <? echo $row_transfers->Pick_up; ?> @ <? echo date("H:i", strtotime($row_transfers->Pick_up_time)); ?>
                             </li>
                             <li>
                                 Dropoff: <? echo $row_transfers->Drop_off; ?> @ <? echo date("H:i", strtotime($row_transfers->Drop_off_time)); ?>
+                            </li>
+                            <li>
+                                Status: <? echo $row_transfers->Status; ?>
+                            </li>
+                            <li>
+                                <a href="<? echo "edit_services_booking.php?Services_bookingId=$row_transfers->Services_bookingId"; ?>"><button type="button" class="button link" name="button">Edit</button></a>
+                                &nbsp; &nbsp;
+                                <a href="<? echo "delete_services_booking.php?Services_bookingId=$row_transfers->Services_bookingId"; ?>"><button type="button" class="button link" name="button">Delete</button></a>
+                                &nbsp; &nbsp;
                             </li>
                         </ul>
                     </div>
