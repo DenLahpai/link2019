@@ -26,7 +26,7 @@ foreach ($rows_Bookings as $row_Bookings) {
             include "includes/booking_menu.html";
             ?>
             <main>
-                <a href="<? echo "add_new_client.php?BookingsId=$BookingsId"; ?>"><button type="button" name="button">Add New Client</button></a>
+                <a href="<? echo "clients.php?BookingsId=$BookingsId"; ?>"><button type="button" name="button">Add New Client</button></a>
                 <a href="<? echo "add_existing_client.php?BookingsId=$BookingsId"; ?>"><button type="button" name="button">Add Existing Client</button></a>
                 <!-- grid-div -->
                 <div class="grid-div">

@@ -2281,7 +2281,7 @@ function table_Clients ($job, $var1, $var2) {
 
     switch ($job) {
         case 'select_all':
-            $query = "SELECT * FROM Clients ;";
+            $query = "SELECT * FROM Clients ORDER BY Id DESC;";
             $database->query($query);
             return $r = $database->resultset();
             break;
@@ -2304,6 +2304,7 @@ function table_Clients ($job, $var1, $var2) {
             break;
 
         case 'insert':
+            //$var1 = BookingsId
             // getting data from the form
             $Title = $_REQUEST['Title'];
             $FirstName = trim($_REQUEST['FirstName']);
@@ -2364,6 +2365,9 @@ function table_Clients ($job, $var1, $var2) {
             $database->bind(':Email', $Email);
             $database->bind(':Website', $Website);
             $database->execute();
+            if (!empty($var1)) {
+                header("location: add_existing_client.php?BookingsId=$var1");
+            }
             break;
 
         case 'select_one':

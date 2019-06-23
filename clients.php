@@ -1,13 +1,18 @@
 <?php
 require_once "functions.php";
 
+//getting BookingsId
+if (isset($_REQUEST['BookingsId'])) {
+    $BookingsId = trim($_REQUEST['BookingsId']);
+}
+
 //getting data from the table Clients
 $rows_Clients = table_Clients ('select_all', NULL, NULL);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rowCount = table_Clients ('check_before_insert', NULL, NULL);
     if ($rowCount == 0) {
-        table_Clients ('insert', NULL, NULL);
+        table_Clients ('insert', $BookingsId, NULL);
     }
     else {
         $error = "Duplicate entry!";

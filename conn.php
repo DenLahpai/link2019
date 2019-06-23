@@ -63,7 +63,7 @@ class Database {
 }
 
 //Uncomment the two lines below to get error reporting as a dev enviroment.
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
 ?>
