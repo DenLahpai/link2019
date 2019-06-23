@@ -2482,53 +2482,53 @@ function table_Bookings_Clients ($job, $var1, $var2) {
             return $r = $database->resultset();
             break;
 
-        case 'insert_new_client':
-            // getting data from the form
-            $Title = $_REQUEST['Title'];
-            $FirstName = trim($_REQUEST['FirstName']);
-            $LastName = trim($_REQUEST['LastName']);
-            $PassportNo = trim($_REQUEST['PassportNo']);
-            $PassportExpiry = $_REQUEST['PassportExpiry'];
-            $NRCNo = trim($_REQUEST['NRCNo']);
-            $DOB = $_REQUEST['DOB'];
-            $Country = trim($_REQUEST['Country']);
-            $FrequentFlyer = trim($_REQUEST['FrequentFlyer']);
-            $Company = trim($_REQUEST['Company']);
-            $Phone = trim($_REQUEST['Phone']);
-            $Email = trim($_REQUEST['Email']);
-            $Website = trim($_REQUEST['Website']);
-
-            $query = "SELECT * FROM Clients
-                WHERE Title = :Title
-                AND FirstName = :FirstName
-                AND LastName = :LastName
-                AND PassportNo = :PassportNo
-                AND PassportExpiry = :PassportExpiry
-                AND NRCNo = :NRCNo
-                AND DOB = :DOB
-                AND Country = :Country
-                AND FrequentFlyer = :FrequentFlyer
-                AND Company = :Company
-                AND Phone = :Phone
-                AND Email = :Email
-                AND Website = :Website
-            ;";
-            $database->query($query);
-            $database->bind(':Title', $Title);
-            $database->bind(':FirstName', $FirstName);
-            $database->bind(':LastName', $LastName);
-            $database->bind(':PassportNo', $PassportNo);
-            $database->bind(':PassportExpiry', $PassportExpiry);
-            $database->bind(':NRCNo', $NRCNo);
-            $database->bind(':DOB', $DOB);
-            $database->bind(':Country', $Country);
-            $database->bind(':FrequentFlyer', $FrequentFlyer);
-            $database->bind(':Company', $Company);
-            $database->bind(':Phone', $Phone);
-            $database->bind(':Email', $Email);
-            $database->bind(':Website', $Website);
-            return $r = $database->resultset();
-            break;
+        // case 'get_new_client': TODO review required
+        //     // getting data from the form
+        //     $Title = $_REQUEST['Title'];
+        //     $FirstName = trim($_REQUEST['FirstName']);
+        //     $LastName = trim($_REQUEST['LastName']);
+        //     $PassportNo = trim($_REQUEST['PassportNo']);
+        //     $PassportExpiry = $_REQUEST['PassportExpiry'];
+        //     $NRCNo = trim($_REQUEST['NRCNo']);
+        //     $DOB = $_REQUEST['DOB'];
+        //     $Country = trim($_REQUEST['Country']);
+        //     $FrequentFlyer = trim($_REQUEST['FrequentFlyer']);
+        //     $Company = trim($_REQUEST['Company']);
+        //     $Phone = trim($_REQUEST['Phone']);
+        //     $Email = trim($_REQUEST['Email']);
+        //     $Website = trim($_REQUEST['Website']);
+        //
+        //     $query = "SELECT Id FROM Clients
+        //         WHERE Title = :Title
+        //         AND FirstName = :FirstName
+        //         AND LastName = :LastName
+        //         AND PassportNo = :PassportNo
+        //         AND PassportExpiry = :PassportExpiry
+        //         AND NRCNo = :NRCNo
+        //         AND DOB = :DOB
+        //         AND Country = :Country
+        //         AND FrequentFlyer = :FrequentFlyer
+        //         AND Company = :Company
+        //         AND Phone = :Phone
+        //         AND Email = :Email
+        //         AND Website = :Website
+        //     ;";
+        //     $database->query($query);
+        //     $database->bind(':Title', $Title);
+        //     $database->bind(':FirstName', $FirstName);
+        //     $database->bind(':LastName', $LastName);
+        //     $database->bind(':PassportNo', $PassportNo);
+        //     $database->bind(':PassportExpiry', $PassportExpiry);
+        //     $database->bind(':NRCNo', $NRCNo);
+        //     $database->bind(':DOB', $DOB);
+        //     $database->bind(':Country', $Country);
+        //     $database->bind(':FrequentFlyer', $FrequentFlyer);
+        //     $database->bind(':Company', $Company);
+        //     $database->bind(':Phone', $Phone);
+        //     $database->bind(':Email', $Email);
+        //     $database->bind(':Website', $Website);
+        //     return $r = $database->resultset();
+        //     break;
 
         case 'insert':
             $query = "INSERT INTO Bookings_Clients (
@@ -2546,6 +2546,7 @@ function table_Bookings_Clients ($job, $var1, $var2) {
                 header("location: booking_clients.php?BookingsId=$var1");
             }
             break;
+
         case 'check_before_insert':
             $ClientsId = $_REQUEST['ClientsId'];
             $query = "SELECT * FROM Bookings_Clients

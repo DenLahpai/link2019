@@ -17,12 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rowCount = table_Clients ('check_before_insert', NULL, NULL);
     if ($rowCount == 0) {
         table_Clients ('insert', NULL, NULL);
-        $rows_newClients = table_Bookings_Clients ('insert_new_client', NULL, NULL);
-        foreach ($rows_newClients as $row_newClients) {
-            $newClientsId = $row_newClients->Id;
-        }
-        table_Bookings_Clients ('insert', $BookingsId, $newClientsId);
-        echo $newClientsId;
+        // TODO review required
+        // $rows_newClients = table_Bookings_Clients ('get_new_client', NULL, NULL);
+        // foreach ($rows_newClients as $row_newClients) {
+        //     // code...
+        // }
+        // table_Bookings_Clients ('insert', $BookingsId, $row_newClients->Id);
     }
     else {
         $error = "Duplicate Entry!";
