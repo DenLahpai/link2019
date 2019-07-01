@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] ==  'POST') {
             </li>
             <li id="costMMK" class="MMK">
                 Cost in MMK / Pers:
-                <input type="number" name="Cost1_MMK" value="<? echo $row_Services_booking->Cost1_MMK; ?>">
+                <input type="number" name="Cost1_MMK" id="Cost1_MMK" value="<? echo $row_Services_booking->Cost1_MMK; ?>">
             </li>
             <li>
                 Markup %:

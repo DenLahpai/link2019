@@ -957,7 +957,7 @@ function table_Services_booking ($job, $var1, $var2) {
                 $Markup = ($profit / $Cost1_USD) * 100;
             }
             elseif ($Cost1_USD == 0) {
-                $profit = $sellPerMMK = $Cost1_MMK;
+                $profit = $sellPerMMK - $Cost1_MMK;
                 $Markup = ($profit / $Cost1_MMK) * 100;
             }
             else {
@@ -1245,9 +1245,12 @@ function table_Services_booking ($job, $var1, $var2) {
             $StatusId = $_REQUEST['StatusId'];
             $Cost1_USD = $_REQUEST['Cost1_USD'];
             $Cost1_MMK = $_REQUEST['Cost1_MMK'];
+            $Quantity = $_REQUEST['Quantity'];
+            $Total_cost_USD = $Cost1_USD * $Quantity;
+            $Total_cost_MMK = $Cost1_MMK * $Quantity;
             $Markup = $_REQUEST['Markup'];
-            $Sell_USD = $_REQUEST['Sell_USD'];
-            $Sell_MMK = $_REQUEST['Sell_MMK'];
+            $Sell_USD = $_REQUEST['Sell_USD'] * $Quantity;
+            $Sell_MMK = $_REQUEST['Sell_MMK'] * $Quantity ;
             $query = "INSERT INTO Services_booking SET
                 BookingsId = :BookingsId,
                 ServicesId = :ServicesId,
@@ -1261,6 +1264,9 @@ function table_Services_booking ($job, $var1, $var2) {
                 StatusId = :StatusId,
                 Cost1_USD = :Cost1_USD,
                 Cost1_MMK = :Cost1_MMK,
+                Quantity = :Quantity,
+                Total_cost_USD = :Total_cost_USD,
+                Total_cost_MMK = :Total_cost_MMK,
                 Markup = :Markup,
                 Sell_USD = :Sell_USD,
                 Sell_MMK = :Sell_MMK
@@ -1278,6 +1284,9 @@ function table_Services_booking ($job, $var1, $var2) {
             $database->bind(':StatusId', $StatusId);
             $database->bind(':Cost1_USD', $Cost1_USD);
             $database->bind(':Cost1_MMK', $Cost1_MMK);
+            $database->bind(':Quantity', $Quantity);
+            $database->bind(':Total_cost_USD', $Total_cost_USD);
+            $database->bind(':Total_cost_MMK', $Total_cost_MMK);
             $database->bind(':Markup', $Markup);
             $database->bind(':Sell_USD', $Sell_USD);
             $database->bind(':Sell_MMK', $Sell_MMK);
@@ -1351,6 +1360,7 @@ function table_Services_booking ($job, $var1, $var2) {
                 Services_booking.Sell_MMK,
                 Services.Id AS ServicesId,
                 Services.Service AS Service,
+                Services.Additional AS Additional,
                 Services.ServiceTypeId AS ServiceTypeId,
                 Services.SupplierId AS SupplierId,
                 Suppliers.Name AS SuppliersName,

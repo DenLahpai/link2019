@@ -24,6 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="number" name="Pax" id="Pax" value="<? echo $row_Bookings->Pax; ?>">
             </li>
             <li>
+                Quantity:
+                <input type="number" name="Quantity" id="Quantity" value="1" onchange="requireMininumValue ('Quantity',1, 99);">
+            </li>
+            <li>
                 Pickup:
                 <input type="text" name="Pick_up" id="Pick_up">
                 @ <input type="time" name="Pick_up_time" id="Pick_up_time">
@@ -77,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 MMK:
                 <input type="number" name="Sell_MMK" id="Sell_MMK" value="<? echo $row_Services->Sell_MMK; ?>" readonly>
             </li>
+            <li class="error"></li>
             <li>
                 <button type="button" name="buttonSubmit" id="buttonSubmit" onclick="checkThreeFields('Date_in', 'Pick_up', 'Markup')">Submit</button>
             </li>

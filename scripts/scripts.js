@@ -180,7 +180,7 @@ function adjustMarkup(sell, cost) {
     var profit = sell.value - cost.value;
     var Markup = (profit / cost.value) * 100;
     document.getElementById('Markup').value = Markup;
-    calculateHotelSell();
+    // calculateHotelSell(); Need to recheck!!!
 }
 
 //function to check and submit accommodation service
@@ -239,7 +239,7 @@ function requireMininumValue (value, min, max) {
     var value = document.getElementById(value);
 
     if (value.value < min) {
-        var error = 'The value entered is below limit! The value must be between '+min+' & '+max;
+        var error = 'The value entered is below limit! The value must be between '+min+' & '+max+'!';
         document.getElementById('buttonSubmit').disabled = true;
     }
     else if (value.value > max) {

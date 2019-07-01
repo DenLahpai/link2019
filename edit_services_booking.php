@@ -39,6 +39,9 @@ foreach ($rows_Services_booking as $row_Services_booking) {
                     case '2':
                         include "includes/edit_services_booking_flight.php";
                         break;
+                    case '3':
+                        include "includes/edit_services_booking_transfer.php";
+                        break;
 
                     default:
                         // code...
