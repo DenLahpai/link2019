@@ -293,8 +293,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div id="KBZ" class="invisible">
                         <p>
-                            Account Name: L Mung Den Nong, PRS(C)0004 <br>
-                            Account No: 999-307-057-007-596-01 <br>
+                            Account Name: L Mung Den Nong, 12/SaKhaNa(N)083146 <br>
+                            Account No: 32830105700759601 <br>
                             Bank Name: Kanbawza Bank <br>
                             Please send us a copy of the bank transfer slip once the payment has been made.
                         </p>
