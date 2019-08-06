@@ -34,6 +34,7 @@ foreach ($rows_Bookings as $row_Bookings) {
                         echo "<div class=\"grid-item\">";
                         echo "<ul>";
                         echo "<li>Airline: <span class=\"bold\">".$row_flights->SuppliersName."</span></li>";
+                        echo "<li>Date: ".date('d-m-y', strtotime($row_flights->Date_in))."</li>";
                         echo "<li>Flight: ".$row_flights->Pick_up." - ".$row_flights->Drop_off."</li>";
                         echo "<li>Flight No: ".$row_flights->Flight_no." ".date("H:i", strtotime($row_flights->Pick_up_time))." - ".date('H:i', strtotime($row_flights->Drop_off_time));
                         echo "<li>Status: ".$row_flights->Status."</li>";
