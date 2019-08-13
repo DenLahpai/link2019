@@ -134,7 +134,7 @@ function getDate_out () {
 //function to calculate selling prices for hotel
 function calculateHotelSell() {
     var Markup = document.getElementById('Markup');
-    var MarkupPC = document.getElementById('Markup').value -0;
+    var MarkupPC = document.getElementById('Markup').value - 0;
     var Cost1_USD = document.getElementById('Cost1_USD').value - 0;
     var Cost1_MMK = document.getElementById('Cost1_MMK').value - 0;
     var Cost2_USD = document.getElementById('Cost2_USD').value - 0;
@@ -150,7 +150,7 @@ function calculateHotelSell() {
     Sell3_MMK = (Cost3_MMK * MarkupPC / 100) + Cost3_MMK;
 
     document.getElementById('Sell1_USD').value = Math.ceil(Sell1_USD * 100) / 100;
-    document.getElementById('Sell1_MMK').value = Math.ceil(Sell1_USD * 100) / 100;
+    document.getElementById('Sell1_MMK').value = Math.ceil(Sell1_MMK * 100) / 100;
     document.getElementById('Sell2_USD').value = Math.ceil(Sell2_USD * 100) / 100;
     document.getElementById('Sell2_MMK').value = Math.ceil(Sell2_MMK * 100) / 100;
     document.getElementById('Sell3_USD').value = Math.ceil(Sell3_USD * 100) / 100;
