@@ -116,7 +116,7 @@ function getQuantity () {
     }
     else {
         Date_out.style.background = 'brown';
-        alert('Check-out date must be later than the check-in date!');
+        document.getElementsByClassName('error')[0].innerHTML = 'Check-out date must be later than the check-in date!';        
     }
 }
 
@@ -127,10 +127,7 @@ function getDate_out () {
     var checkout = checkin.setTime(checkin.getTime() + (nights * 24 * 60 * 60 * 1000));
     var checkoutDate = new Date(checkout);
     var formatCheckoutDate = checkoutDate.getFullYear() + "-0" + (checkoutDate.getMonth() + 1) + "-" + checkoutDate.getDate();
-    alert(formatCheckoutDate);
-
     document.getElementById('Date_out').value = formatCheckoutDate ;
-    // alert(checkoutDate);
 
 }
 
@@ -179,7 +176,8 @@ function adjustMarkup(sell, cost) {
     var Markup = document.getElementById('Markup');
     var profit = sell.value - cost.value;
     var Markup = (profit / cost.value) * 100;
-    document.getElementById('Markup').value = Markup;
+    var MarkupValue = Math.ceil(Markup * 100) / 100;
+    document.getElementById('Markup').value = MarkupValue;
     // calculateHotelSell(); Need to recheck!!!
 }
 
