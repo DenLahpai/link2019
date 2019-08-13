@@ -116,7 +116,7 @@ function getQuantity () {
     }
     else {
         Date_out.style.background = 'brown';
-        document.getElementsByClassName('error')[0].innerHTML = 'Check-out date must be later than the check-in date!';        
+        document.getElementsByClassName('error')[0].innerHTML = 'Check-out date must be later than the check-in date!';
     }
 }
 
@@ -211,7 +211,7 @@ function checkHotel() {
         Tpl.style.background = 'brown';
         document.getElementsByClassName('error')[0].innerHTML = 'Please input a proper number of room(s)!';
     }
-    else if (Markup.value == 0 || Markup.value === null || Markup.value === "") {
+    else if (Markup.value === null || Markup.value === "") {
         Markup.style.background = 'brown';
         document.getElementsByClassName('error')[0].innerHTML = 'Please input a proper markup!';
     }
