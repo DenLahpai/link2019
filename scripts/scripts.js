@@ -149,12 +149,12 @@ function calculateHotelSell() {
     Sell3_USD = (Cost3_USD * MarkupPC / 100) + Cost3_USD;
     Sell3_MMK = (Cost3_MMK * MarkupPC / 100) + Cost3_MMK;
 
-    document.getElementById('Sell1_USD').value = Sell1_USD;
-    document.getElementById('Sell1_MMK').value = Sell1_MMK;
-    document.getElementById('Sell2_USD').value = Sell2_USD;
-    document.getElementById('Sell2_MMK').value = Sell2_MMK;
-    document.getElementById('Sell3_USD').value = Sell3_USD;
-    document.getElementById('Sell3_MMK').value = Sell3_MMK;
+    document.getElementById('Sell1_USD').value = Math.ceil(Sell1_USD * 100) / 100;
+    document.getElementById('Sell1_MMK').value = Math.ceil(Sell1_USD * 100) / 100;
+    document.getElementById('Sell2_USD').value = Math.ceil(Sell2_USD * 100) / 100;
+    document.getElementById('Sell2_MMK').value = Math.ceil(Sell2_MMK * 100) / 100;
+    document.getElementById('Sell3_USD').value = Math.ceil(Sell3_USD * 100) / 100;
+    document.getElementById('Sell3_MMK').value = Math.ceil(Sell3_MMK * 100) / 100;
 }
 
 //funtion to calculate selling princes for group
@@ -165,8 +165,8 @@ function calculateGroupServiceSell () {
     var Cost1_MMK = document.getElementById('Cost1_MMK').value - 0;
     var Sell_USD = (Cost1_USD * MarkupPC / 100) + Cost1_USD;
     var Sell_MMK = (Cost1_MMK * MarkupPC / 100) + Cost1_MMK;
-    document.getElementById('Sell_USD').value = Sell_USD;
-    document.getElementById('Sell_MMK').value = Sell_MMK;
+    document.getElementById('Sell_USD').value = Math.ceil(Sell_USD * 100) / 100;
+    document.getElementById('Sell_MMK').value = Math.ceil(Sell_MMK * 100) / 100;
 }
 
 //function to adjust the Markup
@@ -176,8 +176,7 @@ function adjustMarkup(sell, cost) {
     var Markup = document.getElementById('Markup');
     var profit = sell.value - cost.value;
     var Markup = (profit / cost.value) * 100;
-    var MarkupValue = Math.ceil(Markup * 100) / 100;
-    document.getElementById('Markup').value = MarkupValue;
+    document.getElementById('Markup').value = Math.ceil(Markup * 100) / 100;
     // calculateHotelSell(); Need to recheck!!!
 }
 
