@@ -177,7 +177,7 @@ function adjustMarkup(sell, cost) {
     var profit = sell.value - cost.value;
     var Markup = (profit / cost.value) * 100;
     document.getElementById('Markup').value = Math.ceil(Markup * 100) / 100;
-    // calculateHotelSell(); Need to recheck!!!
+    calculateHotelSell();
 }
 
 //function to check and submit accommodation service
