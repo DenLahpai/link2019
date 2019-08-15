@@ -116,7 +116,7 @@ function getQuantity () {
     }
     else {
         Date_out.style.background = 'brown';
-        document.getElementsByClassName('error')[0].innerHTML = 'Check-out date must be later than the check-in date!';
+        // document.getElementsByClassName('error')[0].innerHTML = 'Check-out date must be later than the check-in date!';
     }
 }
 
