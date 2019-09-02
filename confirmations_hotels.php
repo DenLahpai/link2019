@@ -76,8 +76,8 @@ foreach ($rows_Bookings as $row_Bookings) {
                                 echo $row_hotels->Tpl." Tpl";
                             }
                             echo "</td>";
-                            echo "<td>".date("d-m-y", strtotime($row_hotels->Date_in))."</td>";
-                            echo "<td>".date("d-m-y", strtotime($row_hotels->Date_out))."</td>";
+                            echo "<td>".date("d-M-y", strtotime($row_hotels->Date_in))."</td>";
+                            echo "<td>".date("d-M-y", strtotime($row_hotels->Date_out))."</td>";
                             echo "<td>".$row_hotels->Quantity."</td>";
                             echo "<td>".$row_hotels->Code."</td>";
                         }
