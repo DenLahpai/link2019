@@ -1301,6 +1301,7 @@ function table_Services_booking ($job, $var1, $var2) {
                 Services_booking.Id AS Services_bookingId,
                 Services_booking.ServicesId,
                 Services_booking.Date_in,
+                Services_booking.Pax, 
                 Services_booking.StatusId,
                 Services_booking.Pick_up,
                 Services_booking.Pick_up_time,

@@ -18,6 +18,10 @@
                 <? echo $row_Services_booking->Service." | ".$row_Services_booking->Additional;?>
             </li>
             <li>
+                Pax:
+                <input type="number" name="Pax" id="Pax" value="<? echo $row_Services_booking->Pax; ?>">
+            </li>
+            <li>
                 Pick-up:
                 <input type="text" name="Pick_up" id="Pick_up" value="<? echo $row_Services_booking->Pick_up; ?>">
                 &nbsp; @ &nbsp;

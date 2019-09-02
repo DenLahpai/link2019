@@ -45,6 +45,7 @@ foreach ($rows_Bookings as $row_Bookings) {
                     <thead>
                         <tr>
                             <th>City</th>
+                            <th>Date</th>
                             <th>Service</th>
                             <th>Pax</th>
                             <th>Pick-up</th>
@@ -62,10 +63,13 @@ foreach ($rows_Bookings as $row_Bookings) {
                                 <? echo $row_transfers->City; ?>
                             </td>
                             <td>
+                                <? echo date('d-M-y', strtotime($row_transfers->Date_in)); ?>
+                            </td>
+                            <td>
                                 <? echo $row_transfers->Service. " | ".$row_transfers->Additional; ?>
                             </td>
                             <td>
-                                <? echo $row_Bookings->Pax; ?>
+                                <? echo $row_transfers->Pax; ?>
                             </td>
                             <td>
                                 <? echo $row_transfers->Pick_up." @ ".date("H:i", strtotime($row_transfers->Pick_up_time)); ?>
