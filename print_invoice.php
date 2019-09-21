@@ -256,7 +256,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <p>
                             Beneficiary Name: Link In Asia Pte Ltd. <br>
                             Beneficiary Address: 111, North Bridge Rd, #13-01, Peninsula Plaza, Singapore 179098 <br>
-                            Account No: 3549007730 (USD) <br>
+                            Account No: <span class='bold'>3549007730</span> (USD) <br>
                             Bank Name: United Oversea Bank <br>
                             Bank Address: UOB Rochor, 149 Rochor Rd, #01-26 Fu Lu Shou Complex, Singapore 188425 <br>
                             Bank Code: 7375 <br>
@@ -269,7 +269,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <p>
                             Beneficiary Name: Link In Asia Pte Ltd. <br>
                             Beneficiary Address: 111, North Bridge Rd, #13-01, Peninsula Plaza, Singapore 179098 <br>
-                            Account No: 3483159801 (SGD) <br>
+                            Account No: <span class='bold'>3483159801</span> (SGD) <br>
                             Bank Name: United Oversea Bank <br>
                             Bank Address: UOB Rochor, 149 Rochor Rd, #01-26 Fu Lu Shou Complex, Singapore 188425 <br>
                             Bank Code: 7375 <br>
@@ -307,7 +307,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div id="KBZ" class="invisible">
                         <p>
                             Account Name: L Mung Den Nong, 12/SaKhaNa(N)083146 <br>
-                            Account No: 32830105700759601 <br>
+                            Account No: <span class='bold'>32830105700759601</span> <br>
                             Bank Name: Kanbawza Bank <br>
                             Please send us a copy of the bank transfer slip once the payment has been made.
                         </p>
@@ -315,8 +315,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div id="CB" class="invisible">
                         <p>
                             Account Name: Link In Myanmar Travel Co Ltd <br>
-                            Account No: 0010101200070033 (USD) <br>
-                            Account No: 0010100500010294 (MMK) <br>
+                            Account No: <span class='bold'>0010101200070033</span> (USD) <br>
+                            Account No: <span class='bold'>0010100500010294</span> (MMK) <br>
                             Bank Name: CB Bank <br>
                             Please send us a copy of the bank transfer slip once the payment has been made.
                         </p>
@@ -324,7 +324,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div id="Aya" class="invisible">
                         <p>
                             Account Name: L Mung Den Nong, 12/SaKhaNa(N)083146 <br>
-                            Account No: 0144223010004909 <br>
+                            Account No: <span class='bold'>0144223010004909</span> <br>
                             Bank Name: Aya Bank <br>
                             Please send us a copy of the bank transfer slip once the payment has been made.
                         </p>
@@ -333,7 +333,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <p>
                             Beneficiary Name: Link In Asia Pte Ltd. <br>
                             Beneficiary Address: 111, North Bridge Rd, #13-01, Peninsula Plaza, Singapore 179098 <br>
-                            Account No: 0003-016672-01-7-022 (USD) <br>
+                            Account No: <span class='bold'>0003-016672-01-7-022</span> (USD) <br>
                             Bank Name: DBS Bank <br>
                             Bank Address: 6 Shenton Way, DBS Building, Singapore 068809 <br>
                             Bank Code: 7171 <br>
@@ -344,7 +344,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div id="YOMA" class="invisible">
                         <p>
                             Account Name: L Mung Den Nong, 12/SaKhaNa(N)083146 <br>
-                            Account No: 002145188000473 <br>
+                            Account No: <span class='bold'>002145188000473</span> <br>
                             Bank Name: Yoma Bank <br>
                             Please send us a copy of the bank transfer slip once the payment has been made.
                         </p>
@@ -352,7 +352,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div id="MAB" class="invisible">
                         <p>
                             Account Name: L Mung Den Nong, 12/SaKhaNa(N)083146 <br>
-                            Account No: 0430121043003128014 <br>
+                            Account No: <span class='bold'>0430121043003128014</span> <br>
                             Bank Name: MAB (Myanmar Apex Bank) <br>
                             Please send us a copy of the bank transfer slip once the payment has been made.
                         </p>
